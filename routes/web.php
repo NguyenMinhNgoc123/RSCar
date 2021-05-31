@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\ProductsCarController;
 use App\Http\Controllers\BrandProductController;
 use App\Http\Controllers\TypeVehicleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -32,9 +34,10 @@ Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 Route::get('/category-type/{id}', [HomeController::class, 'show_category_type'])->name('category-type');
 Route::get('/category-brand/{id}', [HomeController::class, 'show_category_brand'])->name('category-brand');
 Route::get('/category-type-vehicles/{id}', [HomeController::class, 'show_category_tv'])->name('category-type-vehicles');
+//search list
 
 
-//backend
+//backend admin
 Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' => 'admin'], function () {
     Route::get('/admin-login', [AdminController::class, 'index'])->name('admin-login');
     //->middleware('check_login_admin');
@@ -44,6 +47,7 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
     Route::get('/dashboard', [AdminController::class, 'show_dashboard'])->name('dashboard');
     // ->middleware('check_login_admin');
 
+//manage order
 
 //products car
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
@@ -90,7 +94,30 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
     });
 });
 
+//backend user
+Route::group(['middleware' => ['check_login_user'], 'as' => 'user.','prefix' => 'user'], function () {
+    Route::get('/login-user', [UserController::class, 'login_user'])->name('login-user');
+
+    Route::post('/user-dashboard', [UserController::class, 'dashboard'])->name('user-dashboard');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+//check out
+    Route::get('/checkout', [CheckOutController::class, 'checkout'])->name('checkout');
+    Route::post('/save-checkout', [CheckOutController::class, 'save_checkout'])->name('save-checkout');
+    Route::get('/payment', [CheckOutController::class, 'payment'])->name('payment');
+    Route::post('/save-payment', [CheckOutController::class, 'save_payment'])->name('save-payment');
+
+    Route::post('/save-cart', [CartController::class, 'save_cart'])->name('save-cart');
+    Route::get('/show-cart', [CartController::class, 'show_cart'])->name('show-cart');
+    Route::get('/delete-cart/{rowId}', [CartController::class, 'delete_cart'])->name('delete-cart');
+    Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity'])->name('update-cart-quantity');
+});
+
+Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::post('/add-user', [UserController::class, 'save_user'])->name('add-user');
 
 //cart
-Route::post('/save-cart', [CartController::class, 'save_cart'])->name('save-cart');
-Route::get('/show-cart', [CartController::class, 'show-cart'])->name('show-cart');
+
+
+//Check out
+

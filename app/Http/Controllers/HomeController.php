@@ -158,4 +158,17 @@ class HomeController extends Controller
         $data['product_tv']=$product_tv;
         return view('pages.category.category_tv',$data);
     }
+    public function search_product(Request $request){
+
+        $product = DB::table('product_cars')
+            ->join('brand_products', 'product_cars.brand_id', '=', 'brand_products.brand_id')
+            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
+            ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
+            ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
+            ->where('status','=','0')
+            ->where('caption','like','%' . $request->get('searchQuest') .'%')
+            ->get();
+
+        return json_encode($product);
+    }
 }

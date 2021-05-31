@@ -144,8 +144,21 @@
                                 <div class="item-inner">
                                     <div class="item-img">
                                         <div class="item-img-info"><a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueSW->thumbnails}")}}" alt="Retis lapen casen"></a>
-                                            @if($valueSW->updated > now())
-                                                <div class="new-label new-top-left">Hot</div>
+                                            @if($valueSW->hot_car == '1' )
+                                                <div class="new-label new-top-left " style="font-size: 10.5px;
+    font-family:'Open Sans', sans-serif;
+    color: #fff;
+    background: red;
+    text-transform: uppercase;
+    padding: 0px 10px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    font-weight: 400;
+    height: 24px;
+    border-radius: 3px;
+    line-height: 26px;
+    z-index: 10;">Hot</div>
                                             @endif
                                             @if($valueSW->discount != '0')
                                                 <div class="sale-label sale-top-left">{{$valueSW->discount}}%</div>
@@ -175,9 +188,9 @@
                                                 </div>
                                                 <div class="item-price">
                                                     @if($valueSW->type_id == '1')
-                                                        <div class="price-box"><span class="regular-price"><span class="price">{{$valueSW->price}} vnđ</span></span> </div>
+                                                        <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueSW->price)}} vnđ</span></span> </div>
                                                     @else
-                                                        <div class="price-box"><span class="regular-price"><span class="price">{{$valueSW->deposit}} vnđ/ngày</span></span> </div>
+                                                        <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueSW->deposit)}} vnđ/ngày</span></span> </div>
                                                     @endif
                                                 </div>
                                                 <div class="other-info">
@@ -207,7 +220,7 @@
                                 <div class="item-inner">
                                     <div class="item-img">
                                         <div class="item-img-info" ><a href="" title="Retis lapen casen" class="product-image"><img  src="{{asset("/product-images/{$valueS->thumbnails}")}}"  alt="Retis lapen casen"></a>
-                                            @if($valueS->updated > now())
+                                            @if($valueS->hot_car == '1')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @endif
                                             @if($valueS->discount != '0')
@@ -237,7 +250,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">{{$valueS->price}} vnđ</span></span> </div>
+                                                    <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueS->price)}} vnđ</span></span> </div>
                                                 </div>
                                                 <div class="other-info">
                                                     <div class="col-km"><i class="fa fa-tachometer"></i> {{$valueS->number_kilometers}} km</div>
@@ -333,7 +346,7 @@
                                                 </div>
                                             </div>
                                             <div class="item-price">
-                                                <div class="price-box"><span class="regular-price"><span class="price">{{$valueR->deposit}} vnđ/ngày</span> </span> </div>
+                                                <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueR->deposit)}} vnđ/ngày</span> </span> </div>
                                             </div>
                                             <div class="other-info">
                                                 <div class="col-km"><i class="fa fa-tachometer"></i> {{$valueR->number_kilometers}}</div>

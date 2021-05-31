@@ -27,8 +27,8 @@ class CreateProductCarsTable extends Migration
             $table->string('status_car',255);
             $table->longText('description');
             $table->string('address',255);
-            $table->string('price',255);
-            $table->string('deposit',255);
+            $table->double('price',255);
+            $table->double('deposit',255);
             $table->integer('discount');
             $table->string('thumbnails',255);
             $table->integer('status');

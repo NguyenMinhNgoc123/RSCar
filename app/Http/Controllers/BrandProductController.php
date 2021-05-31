@@ -54,7 +54,7 @@ class BrandProductController extends Controller
         $data['created']=$date;
 
         if ($request->brand_name == null){
-            return redirect()->route('admin.brandProduct.list')->with('error','Thêm danh mục hình thức thành công');
+            return redirect()->route('admin.brandProduct.list')->with('error','Thêm danh mục hình thức không thành công');
         }
         $result = BrandProduct::create($data);
         //DB::table('post_type')->insert($data);

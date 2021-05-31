@@ -10,6 +10,7 @@
 <script src="{{asset('backend/js/cloud-zoom.js')}}"></script>
 <script type="text/javascript" src="{{asset('/backend/js/jquery.mobile-menu.min.js')}}"></script>
 <script src="{{asset('/backend/js/countdown.js')}}"></script>
+
 <script>
     jQuery(document).ready(function(){
         jQuery('#rev_slider_4').show().revolution({

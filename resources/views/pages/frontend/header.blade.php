@@ -47,21 +47,30 @@
                                         </div>
                                         <h3>My Acount</h3>
                                         <ul class="links">
-                                            <li><a href="login.html" title="My Account">Login</a></li>
-                                            <li><a href="login.html" title="Wishlist">Register</a></li>
+                                            <?php $name = Session()->get('email');$user_id_login = Session()->get('user_id');
+                                            if ($name){ ?>
+                                            <li><a href="#" class="d-block"><?php echo $name ?></a></li>
+                                            <li><a href="{{route('user.logout')}}" title="Đăng xuất">Đăng xuất</a></li>
+                                            <?php
+                                            }else{?>
+                                                <li><a href="{{route('user.login-user')}}" title="My Account">Login</a></li>
+                                                <li><a href="{{route('register')}}" title="Wishlist">Register</a></li>
+                                                <?php }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="fl-cart-contain">
                                 <div class="mini-cart">
-                                    <div class="basket"> <a href="shopping-cart.html"><span> 2 </span></a> </div>
+                                    <div class="basket"> <a href="{{route('user.show-cart')}}"><span> 2 </span></a> </div>
                                     <div class="fl-mini-cart-content" style="display: none;">
                                         <div class="block-subtitle">
                                             <div class="top-subtotal">2 items, <span class="price">$259.99</span> </div>
                                             <!--top-subtotal-->
                                             <!--pull-right-->
                                         </div>
+
                                         <!--block-subtitle-->
                                         <ul class="mini-products-list" id="cart-sidebar">
                                             <li class="item first">

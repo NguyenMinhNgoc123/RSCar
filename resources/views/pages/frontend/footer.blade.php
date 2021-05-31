@@ -92,7 +92,7 @@
                             <li><a title="Payment" href="#">Payment</a></li>
                             <li><a title="Shipment" href="#">Shipment</a></li>
                             <li><a title="Where is my order?" href="#">Where is my order?</a></li>
-                            <li class="last"><a title="Return policy" href="#">Return policy</a></li>
+                            <li class="last"><a title="" href="{{route('admin.admin-login')}}">Admin</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">

@@ -35,7 +35,7 @@
                         <div class="row">
                             @foreach($detailProduct as $valueP)
 
-                                <form action="{{ route('save-cart') }}" method="POST" id="product_addtocart_form">
+                                <form action="{{ route('user.save-cart') }}" method="POST" id="product_addtocart_form">
                                 @csrf
                                 <!--End For version 1, 2, 6 -->
                                     <!-- For version 3 -->
@@ -180,7 +180,7 @@
                             <li><a href="#product_tabs_tags" data-toggle="tab">Thông số kĩ thuật</a></li>
                             <li> <a href="#product_tabs_custom" data-toggle="tab">Option đã thêm</a> </li>
                             <li> <a href="#reviews_tabs" data-toggle="tab">Đánh giá</a> </li>
-                            {{--                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Custom Tab1</a> </li>--}}
+                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Địa chỉ xe</a> </li>
                         </ul>
                         <div id="productTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="product_tabs_description">
@@ -362,11 +362,11 @@
                                     </table>
                                 </div>
                             </div>
-                            {{--                            <div class="tab-pane fade" id="product_tabs_custom1">--}}
-                            {{--                                <div class="product-tabs-content-inner clearfix">--}}
-                            {{--                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
+                            <div class="tab-pane fade" id="product_tabs_custom1">
+                                <div class="product-tabs-content-inner clearfix">
+                                    <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$valueP->address}}&output=embed" ></iframe>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach
