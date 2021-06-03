@@ -153,13 +153,13 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-header">EXAMPLES</li>
+                <li class="nav-header">DANH MỤC ĐƠN HÀNG</li>
                 <li class="nav-item">
-                    <a href="pages/calendar.html" class="nav-link">
-                        <i class="nav-icon far fa-calendar-alt"></i>
+                    <a href="{{route('admin.order.list')}}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
                         <p>
-                            Calendar
-                            <span class="badge badge-info right">2</span>
+                            ĐƠN HÀNG
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                 </li>

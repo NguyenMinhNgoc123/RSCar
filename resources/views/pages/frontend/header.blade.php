@@ -35,17 +35,21 @@
                                             <!-- END For version 1,2,3,4,6 -->
                                             <!-- For version 1,2,3,4,6 -->
                                             <div class="fl-currency">
-                                                <h3>Currency</h3>
+                                                <?php $name = Session()->get('email');$user_id_login = Session()->get('user_id');Session()->get('full_name');
+                                                if ($name){ ?>
+                                                <h3>OPTION PROFILE</h3>
                                                 <ul class="currencies_list">
-                                                    <li><a href="#" title="EGP"> <strong>£</strong> Pound Sterling</a></li>
-                                                    <li><a href="#" title="EUR"> <strong>€</strong> Euro</a></li>
-                                                    <li><a href="#" title="USD"> <strong>$</strong> US Dollar</a></li>
+                                                    <li><a href="{{route('user.profile')}}" title=""> <strong>+</strong> Trang cá nhân</a></li>
+                                                    <li><a href="{{route('user.change-password')}}" title="EUR"> <strong>+</strong> Đổi mật khẩu</a></li>
+                                                    <li><a href="{{route('user.order.list')}}" title="USD"> <strong>+</strong> Đơn Hàng</a></li>
                                                 </ul>
+                                                    <?php }
+                                                    ?>
                                             </div>
                                             <!--fl-currency-->
                                             <!-- END For version 1,2,3,4,6 -->
                                         </div>
-                                        <h3>My Acount</h3>
+                                        <h3>TÀI KHOẢN</h3>
                                         <ul class="links">
                                             <?php $name = Session()->get('email');$user_id_login = Session()->get('user_id');
                                             if ($name){ ?>
@@ -104,13 +108,6 @@
                             </div>
                             <!--mini-cart-->
                             <div class="collapse navbar-collapse">
-                                <form class="navbar-form" role="search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <span class="input-group-btn">
-                      <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
-                      </span> </div>
-                                </form>
                             </div>
                             <!--links-->
                         </div>

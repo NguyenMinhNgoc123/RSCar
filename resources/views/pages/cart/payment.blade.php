@@ -73,7 +73,7 @@
                                                         <strong>Thành Tiền</strong>
                                                     </td>
                                                     <td style="" class="a-right">
-                                                        <strong><span class="price">{{Cart::subtotal().' '.'vnđ'}}</span></strong>
+                                                        <strong><span class="price">{{number_format(Session()->get('total')).'đ'}}</span></strong>
                                                     </td>
                                                 </tr>
                                                 </tfoot>
@@ -90,7 +90,7 @@
                                                         Giảm giá
                                                     </td>
                                                     <td style="" class="a-right"><span
-                                                            class="price">{{Cart::discount().' '.'vnđ'}}</span></td>
+                                                            class="price"></span></td>
                                                 </tr>
                                                 </tbody>
                                             </table>

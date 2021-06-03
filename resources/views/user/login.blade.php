@@ -3,7 +3,32 @@
 @section('content')
     @include('pages.banner')
     <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
-
+        <div>
+            <?php
+            $message = Session()->get('message');
+            if ($message){ ?>
+            <div class="alert alert-primary alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Lỗi!</h5>
+                <?php echo $message ?>
+            </div>
+            <?php  Session()->put('message', null);
+            }
+            ?>
+        </div>
+        <div>
+            <?php
+            $message = Session()->get('error');
+            if ($message){ ?>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Lỗi!</h5>
+                <?php echo $message ?>
+            </div>
+            <?php  Session()->put('error', null);
+            }
+            ?>
+        </div>
         <div class="main">
             <div class="account-login container">
                 <!--page-title-->
@@ -69,7 +94,7 @@
                                     <button type="submit" class="button login" title="Login" name="send" id="send2">
                                         <span>ĐĂNG NHẬP</span></button>
 
-                                    <a href="#" class="forgot-word">Forgot Your Password?</a>
+                                    <a href="{{route('guest.input-email')}}" class="forgot-word">Bạn quên mật khẩu?</a>
                                 </div> <!--buttons-set-->
                             </div> <!--content-->
 

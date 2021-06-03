@@ -20,6 +20,8 @@ class CreateOrderDetailsTable extends Migration
             $table->double('product_price');
             $table->double('product_quantity');
             $table->dateTime('order_detail_create');
+            $table->foreign('order_id')->references('order_id')->on('orders');
+            $table->foreign('product_id')->references('product_id')->on('product_cars');
         });
     }
 

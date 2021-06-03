@@ -1,77 +1,18 @@
 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
-    <div class="section-filter">
-        <div class="b-filter__inner bg-grey">
-            <h2>Tim chiếc xe của bạn</h2>
-            <form class="b-filter">
-                <div class="btn-group bootstrap-select" style="width: 100%;">
-                    <select class="selectpicker" data-width="100%" tabindex="-98">
-                        <option>Select Make</option>
-                        <option>Make 1</option>
-                        <option>Make 2</option>
-                        <option>Make 3</option>
-                    </select>
-                </div>
-                <div class="btn-group bootstrap-select" style="width: 100%;">
-                    <select class="selectpicker" data-width="100%" tabindex="-98">
-                        <option>Select Car Status</option>
-                        <option>Status 1</option>
-                        <option>Status 2</option>
-                        <option>Status 3</option>
-                    </select>
-                </div>
-                <div class="btn-group bootstrap-select" style="width: 100%;">
-                    <select class="selectpicker" data-width="100%" tabindex="-98">
-                        <option>Select Model</option>
-                        <option>Model 1</option>
-                        <option>Model 2</option>
-                        <option>Model 3</option>
-                    </select>
-                </div>
-                <div class="btn-group bootstrap-select" style="width: 100%;">
-                    <select class="selectpicker" data-width="100%" tabindex="-98">
-                        <option>Select All Locations</option>
-                        <option>Location 1</option>
-                        <option>Location 2</option>
-                        <option>Location 3</option>
-                    </select>
-                </div>
-                <div class="btn-group bootstrap-select" style="width: 100%;">
-                    <select class="selectpicker" data-width="100%" tabindex="-98">
-                        <option>Select Year</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                        <option>2015</option>
-                    </select>
-                </div>
-                <div class="ui-filter-slider">
-                    <div class="sidebar-widget-body m-t-10">
-                        <div class="price-range-holder"><span class="min-max"> <span
-                                    class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
-                            <input type="text" class="price-slider" value="" style="display:block">
-                        </div>
-                        <!-- /.price-range-holder -->
-                    </div>
-                </div>
-                <div>
-                    <div class="b-filter__btns">
-                        <button class="btn btn-lg btn-primary">TÌM KIẾM</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
     <!-- BEGIN SIDE-NAV-CATEGORY -->
     <div class="side-nav-categories">
         <div class="block-title"> DANH MỤC</div>
         <!--block-title-->
         <!-- BEGIN BOX-CATEGORY -->
+        <form action="{{route('list')}}" method="post">
         <div class="box-content box-category">
             <ul>
                 <li><a class="active" href="grid.html">HÌNH THỨC</a> <span
                         class="subDropdown minus"></span>
                     <ul class="level0_415" style="display:block">
                         @foreach($post_types as $valuePT)
-                            <li><a href="{{route('category-type',$valuePT->type_id)}}"> {{$valuePT->type_name}} </a>
+                            <li>
+                                <a href="{{route('category-type',$valuePT->type_id)}}"> {{$valuePT->type_name}} </a>
                                 <span class=""></span>
 
                                 <!--level1-->
@@ -108,45 +49,9 @@
                     </ul>
                     <!--level0-->
                 </li>
-                <!--level 0-->
-                {{--                <li><a href="grid.html">INTERIOR</a> <span class="subDropdown plus"></span>--}}
-                {{--                    <ul class="level0_482" style="display:none">--}}
-                {{--                        <li><a href="grid.html"> Custom Gauges </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Dash Kits </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Seat Covers </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Steering Wheels </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Sun Shades</a> <span class=""></span></li>--}}
-                {{--                        </li>--}}
-                {{--                        <!--level 0-->--}}
-
-                {{--                    </ul>--}}
-                {{--                    <!--level 0-->--}}
-                {{--                <li><a href="grid.html">LIGHTING</a> <span class="subDropdown plus"></span>--}}
-                {{--                    <ul class="level0_482" style="display:none">--}}
-                {{--                        <li><a href="grid.html"> Fog Lights </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Headlights </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> LED Lights </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html">Off-Road Lights </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Signal Lights</a> <span class=""></span></li>--}}
-                {{--                        </li>--}}
-                {{--                        <!--level 0-->--}}
-
-                {{--                    </ul>--}}
-                {{--                    <!--level 0-->--}}
-                {{--                <li><a href="grid.html">PERFORMANCE</a> <span class="subDropdown plus"></span>--}}
-                {{--                    <ul class="level0_482" style="display:none">--}}
-                {{--                        <li><a href="grid.html"> Air Intake Systems </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Brakes </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Exhaust Systems </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html">Power Adders </a> <span class=""></span></li>--}}
-                {{--                        <li><a href="grid.html"> Racing Gear</a> <span class=""></span></li>--}}
-                {{--                        </li>--}}
-                {{--                        <!--level 0-->--}}
-
-                {{--                    </ul>--}}
-                {{--                </li>--}}
             </ul>
         </div>
+        </form>
         <!--box-content box-category-->
     </div>
     <!--side-nav-categories-->

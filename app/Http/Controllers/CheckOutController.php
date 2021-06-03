@@ -65,7 +65,7 @@ class CheckOutController extends Controller
             DB::table('payments')->insertGetId($data);
             //--
             $orderData = [];
-            $priceAll = Cart::subtotal();
+            $priceAll = Session()->get('total');
             $priceOrder = str_replace(',', '', $priceAll);
             $priceOrder = str_replace('.00', '', $priceOrder);
             $order_id = $orderData['order_id'] = mt_rand();
@@ -77,21 +77,22 @@ class CheckOutController extends Controller
             $orderData['order_create'] = $date;
             $result1 = DB::table('orders')->insertGetId($orderData);
 
-            $content = Cart::content();
-            foreach ($content as $valueC) {
+            $content = Session('cart');
+            foreach ($content as $key => $valueC) {
                 $orderDetailData = [];
-                $price = str_replace(',', '', $valueC->price);
+                $price = str_replace(',', '', $valueC['deposit']);
                 $price = str_replace('.', '', $price);
                 $orderDetailData['order_details_id'] = mt_rand();
                 $orderDetailData['order_id'] = $order_id;
-                $orderDetailData['product_id'] = $valueC->id;
+                $orderDetailData['product_id'] = $valueC['product_id'];
                 $orderDetailData['product_price'] = $price;
-                $orderDetailData['product_quantity'] = $valueC->qty;
+                $orderDetailData['product_quantity'] = $valueC['quantity'];
                 $orderDetailData['order_detail_create'] = $date;
                 DB::table('order_details')->insert($orderDetailData);
             }
 
-            Cart::destroy();
+            Session()->put('total',null);
+            Session()->put('cart',null);
             $request->session()->put('full_name_ship', null);
             $request->session()->put('email_ship', null);
             $request->session()->put('address_ship', null);

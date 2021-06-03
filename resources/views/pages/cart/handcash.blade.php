@@ -25,6 +25,39 @@
                                                                 <h3 class="one_page_heading"> CÁM ƠN BẠN ĐÃ ĐẶT HÀNG CHÚNG TÔI SẼ SỚM LIÊN LẠC LẠI VỚI BẠN<span
                                                                         class="required">*</span></h3>
                                                             </div>
+                                                            <div class="col2-set">
+                                                                <div class="col-1">
+                                                                    <div class="box">
+                                                                        <div class="box-title">
+                                                                            <h5>NGUYEN MINH NGOC</h5>
+                                                                            <a href="#"></a></div>
+                                                                        <!--box-title-->
+                                                                        <div class="box-content">
+                                                                            <p> NGÂN HÀNG : TP BANK<br>
+                                                                                SỐ TÀI KHOẢN : 0384 7021 801<br>
+                                                                            </p>
+                                                                        </div>
+                                                                        <!--box-content-->
+                                                                        <div class="buttons-set" id="billing-buttons-container">
+                                                                            <button type="submit" title="Continue" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--box-->
+                                                                </div>
+                                                                <div class="col-2">
+                                                                    <div class="box">
+                                                                        <div class="box-title">
+                                                                            <h5>NỘI DUNG CHUYỂN KHOẢN</h5>
+                                                                            <!--box-title-->
+                                                                            <div class="box-content">
+                                                                                <p> Nhập id đơn hàng và nội dung chuyển khoản </p>
+                                                                            </div>
+                                                                            <!--box-content-->
+                                                                        </div>
+                                                                        <!--box-->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </li>
                                                     </ul>
                                                 </fieldset>

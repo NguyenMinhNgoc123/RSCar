@@ -26,7 +26,7 @@ class CheckUserLogin
         if (session()->has('email') && session()->has('user_id') && url('user/login-user') == $request->url() && in_array(Route::currentRouteName(), ['user.login-user', 'user.user-dashboard'])){
             return redirect('/');
         }
-        if (session()->has('email') && url('register') == $request->url() && in_array(Route::currentRouteName(), ['register', 'add-user'])){
+        if (session()->has('email') && url('/register') == $request->url() && in_array(Route::currentRouteName(), ['register', 'add-user'])){
             return redirect('/');
         }
         return $next($request);

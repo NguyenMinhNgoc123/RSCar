@@ -11,7 +11,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Danh mục sản phẩm xe</li>
+                            <li class="breadcrumb-item active">Danh mục Đơn Hàng</li>
                         </ol>
                     </div>
                 </div>
@@ -60,69 +60,82 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>id sản phẩm</th>
+                                        <th>Id</th>
+                                        <th>Id đơn hàng</th>
                                         <th style="width: 1000px"></th>
-                                        <th>Loại xe</th>
-                                        <th>Hình thức</th>
-                                        <th>Giá tiền</th>
-                                        <th>Giảm giá (%)</th>
-                                        <th>Tiền cọc</th>
-                                        <th>Nhà sản xuất xe</th>
-                                        <th>Dòng xe</th>
-                                        <th>Dung tích xe</th>
-                                        <th>Đăng ký tháng /năm</th>
-                                        <th>Tình trạng</th>
-                                        <th>Model</th>
-                                        <th>Số km đã đi</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Tiêu đề</th>
+                                        <th>Tình trạng đơn</th>
+                                        <th>Tên người đặt</th>
+                                        <th>Tổng giá tiền</th>
+                                        <th>email</th>
+                                        <th>Địa chỉ ship</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Loại hình thanh toán</th>
+                                        <th>Tình trạng thanh toán</th>
                                         <th>Mô tả</th>
                                         <th>Ngày tạo</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($productCar as $key =>$value)
+                                    @foreach($order as $key =>$value)
                                         <tr>
                                             <td>{{$key}}</td>
-                                            <td>{{ $value->product_id}}</td>
+                                            <td>{{ $value->order_id}}</td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm" href="{{route('admin.product.show',$value->product_id)}}">
+                                                <a class="btn btn-primary btn-sm" href="{{route('admin.order.detail',$value->order_id)}}">
                                                     <i class="fas fa-folder">
                                                     </i>
-                                                    Ảnh
+                                                    Chi tiết
                                                 </a>
                                                 <a class="btn btn-info btn-sm"
-                                                   href="{{route('admin.product.edit',$value->product_id)}}">
+                                                   href="{{route('admin.order.edit',$value->order_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
-                                                    Edit
+                                                    Cập nhật
                                                 </a>
                                                 <a class="btn btn-danger btn-sm"
-                                                   href="{{route('admin.product.delete',$value->product_id)}}" onclick="return confirm('Bạn có muốn xóa?')">
+                                                   href="{{route('admin.order.delete',$value->order_id)}}" onclick="return confirm('Bạn có muốn xóa?')">
                                                     <i class="fas fa-trash">
                                                     </i>
-                                                    Delete
+                                                    Xóa
                                                 </a>
                                             </td>
-                                            <td>{{$value->tv_name}}</td>
-                                            <td>{{$value->type_name}}</td>
-                                            <td> {{$value->price}}</td>
-                                            <td>{{ $value->discount }} %</td>
-                                            <td>{{$value->deposit}}</td>
-                                            <td>{{$value->brand_name}}</td>
-                                            <td>{{$value->name_car}}</td>
-                                            <td>{{$value->capacity}}</td>
-                                            <td>{{$value->Year_of_registration}}</td>
-                                            <td>{{$value->status_car}}</td>
-                                            <td>{{$value->model}}</td>
-                                            <td>{{$value->number_kilometers}}</td>
-                                            <td>{{$value->address}}</td>
-                                            <td>{{$value->caption}}</td>
-                                            <td>{{$value->description}}</td>
-                                            <td>{{ $value->created_at }}</td>
-
+                                            <td>
+                                                @if($value->order_status =='0')
+                                                    Chưa giao xe
+                                                @elseif ($value->order_status =='1')
+                                                    Đã giao xe
+                                                @elseif ($value->order_status =='2')
+                                                    Đã nhận cọc chưa giao xe
+                                                @elseif($value->order_status =='3')
+                                                    Đang trong quá trình giao xe
+                                                @else
+                                                    Đã giao xe đang ghi nợ
+                                                @endif
+                                            </td>
+                                            <td>{{$value->full_name_ship}}</td>
+                                            <td> {{number_format($value->total)}}</td>
+                                            <td>{{$value->email_ship}}</td>
+                                            <td>{{$value->address_ship}}</td>
+                                            <td>{{$value->phone_no_ship}}</td>
+                                            <td>
+                                                @if($value->payment_method == '0')
+                                                    Ghi nợ
+                                                @elseif($value->payment_method == '1')
+                                                    Nhận Tiền Mặt
+                                                @else
+                                                    Thanh toán bằng ATM
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($value->payment_status == '0')
+                                                    Chưa thanh toán
+                                                @else
+                                                    Đã thanh toán
+                                                @endif
+                                            </td>
+                                            <td>{{$value->description_ship}}</td>
+                                            <td>{{$value->order_create}}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

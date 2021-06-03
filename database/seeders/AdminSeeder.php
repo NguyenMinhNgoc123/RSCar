@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
             'email' => 'NguyenMinhNgoc@gmail.com',
             'password' => md5('852654'),
             'phone_no'=>'0815115415',
+            'status_admin'=>'1',
             'created_at'=>$date
         ]);
     }

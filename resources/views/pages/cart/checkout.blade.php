@@ -26,7 +26,6 @@
                                             <li id="billing-new-address-form" >
                                                 <fieldset>
                                                     <ul>
-
                                                         <li class="fields">
                                                             <div class="customer-name">
                                                                 <div class="input-box name-firstname">
@@ -34,7 +33,7 @@
                                                                             class="required">*</span></label>
                                                                     <div class="input-box1">
                                                                         <input type="email" id="billing:firstname"
-                                                                               name="email_ship" value=""
+                                                                               name="email_ship" value="{{session()->get('email')}}"
                                                                                class="input-text required-entry">
                                                                     </div>
                                                                 </div>
@@ -43,7 +42,7 @@
                                                                             class="required">*</span></label>
                                                                     <div class="input-box1">
                                                                         <input type="text" id="billing:lastname"
-                                                                               name="full_name_ship" value=""
+                                                                               name="full_name_ship" value="{{session()->get('full_name')}}"
                                                                                title="Last Name" maxlength="255"
                                                                                class="input-text required-entry">
                                                                     </div>

@@ -1,7 +1,13 @@
 @extends('pages.frontend.welcome')
 @section('content')
     <!--container-->
-
+    <script>
+        $(document).ready(function (){
+            $('#addcart').click(function (){
+                alert('clicked')
+            })
+        })
+    </script>
     <div class="content">
         <div class="container-fluid">
 
@@ -57,62 +63,7 @@
 
         <div class="section-filter">
             <div class="b-filter__inner bg-grey container">
-                <h2>Tìm kiếm chiếc xe phù hợp</h2>
-                <form class="b-filter">
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option value="">Hãng xe</option>
-                            <option>Status 1</option>
-                            <option>Status 2</option>
-                            <option>Status 3</option>
-                        </select>
-                    </div>
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option value="">tình trạng xe</option>
-                            <option>Status 1</option>
-                            <option>Status 2</option>
-                            <option>Status 3</option>
-                        </select>
-                    </div>
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option>Model</option>
-                            <option>Model 1</option>
-                            <option>Model 2</option>
-                            <option>Model 3</option>
-                        </select>
-                    </div>
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option>Địa điểm</option>
-                            <option>Location 1</option>
-                            <option>Location 2</option>
-                            <option>Location 3</option>
-                        </select>
-                    </div>
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option>Năm đăng ký</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                            <option>2015</option>
-                        </select>
-                    </div>
-                    <div class="btn-group bootstrap-select">
-                        <select class="selectpicker" data-width="100%" tabindex="-98">
-                            <option>Giá xe</option>
-                            <option>2017</option>
-                            <option>2016</option>
-                            <option>2015</option>
-                        </select>
-                    </div>
-                    <div>
-                        <div class="b-filter__btns">
-                            <button class="btn btn-lg btn-primary">Tìm kiếm ngay</button>
-                        </div>
-                    </div>
-                </form>
+
             </div>
         </div>
 
@@ -143,7 +94,7 @@
                             <div class="item">
                                 <div class="item-inner">
                                     <div class="item-img">
-                                        <div class="item-img-info"><a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueSW->thumbnails}")}}" alt="Retis lapen casen"></a>
+                                        <div class="item-img-info"><a href="{{route('detail',$valueSW->product_id)}}" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueSW->thumbnails}")}}" alt="Retis lapen casen"></a>
                                             @if($valueSW->hot_car == '1' )
                                                 <div class="new-label new-top-left " style="font-size: 10.5px;
     font-family:'Open Sans', sans-serif;
@@ -166,17 +117,17 @@
                                             <div class="item-box-hover">
                                                 <div class="box-inner">
                                                     <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
+                                                        <button class="button btn-cart" data-id="{{$valueSW->product_id}}" type="submit" onclick="return confirm('Bạn có chắc muốn thêm?')" ></button>
                                                     </div>
                                                     <div class="product-detail-bnt"><a href="{{route('detail',$valueSW->product_id)}}" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                                                    <div class="actions"><span class="add-to-links"><a id="addcart" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="item-info">
                                         <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">{{$valueSW->caption}}</a> </div>
+                                            <div class="item-title"><a href="{{route('detail',$valueSW->product_id)}}" title="Retis lapen casen">{{$valueSW->caption}}</a> </div>
                                             <div class="item-content">
                                                 <div class="rating">
                                                     <div class="ratings">
@@ -219,7 +170,7 @@
                             <div class="item">
                                 <div class="item-inner">
                                     <div class="item-img">
-                                        <div class="item-img-info" ><a href="" title="Retis lapen casen" class="product-image"><img  src="{{asset("/product-images/{$valueS->thumbnails}")}}"  alt="Retis lapen casen"></a>
+                                        <div class="item-img-info" ><a href="{{route('detail',$valueS->product_id)}}" title="Retis lapen casen" class="product-image"><img  src="{{asset("/product-images/{$valueS->thumbnails}")}}"  alt="Retis lapen casen"></a>
                                             @if($valueS->hot_car == '1')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @endif
@@ -229,7 +180,7 @@
                                             <div class="item-box-hover">
                                                 <div class="box-inner">
                                                     <div class="add_cart">
-                                                        <button class="button btn-cart" type="button"></button>
+                                                        <button class="button btn-cart" data-id="{{$valueS->product_id}}" type="submit" onclick="return confirm('Bạn có chắc muốn thêm?')" ></button>
                                                     </div>
                                                     <div class="product-detail-bnt"><a href="{{route('detail',$valueS->product_id)}}" class="button detail-bnt"><span>Quick View</span></a></div>
                                                     <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
@@ -239,7 +190,7 @@
                                     </div>
                                     <div class="item-info">
                                         <div class="info-inner">
-                                            <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">{{$valueS->caption}}</a> </div>
+                                            <div class="item-title"><a href="{{route('detail',$valueS->product_id)}}" title="Retis lapen casen">{{$valueS->caption}}</a> </div>
                                             <div class="item-content">
                                                 <div class="rating">
                                                     <div class="ratings">
@@ -313,7 +264,7 @@
                         <div class="item">
                             <div class="item-inner">
                                 <div class="item-img">
-                                    <div class="item-img-info"><a href="accessories-detail.html" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueR->thumbnails}")}}" alt="Retis lapen casen"></a>
+                                    <div class="item-img-info"><a href="{{route('detail',$valueR->product_id)}}" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueR->thumbnails}")}}" alt="Retis lapen casen"></a>
                                         @if($valueR->updated > now() && $valueR->status == '0')
                                             <div class="new-label new-top-left">Hot</div>
                                         @else
@@ -325,7 +276,7 @@
                                         <div class="item-box-hover">
                                             <div class="box-inner">
                                                 <div class="add_cart">
-                                                    <button class="button btn-cart" type="button"></button>
+                                                    <button class="button btn-cart" data-id="{{$valueR->product_id}}" type="submit" onclick="return confirm('Bạn có chắc muốn thêm?')"></button>
                                                 </div>
                                                 <div class="product-detail-bnt"><a href="{{route('detail',$valueR->product_id)}}" class="button detail-bnt"><span>Quick View</span></a></div>
                                                 <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
@@ -335,7 +286,7 @@
                                 </div>
                                 <div class="item-info">
                                     <div class="info-inner">
-                                        <div class="item-title"><a href="accessories-detail.html" title="Retis lapen casen">{{$valueR->caption}}</a> </div>
+                                        <div class="item-title"><a href="{{route('detail',$valueR->product_id)}}" title="Retis lapen casen">{{$valueR->caption}}</a> </div>
                                         <div class="item-content">
                                             <div class="rating">
                                                 <div class="ratings">

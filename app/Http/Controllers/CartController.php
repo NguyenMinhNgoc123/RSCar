@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product_car;
-
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use MongoDB\Driver\Session;
+
 session_start();
 
 class CartController extends Controller
@@ -33,9 +35,51 @@ class CartController extends Controller
 
         Cart::add($data1);
         //Cart::add('293ad', 'Product 1', 1, 9.99, 550);
-        //Cart::destroy();
-        return redirect()->route('user.show-cart');
+        Cart::destroy();
+        return redirect()->back();
 
+    }
+    public function addCart(Request $request,$id)
+    {
+        $product_id = $id;
+        $product = DB::table('product_cars')
+            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
+            ->where('product_id', '=', $product_id)->first();
+        $cart = session()->get('cart');
+        if ($cart != null) {
+            $is_available = 0;
+            foreach ($cart as $key => $value) {
+                if ($value['product_id'] == $product->product_id) {
+                    $is_available++;
+                }
+
+            }
+            if ($is_available == 0) {
+                $cart[$product_id] = [
+                    'product_id' => $product_id,
+                    'name_car' => $product->name_car,
+                    'quantity' => 1,
+                    'type_id' => $product->type_id,
+                    'deposit' => $product->deposit,
+                    'thumbnails' => $product->thumbnails,
+                    'type_name' => $product->type_name
+                ];
+                Session()->put('cart', $cart);
+            }
+        } else {
+            $cart[$product_id] = [
+                'product_id' => $product_id,
+                'name_car' => $product->name_car,
+                'quantity' => 1,
+                'type_id' => $product->type_id,
+                'deposit' => $product->deposit,
+                'thumbnails' => $product->thumbnails,
+                'type_name' => $product->type_name
+            ];
+            Session()->put('cart', $cart);
+        }
+
+        session()->put('cart', $cart);
     }
     public function show_cart(){
         $data=[];
@@ -45,20 +89,53 @@ class CartController extends Controller
         $data['post_types']=$categoryPostType;
         $data['brand_products']=$categoryBrand;
         $data['type_vehicles']=$categoryTypeVehicles;
-
         return view('pages.cart.show_cart',$data);
 
     }
     public function update_cart_quantity(Request $request){
-        $rowId=$request->rowId_cart;
-        $quantity =$request->cart_quantity;
+        $data = $request->all();
 
-        Cart::update($rowId, $quantity);
-        return view('pages.cart.show_cart');
+        $cart = Session()->get('cart');
+        if ($cart == true){
+            foreach ($data['cart_qty'] as $key =>$value){
+                if ($value != 0 || $value != null){
+                    foreach ($cart as $key1 =>$value1){
+                        echo $key;
+                        if ($value1['product_id'] == $key){
+                            $cart[$key1]['quantity'] =$value;
+                        }
+                    }
+                }
+            }
+            Session()->put('cart', $cart);
+            return redirect()->back();
+        }
+
+
+        //return view('pages.cart.show_cart');
     }
 
-    public function delete_cart($rowId){
-        Cart::update($rowId, 0);
-        return redirect()->route('user.show-cart');
+    public function delete_cart($id){
+
+        $cart = Session()->get('cart');
+        if ($cart == true){
+            foreach ($cart as $key =>$value){
+                if ($key= $id){
+                    unset($cart[$key]);
+                }
+            }
+            Session()->put('cart', $cart);
+            return redirect()->back();
+        }
+
+    }
+    public function delete_cart_all(){
+        $cart = Session()->get('cart');
+        if ($cart == true){
+            Session()->put('cart',null);
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
     }
 }

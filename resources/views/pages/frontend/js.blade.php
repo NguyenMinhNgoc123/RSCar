@@ -1,3 +1,7 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 <script type="text/javascript" src="{{asset('/backend/js/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/backend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('/backend/js/bootstrap-slider.min.js')}}"></script>
@@ -11,6 +15,59 @@
 <script type="text/javascript" src="{{asset('/backend/js/jquery.mobile-menu.min.js')}}"></script>
 <script src="{{asset('/backend/js/countdown.js')}}"></script>
 
+<script type="text/javascript">
+    window.setTimeout(function() {
+        $(".alert").fadeTo(1000, 0).slideUp(500, function(){
+            $(this).remove();
+        });
+    }, 4000)
+</script>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('.btn-cart').on('click',function (){
+            var id = $(this).data('id');
+            if (id){
+                $.ajax({
+                    url:"{{url('user/add-cart')}}/"+id,
+                    type:"GET",
+                    dataType:"json",
+                    success:function (data){
+                        const Toast = Swal.mixin({
+                            toast:true,
+                            position:'top-end',
+                            showConfirmButton:false,
+                            timer:3000
+                        })
+                        if ($.isEmptyObject(data.error)){
+                            Toast.fire({
+                                type:'success',
+                                title:data.success
+                            })
+                        }else{
+                            Toast.fire({
+                                type:'error',
+                                title:data.error
+                            })
+                        }
+                    }
+                })
+            }else{
+                alert('danger');
+            }
+            swal("Đã thêm vào giỏ hàng")
+            e.preventDefault();
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function (){
+        //swal("Here's a message!")
+    })
+
+    // $("#change-item-cart").on("click",".remove-pr a",function (){
+    //     console.log($(this).data("id"));
+    // })
+</script>
 <script>
     jQuery(document).ready(function(){
         jQuery('#rev_slider_4').show().revolution({

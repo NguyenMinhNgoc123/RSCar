@@ -30,6 +30,7 @@ class CreateProductCarsTable extends Migration
             $table->double('price',255);
             $table->double('deposit',255);
             $table->integer('discount');
+            $table->integer('quantity');
             $table->string('thumbnails',255);
             $table->integer('status');
             $table->timestamps();

@@ -5,15 +5,13 @@
     <div class="main-container col1-layout wow bounceInUp animated">
 
         <div class="main">
-            <div class="cart wow bounceInUp animated">
+            <div class="cart wow bounceInUp animated" id="change-item-cart">
 
                 <div class="table-responsive shopping-cart-tbl  container">
                     <form action="{{route('user.update-cart-quantity')}}" method="post">
                         @csrf
                         <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
-                        <?php
-                        $content = Cart::content();
-                        ?>
+
                         <fieldset>
                             </span></th>
                             <table id="shopping-cart-table" class="data-table cart-table table-striped">
@@ -41,80 +39,87 @@
                                 <tfoot>
                                 <tr class="first last">
                                     <td colspan="50" class="a-right last">
-                                        <button type="button" title="Continue Shopping" class="button btn-continue"
-                                                onClick=""><span><span>TIẾP TỤC MUA SẮM</span></span></button>
+                                        <a type="button" title="Continue Shopping" class="button btn-continue" href="{{route('list')}}"
+                                                onClick=""><span><span>TIẾP TỤC MUA SẮM</span></span></a>
                                         <button type="submit" name="update_cart_action" value="update_qty"
                                                 title="Update Cart" class="button btn-update">
                                             <span><span>CẬP NHẬT GIỎ</span></span></button>
-                                        {{--                                        <button type="submit" name="update_cart_action" value="empty_cart"--}}
-                                        {{--                                                title="Clear Cart" class="button btn-empty" id="empty_cart_button">--}}
-                                        {{--                                            <span><span>XÓA GIỎ</span></span></button>--}}
+                                        <a href="{{route('user.delete-all-cart')}}"
+                                                title="Clear Cart" class="button btn-empty" id="empty_cart_button">
+                                            <span><span>XÓA TẤT CẢ</span></span></a>
 
                                     </td>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                @foreach($content as $valueCT)
-                                    <tr class="first last odd">
-                                        <td class="image hidden-table"><a href="product-detail.html"
-                                                                          title="Women&#39;s Georgette Animal Print"
-                                                                          class="product-image"><img
-                                                    src="{{asset("/product-images/{$valueCT->options->image}")}}"
-                                                    width="75"
-                                                    alt="Women&#39;s Georgette Animal Print"></a></td>
-                                        <td>
-                                            <h2 class="product-name">
-                                                <a href="{{route('detail',$valueCT->id)}}">{{$valueCT->name}}</a>
-                                            </h2>
-                                        </td>
-                                        <td class="a-center hidden-table">
+                                @php
+                                    $total = 0;
+                                @endphp
+                                @if(session('cart') != null)
+
+                                    @foreach(session('cart') as $key =>$value)
+                                        <?php $subtotal = 0;
+                                        $subtotal += $value['deposit'] * $value['quantity'];
+                                        $total += $subtotal;
+                                        ?>
+                                        <tr class="first last odd" id="sid">
+                                            <td class="image hidden-table">
+                                                <a href="product-detail.html"
+                                                   title="Women&#39;s Georgette Animal Print"
+                                                   class="product-image"><img
+                                                        src="{{asset("/product-images/{$value['thumbnails']}")}}"
+                                                        width="75"
+                                                        alt="Women&#39;s Georgette Animal Print"></a></td>
+                                            <td>
+                                                <h2 class="product-name">
+                                                    <a href="{{route('detail',$value['product_id'])}}">{{$value['name_car']}}</a>
+                                                </h2>
+                                            </td>
+                                            <td class="a-center hidden-table">
                                          <span class="cart-price">
-                                                <span class="">{{$valueCT->options->type}}</span>
+                                                <span class="">{{$value['type_name']}}</span>
                                 </span>
-                                        </td>
+                                            </td>
 
 
-                                        <td class="a-right hidden-table">
+                                            <td class="a-right hidden-table">
                                     <span class="cart-price">
-                                        @if($valueCT->options->type_id =='2')
-                                            <span class="price">{{number_format($valueCT->price)}} vnđ/ngày</span>
+                                        @if($value['type_id'] =='2')
+                                            <span class="price">{{number_format($value['deposit'])}} đ/ngày</span>
                                         @else
-                                            <span class="price">{{number_format($valueCT->price)}} vnđ</span>
+                                            <span class="price">{{number_format($value['deposit'])}} đ</span>
                                         @endif
                                     </span>
 
-                                        </td>
-                                        <td class="a-center movewishlist">
-                                            <input name="cart_quantity" value="{{$valueCT->qty}}" size="2" title="Qty"
-                                                   class="input-text qty">
-                                            <input type="hidden" value="{{$valueCT->rowId}}" name="rowId_cart"
-                                                   class="form-control">
+                                            </td>
+                                            <td class="a-center movewishlist">
+                                                <input name="cart_qty[{{$value['product_id']}}]"
+                                                       value="{{$value['quantity']}}" size="2" title="Qty"
+                                                       class="input-text cart_quantity">
 
-                                        </td>
-                                        <td class="a-right movewishlist">
+                                            </td>
+                                            <td class="a-right movewishlist">
                     <span class="cart-price">
 
                                                 <span class="price">
-                                                    <?php
-                                                    $total = $valueCT->price * $valueCT->qty;
-                                                    echo number_format($total) . ' ' . 'vnđ';
-                                                    ?>
+<?php echo number_format($subtotal)?>
                                                 </span>
         </span>
-                                        </td>
+                                            </td>
 
-                                        <td class="a-center last">
+                                            <td class="a-center last remove-pr">
+                                                {{--                                            {{route('user.delete-cart',$valueCT->rowId)}}--}}
+                                                <a title="Remove item"
+                                                   class="button remove-item"
+                                                   href="{{route('user.delete-cart',$value['product_id'])}}"></a>
+                                            </td>
 
-                                            <a href="{{route('user.delete-cart',$valueCT->rowId)}}" title="Remove item"
-                                               class="button remove-item"><span><span>Remove item</span></span></a>
-                                        </td>
 
-
-                                    </tr>
-                                @endforeach
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
-
                         </fieldset>
                     </form>
                 </div>
@@ -156,7 +161,7 @@
 
                                 <table id="shopping-cart-totals-table" class="table shopping-cart-table-total">
                                     <colgroup>
-                                        <col>
+                                        <col width="1">
                                         <col width="1">
                                     </colgroup>
                                     <tfoot>
@@ -165,7 +170,11 @@
                                             <strong>Thành Tiền</strong>
                                         </td>
                                         <td style="" class="a-right">
-                                            <strong><span class="price">{{Cart::subtotal().' '.'vnđ'}}</span></strong>
+                                            <strong><span
+                                                    class="price"></span><?php
+                                                Session()->put('total',$total);
+                                                echo number_format($total, 0, ',', '.') . ' đ' ?>
+                                            </strong>
                                         </td>
                                     </tr>
                                     </tfoot>
@@ -189,7 +198,7 @@
                                             Giảm giá
                                         </td>
                                         <td style="" class="a-right"><span
-                                                class="price">{{Cart::discount().' '.'vnđ'}}</span></td>
+                                                class="price"></span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -198,6 +207,7 @@
                                     <li>
                                         <a type="submit" style="width: 100%;text-decoration: none"
                                            href="{{route('user.checkout')}}"
+                                           <?php if (session('cart') == null) echo 'disabled'; ?>
                                            class="button btn btn-danger" onClick="">
                                             <span>THANH TOÁN</span></a>
                                     </li>
