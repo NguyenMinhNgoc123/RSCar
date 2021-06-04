@@ -31,6 +31,7 @@
                                     <th rowspan="1"><span class="nobr">HÌNH THỨC</span></th>
                                     <th class="a-center" colspan="1"><span class="nobr">TIỀN CỌC</span></th>
                                     <th rowspan="1" class="a-center"><span class="nobr">SỐ LƯỢNG</span></th>
+                                    <th rowspan="1" class="a-center"><span class="nobr">NGÀY THUÊ</span></th>
                                     <th class="a-center" style="padding-right: 20px" colspan="1"><span class="nobr">TỔNG TIỀN SẢN PHẨM</span>
                                     </th>
                                     <th rowspan="1" class="a-center">&nbsp;</th>
@@ -39,13 +40,14 @@
                                 <tfoot>
                                 <tr class="first last">
                                     <td colspan="50" class="a-right last">
-                                        <a type="button" title="Continue Shopping" class="button btn-continue" href="{{route('list')}}"
-                                                onClick=""><span><span>TIẾP TỤC MUA SẮM</span></span></a>
+                                        <a type="button" title="Continue Shopping" class="button btn-continue"
+                                           href="{{route('list')}}"
+                                           onClick=""><span><span>TIẾP TỤC MUA SẮM</span></span></a>
                                         <button type="submit" name="update_cart_action" value="update_qty"
                                                 title="Update Cart" class="button btn-update">
                                             <span><span>CẬP NHẬT GIỎ</span></span></button>
                                         <a href="{{route('user.delete-all-cart')}}"
-                                                title="Clear Cart" class="button btn-empty" id="empty_cart_button">
+                                           title="Clear Cart" class="button btn-empty" id="empty_cart_button">
                                             <span><span>XÓA TẤT CẢ</span></span></a>
 
                                     </td>
@@ -54,13 +56,17 @@
                                 <tbody>
                                 @php
                                     $total = 0;
+                                    $number_quantity = 0;
                                 @endphp
                                 @if(session('cart') != null)
 
                                     @foreach(session('cart') as $key =>$value)
                                         <?php $subtotal = 0;
-                                        $subtotal += $value['deposit'] * $value['quantity'];
+
+                                        $subtotal += $value['deposit'] * $value['quantity'] * $value['total_rent'];
+
                                         $total += $subtotal;
+                                        $number_quantity += $value['quantity']
                                         ?>
                                         <tr class="first last odd" id="sid">
                                             <td class="image hidden-table">
@@ -76,9 +82,9 @@
                                                 </h2>
                                             </td>
                                             <td class="a-center hidden-table">
-                                         <span class="cart-price">
+                                             <span class="cart-price">
                                                 <span class="">{{$value['type_name']}}</span>
-                                </span>
+                                            </span>
                                             </td>
 
 
@@ -99,12 +105,24 @@
 
                                             </td>
                                             <td class="a-right movewishlist">
-                    <span class="cart-price">
+                                                <span class="cart-price">
+                                                    @if($value['type_id'] =='2')
+                                                <input name="date_begin" type="datetime-local"
+                                                       value="{{$value['date_begin']}}" size="3"
+                                                       class="input-text">
+                                                    <input name="date_end" type="datetime-local"
+                                                           value="{{$value['date_end']}}" size="3"
+                                                           class="input-text ">
+                                                    @endif
+                                                </span>
+                                            </td>
+                                            <td class="a-right movewishlist">
+                                                <span class="cart-price">
 
                                                 <span class="price">
-<?php echo number_format($subtotal)?>
+                                                    <?php echo number_format($subtotal)?>
                                                 </span>
-        </span>
+                                                </span>
                                             </td>
 
                                             <td class="a-center last remove-pr">
@@ -172,7 +190,7 @@
                                         <td style="" class="a-right">
                                             <strong><span
                                                     class="price"></span><?php
-                                                Session()->put('total',$total);
+                                                Session()->put('total', $total);
                                                 echo number_format($total, 0, ',', '.') . ' đ' ?>
                                             </strong>
                                         </td>
@@ -181,10 +199,11 @@
                                     <tbody>
                                     <tr>
                                         <td style="" class="a-left" colspan="1">
-                                            Tổng Tiền
+                                            Tổng số lượng
                                         </td>
                                         <td style="" class="a-right">
-                                            <span class="price"></span></td>
+                                            <span class="price" id="total-quantity-cart">{{$number_quantity}}</span>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="" class="a-left" colspan="1">
@@ -207,14 +226,20 @@
                                     <li>
                                         <a type="submit" style="width: 100%;text-decoration: none"
                                            href="{{route('user.checkout')}}"
-                                           <?php if (session('cart') == null) echo 'disabled'; ?>
+                                           <?php if (session('cart') == null) echo 'disabled'; else
+                                               foreach (session('cart') as $key =>$value){
+                                                   if ($value['type_id'] == '2'){
+                                                       if ($value['date_begin'] =='0000-00-00 00:00:00' || $value['date_end'] =='0000-00-00 00:00:00' ){
+                                                           echo 'disabled';
+                                                       }
+                                                   }
+                                               }
+
+                                           ?>
                                            class="button btn btn-danger" onClick="">
                                             <span>THANH TOÁN</span></a>
                                     </li>
                                     <br>
-                                    <li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout
-                                            with Multiple Addresses</a>
-                                    </li>
                                     <br>
                                 </ul>
                             </div><!--inner-->

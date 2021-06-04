@@ -13,8 +13,7 @@
                         <li id="opc-billing" class="section allow active">
 
                             <div id="checkout-step-billing" class="step a-item">
-                                <form id="co-billing-form" action="" method="post">
-                                    @csrf
+                                <form id="co-billing-form" action="" >
                                     <fieldset class="group-select">
                                         <ul class="">
                                             <li id="billing-new-address-form" >
@@ -39,7 +38,7 @@
                                                                         </div>
                                                                         <!--box-content-->
                                                                         <div class="buttons-set" id="billing-buttons-container">
-                                                                            <button type="submit" title="Continue" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
+                                                                            <button title="Continue" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
                                                                         </div>
                                                                     </div>
                                                                     <!--box-->

@@ -151,7 +151,7 @@ Route::group(['middleware' => ['check_not_login'], 'as' => 'guest.','prefix' => 
     Route::post('/check-email', [UserController::class, 'check_email'])->name('check-email');
 
     Route::post('/check-otp', [UserController::class, 'check_otp'])->name('check-otp');
-    Route::get('/form-chang-password', [UserController::class, 'form_chang_password'])->name('form-chang-password');
+    Route::get('/form-change-password', [UserController::class, 'form_change_password'])->name('form-change-password');
 
     Route::post('/change-password-forgot', [UserController::class, 'change_password_forgot'])->name('change-password-forgot');
 

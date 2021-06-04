@@ -1,6 +1,6 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="{{asset('AdminLTE-master/build/scss/_alerts.scss')}}"></script>
 
 <script type="text/javascript" src="{{asset('/backend/js/jquery.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('/backend/js/bootstrap.min.js')}}"></script>
@@ -36,12 +36,14 @@
                             toast:true,
                             position:'top-end',
                             showConfirmButton:false,
-                            timer:3000
+                            timer:3000,
                         })
                         if ($.isEmptyObject(data.error)){
-                            Toast.fire({
+                            $('#total-quantity').text($('#total-quantity-cart').val())
+
+                                Toast.fire({
                                 type:'success',
-                                title:data.success
+                                title:data.success,
                             })
                         }else{
                             Toast.fire({

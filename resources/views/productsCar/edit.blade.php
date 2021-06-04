@@ -118,6 +118,10 @@
                                     <textarea id="inputDescription" class="form-control" name="description" rows="4" >{{$productCar->description}}</textarea>
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputName">Số lượng</label>
+                                    <input type="text" id="inputName" name="quantity" class="form-control" value="{{$productCar->quantity}}">
+                                </div>
+                                <div class="form-group">
                                     <label for="inputName">Giá tiền </label>
                                     <input type="text" id="inputName" name="price" class="money form-control" value="{{$productCar->price}}" >
                                 </div>

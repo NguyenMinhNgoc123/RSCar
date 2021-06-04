@@ -3,13 +3,14 @@
 @section('content')
     @include('pages.banner')
     <div class="main-container col1-layout wow bounceInUp animated animated" style="visibility: visible;">
+        <div style="margin: 20px">
         <div>
             <?php
             $message = Session()->get('message');
             if ($message){ ?>
-            <div class="alert alert-primary alert-dismissible">
+            <div class="alert bg-primary">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-check"></i> Lỗi!</h5>
+                <h5><i class="icon"></i> Thành Công!</h5>
                 <?php echo $message ?>
             </div>
             <?php  Session()->put('message', null);
@@ -20,14 +21,15 @@
             <?php
             $message = Session()->get('error');
             if ($message){ ?>
-            <div class="alert alert-danger alert-dismissible">
+                <div class="alert bg-danger" >
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon fas fa-check"></i> Lỗi!</h5>
+                <h5><i class="icon"></i> Lỗi!</h5>
                 <?php echo $message ?>
-            </div>
+                </div>
             <?php  Session()->put('error', null);
             }
             ?>
+        </div>
         </div>
         <div class="main">
             <div class="account-login container">

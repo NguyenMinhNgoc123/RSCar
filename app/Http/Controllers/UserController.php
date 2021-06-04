@@ -63,10 +63,10 @@ class UserController extends Controller
                 $request->session()->put('full_name',$user->full_name);
                 return redirect('user/show-cart');
             }else{
-                return back()->with('message','sai mật khẩu hoặc tài khoản');
+                return back()->with('error','sai mật khẩu hoặc tài khoản');
             }
         }else{
-            return back()->with('message','sai mật khẩu hoặc tài khoản');
+            return back()->with('error','sai mật khẩu hoặc tài khoản');
         }
     }
     public function profile(Request $request){
@@ -110,7 +110,7 @@ class UserController extends Controller
         $data = [];
         $check_email = DB::table('users')->where('email','=',$request->email)
             ->count();
-        if (isset($check_email)){
+        if ($check_email > 0){
             $code = mt_rand();
             $data['code']=$code;
             DB::table('users')->where('email','=',$request->email)->update($data);
@@ -140,14 +140,14 @@ class UserController extends Controller
                 ->where('email','=',$email)
                 ->where('code','=',$request->otp)
                 ->count();
-            if ($result){
-                return redirect()->route('guest.form-chang-password');
+            if ($result > 0){
+                return redirect()->route('guest.form-change-password');
             }else{
                 return redirect()->back()->with('error', 'otp không đúng');
             }
         }
     }
-    public function form_chang_password (){
+    public function form_change_password (){
         return view('resetPass.changePassword');
     }
     public function change_password_forgot(Request $request){

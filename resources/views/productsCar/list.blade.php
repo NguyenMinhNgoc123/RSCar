@@ -61,11 +61,12 @@
                                     <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>id sản phẩm</th>
-                                        <th style="width: 1000px"></th>
-                                        <th>Loại xe</th>
+                                        <th width="20%">id sản phẩm</th>
+                                        <th width="20%"></th>
+                                        <th width="1">Loại xe</th>
                                         <th>Hình thức</th>
                                         <th>Giá tiền</th>
+                                        <th>Số lượng</th>
                                         <th>Giảm giá (%)</th>
                                         <th>Tiền cọc</th>
                                         <th>Nhà sản xuất xe</th>
@@ -97,20 +98,21 @@
                                                    href="{{route('admin.product.edit',$value->product_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
-                                                    Edit
+                                                    Sửa
                                                 </a>
                                                 <a class="btn btn-danger btn-sm"
                                                    href="{{route('admin.product.delete',$value->product_id)}}" onclick="return confirm('Bạn có muốn xóa?')">
                                                     <i class="fas fa-trash">
                                                     </i>
-                                                    Delete
+                                                    Xóa
                                                 </a>
                                             </td>
                                             <td>{{$value->tv_name}}</td>
                                             <td>{{$value->type_name}}</td>
-                                            <td> {{$value->price}}</td>
+                                            <td> {{number_format($value->price).'đ'}}</td>
+                                            <td>{{$value->quantity}}</td>
                                             <td>{{ $value->discount }} %</td>
-                                            <td>{{$value->deposit}}</td>
+                                            <td>{{number_format($value->deposit).'đ'}}</td>
                                             <td>{{$value->brand_name}}</td>
                                             <td>{{$value->name_car}}</td>
                                             <td>{{$value->capacity}}</td>

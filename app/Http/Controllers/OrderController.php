@@ -99,16 +99,17 @@ class OrderController extends Controller
             $data=[];
             if (isset($request->payment_status)){
                 $data1['payment_status']=$request->payment_status;
+                $data1['order_status'] =$request->order_status;
                 DB::table('payments')
                     ->join('orders','orders.payment_id','=','payments.payment_id')
                     ->where('orders.order_id', $id)
                     ->update($data1);
             }
 
-            $data['order_status']=$request->order_status;
-            DB::table('orders')
-                ->where('order_id', $id)
-                ->update($data);
+//            $data['order_status']=$request->order_status;
+//            DB::table('orders')
+//                ->where('order_id', $id)
+//                ->update($data);
             return redirect()->route('admin.order.list');
         }
 

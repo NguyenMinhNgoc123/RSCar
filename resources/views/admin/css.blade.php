@@ -25,8 +25,10 @@
 <link rel="stylesheet" href="{{asset('/AdminLTE-master/plugins/daterangepicker/daterangepicker.css')}}">
 <!-- summernote -->
 <link rel="stylesheet" href="{{asset('/AdminLTE-master/plugins/summernote/summernote-bs4.min.css')}}">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
 <link rel="stylesheet" href="{{asset('/AdminLTE-master/plugins/ekko-lightbox/ekko-lightbox.css')}}">
 <!-- Theme style -->
 <link rel="stylesheet" href="{{asset('//AdminLTE-master/dist/css/adminlte.min.css')}}">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 @stack('css')

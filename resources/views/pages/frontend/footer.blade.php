@@ -54,10 +54,7 @@
                             <h4>Get Notified Of any Updates!</h4>
                             <form action="#" method="post" id="newsletter-validate-detail1">
                                 <div id="container_form_news">
-                                    <div id="container_form_news2">
-                                        <input type="text" name="email" id="newsletter1" title="Sign up for our newsletter" class="input-text required-entry validate-email" placeholder="Enter your email address">
-                                        <button type="submit" title="Subscribe" class="button subscribe"><span>Subscribe</span></button>
-                                    </div>
+
                                     <!--container_form_news2-->
                                 </div>
                                 <!--container_form_news-->

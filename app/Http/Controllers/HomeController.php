@@ -18,7 +18,7 @@ class HomeController extends Controller
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
             ->where('sale_week', '!=', '0')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('updated_sale_week','>',now())
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -29,7 +29,7 @@ class HomeController extends Controller
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
             ->where('product_cars.type_id', '=', '1')
-            ->where('status','=','0')
+            ->where('status','!=','4')
             ->where('updated_sale_week','>',now())
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -40,7 +40,7 @@ class HomeController extends Controller
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
             ->where('product_cars.type_id', '=', '2')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('updated_sale_week','>',now())
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -58,7 +58,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->orderBy('product_cars.created_at', 'desc')
             ->paginate(10);
         //--show danh mục
@@ -68,7 +68,7 @@ class HomeController extends Controller
                 ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
                 ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
                 ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-                ->where('status','!=','3')
+                ->where('status','!=','4')
                 ->where('product_cars.type_id','=',$request->type_id_search)
                 ->orderBy('product_cars.created_at', 'desc')
                 ->paginate(10);
@@ -91,7 +91,7 @@ class HomeController extends Controller
                 ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
                 ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
                 ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-                ->where('status','!=','3')
+                ->where('status','!=','4')
                 ->orderBy('product_cars.created_at', 'desc')
                 ->paginate(10);
             $data['product']=$product;
@@ -106,7 +106,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('product_cars.product_id','=',$id)
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -123,7 +123,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('brand_products.brand_id','=',$brand_id)
             ->where('type_vehicles.type_vehicles_id','=',$tv)
             ->whereNotIn('product_cars.product_id',[$id])
@@ -142,7 +142,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('product_cars.type_id','=',$id)
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -162,7 +162,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('product_cars.brand_id','=',$id)
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -182,7 +182,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('product_cars.type_vehicles_id','=',$id)
             ->orderBy('product_cars.created_at', 'desc')
             ->get();
@@ -202,7 +202,7 @@ class HomeController extends Controller
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
             ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
             ->join('show_products', 'product_cars.product_id', '=', 'show_products.product_id')
-            ->where('status','!=','3')
+            ->where('status','!=','4')
             ->where('caption','like','%' . $request->get('searchQuest') .'%')
             ->get();
 

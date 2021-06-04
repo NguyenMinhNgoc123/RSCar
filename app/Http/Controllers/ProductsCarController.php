@@ -273,6 +273,7 @@ class ProductsCarController extends Controller
         $productCar->number_kilometers = $request->number_kilometers;
         $productCar->address = $request->address;
         $productCar->caption = $request->caption;
+        $productCar->quantity = $request->quantity;
         $productCar->price = $price;
         $productCar->deposit = $deposit;
         $productCar->discount = $request->discount;

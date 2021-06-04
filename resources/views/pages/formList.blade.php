@@ -3,7 +3,7 @@
         <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
             <div class="item-inner">
                 <div class="item-img">
-                    <div class="item-img-info"><a href="product-detail.html"
+                    <div class="item-img-info"><a href="{{route('detail',$valueP->product_id)}}"
                                                   title="Retis lapen casen"
                                                   class="product-image"><img
                                 src="{{asset("/product-images/{$valueP->thumbnails}")}}"
@@ -12,7 +12,10 @@
                             <div class="new-label new-top-left">Hot</div>
                         @elseif($valueP->status == '1')
                             <div class="new-label new-top-left">Đã bán</div>
+                        @elseif($valueP->status == '2')
+                            <div class="new-label new-top-left">Đã Cọc</div>
                         @else
+                            <div class="new-label new-top-left">Chưa cọc</div>
                         @endif
                         @if($valueP->discount != '0')
                             <div class="sale-label sale-top-left">{{$valueP->discount}}%</div>
@@ -47,7 +50,7 @@
                 </div>
                 <div class="item-info">
                     <div class="info-inner">
-                        <div class="item-title"><a href="product-detail.html"
+                        <div class="item-title"><a href="{{route('detail',$valueP->product_id)}}"
                                                    title="Retis lapen casen">{{$valueP->caption}}</a>
                         </div>
                         <div class="item-content">

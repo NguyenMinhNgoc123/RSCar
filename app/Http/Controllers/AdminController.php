@@ -27,6 +27,7 @@ class AdminController extends Controller
         if ($admin){
             if (md5($request->admin_password) == $admin->password){
                 $request->session()->put('name',$admin->name);
+                $request->session()->put('status_admin',$admin->status_admin);
                 return redirect('admin/dashboard');
             }else{
                 return back()->with('message','sai mật khẩu hoặc tài khoản');
