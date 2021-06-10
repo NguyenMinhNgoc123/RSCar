@@ -13,7 +13,7 @@
                         <li id="opc-billing" class="section allow active">
 
                             <div id="checkout-step-billing" class="step a-item">
-                                <form id="co-billing-form" action="" >
+
                                     <fieldset class="group-select">
                                         <ul class="">
                                             <li id="billing-new-address-form" >
@@ -38,7 +38,12 @@
                                                                         </div>
                                                                         <!--box-content-->
                                                                         <div class="buttons-set" id="billing-buttons-container">
-                                                                            <button title="Continue" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
+                                                                            <button type="button" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
+                                                                        </div>
+                                                                        <br>
+                                                                        <div class="buttons-set" id="billing-buttons-container">
+                                                                            <a type="submit" href="{{route('user.send-payment')}}" class="button continue"><span>GỬI HÓA ĐƠN QUA EMAIL</span></a>
+{{--                                                                            target="_blank"--}}
                                                                         </div>
                                                                     </div>
                                                                     <!--box-->
@@ -63,8 +68,6 @@
                                             </li>
                                         </ul>
                                     </fieldset>
-
-                                </form>
                             </div>
                         </li>
                     </ol>
@@ -110,20 +113,6 @@
                                             </tr>
                                             </tbody>
                                         </table>
-
-                                        {{--                                            <ul class="checkout">--}}
-                                        {{--                                                <li>--}}
-                                        {{--                                                    <a type="submit" style="width: 100%;text-decoration: none"--}}
-                                        {{--                                                       href="{{route('user.checkout')}}"--}}
-                                        {{--                                                       class="button btn btn-danger" onClick="">--}}
-                                        {{--                                                        <span>THANH TOÁN</span></a>--}}
-                                        {{--                                                </li>--}}
-                                        {{--                                                <br>--}}
-                                        {{--                                                <li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout--}}
-                                        {{--                                                        with Multiple Addresses</a>--}}
-                                        {{--                                                </li>--}}
-                                        {{--                                                <br>--}}
-                                        {{--                                            </ul>--}}
                                     </div><!--inner-->
                                 </dl>
                             </div>

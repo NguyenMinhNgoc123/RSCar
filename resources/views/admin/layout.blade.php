@@ -8,8 +8,14 @@
 <!-- DataTables -->
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<body class="preloading hold-transition sidebar-mini layout-fixed">
+<div id="loader">
+    <div class="circle">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+    </div>
+</div>
+<div class="wrapper ">
 
     <!-- Navbar -->
 @include('admin.navbar')
@@ -21,7 +27,6 @@
 <!-- Content Wrapper. Contains page content -->
 @yield('content')
 <!-- /.content-wrapper -->
-@include('admin.footer')
 
 
 <!-- Control Sidebar -->
@@ -31,6 +36,7 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+@include('admin.footer')
 
 @include('admin.js')
 </body>

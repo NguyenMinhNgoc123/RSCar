@@ -8,8 +8,8 @@
                         <div class="feature-box">
                             <div class="icon-truck"><img src="{{('/backend/images/world-icon.png')}}" alt="Image"></div>
                             <div class="content">
-                                <h6>World's #1</h6>
-                                <p>Largest Auto portal</p>
+                                <h6>World's #99</h6>
+                                <p>Top truy cập </p>
                             </div>
                         </div>
                     </li>
@@ -18,7 +18,7 @@
                             <div class="icon-support"><img src="{{('/backend/images/car-sold-icon.png')}}" alt="Image"></div>
                             <div class="content">
                                 <h6>Car Sold</h6>
-                                <p>Every 4 minute</p>
+                                <p>30 phút một lần</p>
                             </div>
                         </div>
                     </li>
@@ -27,7 +27,7 @@
                             <div class="icon-money"><img src="{{('/backend/images/tag-icon.png')}}" alt="Image"></div>
                             <div class="content">
                                 <h6>Offers</h6>
-                                <p>Stay updated pay less</p>
+                                <p>Luôn cập nhât,nhanh chóng</p>
                             </div>
                         </div>
                     </li>
@@ -35,8 +35,8 @@
                         <div class="feature-box">
                             <div class="icon-return"><img src="{{('/backend/images/compare-icon.png')}}" alt="Image"></div>
                             <div class="content">
-                                <h6>Compare</h6>
-                                <p>Decode the right car</p>
+                                <h6>Payment</h6>
+                                <p>Thủ tục nhanh chóng</p>
                             </div>
                         </div>
                     </li>
@@ -51,7 +51,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col1">
                         <div class="newsletter-wrap">
                             <h5>Newsletter</h5>
-                            <h4>Get Notified Of any Updates!</h4>
+                            <h4>LUÔN LUÔN CẬP NHẬT GIÁ CẢ THỊ TRƯỜNG!</h4>
                             <form action="#" method="post" id="newsletter-validate-detail1">
                                 <div id="container_form_news">
 
@@ -72,46 +72,45 @@
                     <div class="co-info">
                         <h4>SHOWROOM</h4>
                         <address>
-                            <div><span>ThemesGround, 789 Main rd, Anytown, <br>
-                CA 12345 USA</span></div>
-                            <div> <span> +1 800 789 0000</span></div>
-                            <div> <span><a href="#">Harrier@themesground.com</a></span></div>
+                            <div><span>243 Thái Thị Bôi,Đà nẵng</span></div>
+                            <div> <span> 0815115415</span></div>
+                            <div> <span><a href="#"> ngminhngoc123@gmail.com</a></span></div>
                             <div> <span>Mon - Fri : 09am to 06pm</span></div>
                         </address>
                     </div>
                 </div>
                 <div class="col-sm-8 col-xs-12 col-lg-8">
                     <div class="footer-column">
-                        <h4>Quick Links</h4>
+                        <h4>ĐƯỜNG DẪN NHANH</h4>
                         <ul class="links">
                             <li class="first"><a title="How to buy" href="http://themesground.com/blog/">Blog</a></li>
                             <li><a title="FAQs" href="#">FAQs</a></li>
                             <li><a title="Payment" href="#">Payment</a></li>
                             <li><a title="Shipment" href="#">Shipment</a></li>
-                            <li><a title="Where is my order?" href="#">Where is my order?</a></li>
+                            <li><a title="Where is my order?" href="#">Tôi có thể đặt hàng ở đâu?</a></li>
                             <li class="last"><a title="" href="{{route('admin.admin-login')}}">Admin</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
-                        <h4>Style Advisor</h4>
+                        <h4>ĐƯỜNG DẪN NHANH</h4>
                         <ul class="links">
-                            <li class="first"><a title="Your Account" href="#">Your Account</a></li>
-                            <li><a title="Information" href="#">Information</a></li>
-                            <li><a title="Addresses" href="#">Addresses</a></li>
-                            <li><a title="Addresses" href="#">Discount</a></li>
-                            <li><a title="Orders History" href="#">Orders History</a></li>
-                            <li class="last"><a title=" Additional Information" href="#"> Additional Information</a></li>
+                            <li class="first"><a title="Your Account" href="#">Tài khoàn</a></li>
+                            <li><a title="Information" href="#">Thông tin cá nhân</a></li>
+                            <li><a title="Addresses" href="#">Địa chỉ</a></li>
+                            <li><a title="Addresses" href="#">Giảm giá</a></li>
+                            <li><a title="Orders History" href="#">Lịch sử mua hàng</a></li>
+                            <li class="last"><a title=" Additional Information" href="#"> Thông tin thêm</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">
-                        <h4>Information</h4>
+                        <h4>THÔNG TIN CHÚNG TÔI</h4>
                         <ul class="links">
-                            <li class="first"><a title="Site Map" href="#">Site Map</a></li>
-                            <li><a title="Search Terms" href="#">Search Terms</a></li>
-                            <li><a title="Advanced Search" href="#">Advanced Search</a></li>
+                            <li class="first"><a title="Site Map" href="#">Google map địa chỉ chúng tôi</a></li>
+                            <li><a title="Search Terms" href="#">Cụm từ tìm kiếm</a></li>
+                            <li><a title="Advanced Search" href="#">Tìm kiếm nâng cao</a></li>
                             <li><a title="History" href="#">About Us</a></li>
                             <li><a title="History" href="#">Contact Us</a></li>
-                            <li><a title="Suppliers" href="#">Suppliers</a></li>
+                            <li><a title="Suppliers" href="#">Hỗ trợ</a></li>
                         </ul>
                     </div>
                 </div>

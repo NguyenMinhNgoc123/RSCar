@@ -4365,7 +4365,7 @@ text-transform: uppercase
     font-family: 'Saira Condensed', sans-serif;
     letter-spacing: 1px;
     text-transform: uppercase;
-    background: #6c6;
+    background: #D8EA3D;
     margin-top: 0px;
     min-width: 250px;}
 
@@ -8743,7 +8743,7 @@ padding:30px;
 	text-align: center;
 }
 .product-view .product-shop .add-to-links .link-wishlist {
-    background: #f2f2f2;
+    background: #d9eb3d;
     color: #333;
     line-height: normal;
     font-weight: normal;

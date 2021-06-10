@@ -129,6 +129,10 @@
                                     <input type="text" id="inputName" name="deposit" class="deposit form-control" >
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputName">Số lượng</label>
+                                    <input type="text" id="inputName" name="quantity" class="form-control">
+                                </div>
+                                <div class="form-group">
                                     <label for="inputName">Giảm giá (%)</label>
                                     <input type="text" id="inputName" name="discount" class="form-control">
                                 </div>

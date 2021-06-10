@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Trang Chủ admin</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -24,18 +24,20 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 " data-mdb-animation-start="onScroll">
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>150</h3>
+                                <h3>{{$countOrder}}</h3>
 
-                                <p>New Orders</p>
+                                <p>Đơn mới</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            @if(session()->get('status_admin') == '1')
+                            <a href="{{route('admin.order.list')}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                            @endif
                         </div>
                     </div>
                     <!-- ./col -->
@@ -43,14 +45,16 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                                <h3>{{$countOrderFinish}}</h3>
 
-                                <p>Bounce Rate</p>
+                                <p>Đơn đã hoàn tất</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            @if(session()->get('status_admin') == '1')
+                            <a href="{{route('admin.order.list-completed')}}" class="small-box-footer">Xem chi tiết <i class="fas fa-arrow-circle-right"></i></a>
+                            @endif
                         </div>
                     </div>
                     <!-- ./col -->
@@ -58,14 +62,16 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>44</h3>
+                                <h3>{{$countTotalproduct}}</h3>
 
-                                <p>User Registrations</p>
+                                <p>Tổng số Sản phẩm</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            @if(session()->get('status_admin') == '1')
+                            <a href="{{ route('admin.product.list') }}" class="small-box-footer">Xem chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+                            @endif
                         </div>
                     </div>
                     <!-- ./col -->
@@ -73,14 +79,16 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
+                                <h3>{{$countUser}}</h3>
 
-                                <p>Unique Visitors</p>
+                                <p>Số khách hàng đã đăng ký</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            @if(session()->get('status_admin') == '1')
+                            <a href="{{route('admin.manage-user.list')}}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                            @endif
                         </div>
                     </div>
                     <!-- ./col -->

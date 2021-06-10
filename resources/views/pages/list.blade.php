@@ -21,13 +21,13 @@
                         @include('pages.search')
                     </div>
                 </div>
-                <div class="category-products" id="category-products">
+                <div class="category-products wow backInRight" id="category-products">
                     @include('pages.formList')
                 </div>
+                {{ csrf_field() }}
                 <div class="toolbar bottom">
-
+                    {!! $product->links()  !!}
                 </div>
-
             </article>
         </div>
         <!--	///*///======    End article  ========= //*/// -->

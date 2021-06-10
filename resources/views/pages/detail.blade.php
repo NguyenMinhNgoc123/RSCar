@@ -35,7 +35,7 @@
                         <div class="row">
                             @foreach($detailProduct as $valueP)
 
-                                <form action="{{ route('user.save-cart') }}" method="POST" id="product_addtocart_form">
+{{--                                <form action="{{ route('user.save-cart') }}" method="POST" id="product_addtocart_form">--}}
                                 @csrf
                                 <!--End For version 1, 2, 6 -->
                                     <!-- For version 3 -->
@@ -57,9 +57,6 @@
                                             </div>
                                         </div>
                                         <!-- end: more-images -->
-                                        <div class="toll-free"><a href="#"><i class="fa fa-phone"></i> 081 511 5415</a></div>
-                                        <div class="ask-question"><a href="#" onClick="ShowMe();"><i class="fa fa-question"></i> ĐẶT CÂU HỎI</a></div>
-                                        <div class="request-call"><a href="#" onClick="ShowMe1();"><i class="fa fa-money"></i> THANH TOÁN</a></div>
                                     </div>
                                     <!--End For version 1,2,6-->
                                     <!-- For version 3 -->
@@ -72,7 +69,7 @@
                                             <div class="rating-box">
                                                 <div style="width:60%" class="rating"></div>
                                             </div>
-                                            <p class="rating-links"> <a href="#">1 Review</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
+                                            <p class="rating-links"> <a href="#">1 Review</a> <span class="separator">|</span> </p>
                                         </div>
                                         <div class="price-block">
                                             <div class="price-box">
@@ -142,25 +139,13 @@
                                         </div>
                                         <div class="email-addto-box">
                                             <ul class="add-to-links">
-                                                <li> <a class="link-wishlist" href="wishlist.html"><span>Thêm vào yêu thích</span></a></li>
+                                                <li> <button class="button btn-app link-wishlist" style="width: 200px;height: 41px;border-bottom: 25px;" href=""><span>Thêm vào yêu thích</span></button></li>
                                                 <li>
-                                                    <input type="hidden" name="productid_hidden" value="{{$valueP->product_id}}" >
-                                                    <button type="submit" class="link-compare"><span>Thêm vào giỏ</span></button>
+                                                    <button class="button btn-cart link-cart" style="width: 200px;height: 41px;border-bottom: 25px;" type="submit" data-login="{{Session()->get('user_id')}}" data-id="{{$valueP->product_id}}" ><span>Thêm vào giỏ</span></button>
                                                 </li>
                                             </ul>
-                                            <p class="email-friend"><a href="#" class=""><span>Gửi thông tin qua email</span></a></p>
-
                                         </div>
                                         <div class="social">
-                                            <ul class="link">
-                                                <li class="fb"><a href="#"></a></li>
-                                                <li class="tw"><a href="#"></a></li>
-                                                <li class="googleplus"><a href="#"></a></li>
-                                                <li class="rss"><a href="#"></a></li>
-                                                <li class="pintrest"><a href="#"></a></li>
-                                                <li class="linkedin"><a href="#"></a></li>
-                                                <li class="youtube"><a href="#"></a></li>
-                                            </ul>
                                         </div>
                                         <ul class="shipping-pro">
                                             <li>Tư vấn miễn phí</li>
@@ -170,22 +155,21 @@
                                     </div>
                                     <!--product-shop-->
                                     <!--Detail page static block for version 3-->
-                                </form>
+{{--                                </form>--}}
                         </div>
                     </div>
                     <!--product-essential-->
                     <div class="product-collateral container">
                         <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                            <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Thông tin chi tiết</a> </li>
+                            <li class="active"> <a href="#product_tabs_description" data-toggle="tab">Google map</a> </li>
                             <li><a href="#product_tabs_tags" data-toggle="tab">Thông số kĩ thuật</a></li>
-                            <li> <a href="#product_tabs_custom" data-toggle="tab">Option đã thêm</a> </li>
                             <li> <a href="#reviews_tabs" data-toggle="tab">Đánh giá</a> </li>
-                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Địa chỉ xe</a> </li>
+                            <li> <a href="#product_tabs_custom1" data-toggle="tab">Mô tả</a> </li>
                         </ul>
                         <div id="productTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="product_tabs_description">
                                 <div class="std">
-                                    <p>{{$valueP->description}}</p>
+                                    <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$valueP->address}}&output=embed" ></iframe>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="product_tabs_tags">
@@ -231,10 +215,15 @@
                                         <tr>
                                             <td class="label-spec"> Tình trạng bài <span class="coln">:</span></td>
                                             <td class="value-spec">
-                                                @if($valueP->status == '0')
-                                                    Đang bán
+                                                @if($valueP->hot_car != '0' && $valueP->status == '0')
+                                                    <div class="new-label new-top-left">Hot</div>
+                                                @elseif($valueP->status == '1')
+                                                    <div class="new-label new-top-left">Đã bán</div>
+                                                @elseif($valueP->status == '2')
+                                                    <div class="new-label new-top-left">Đã Cọc</div>
+                                                @elseif($valueP->status == '3')
+                                                    <div class="new-label new-top-left">Đã thuê</div>
                                                 @else
-                                                    Đã bán
                                                 @endif
                                             </td>
                                         </tr>
@@ -245,7 +234,7 @@
                             <div class="tab-pane fade" id="reviews_tabs">
                                 <div class="woocommerce-Reviews">
                                     <div>
-                                        <h2 class="woocommerce-Reviews-title">2 reviews for <span>Bacca Bucci Men's Running Shoes</span></h2>
+                                        <h2 class="woocommerce-Reviews-title">2 Bài đánh giá cho sản phẩm</h2>
                                         <ol class="commentlist">
                                             <li class="comment">
                                                 <div> <img alt="" src="images/member1.png" class="avatar avatar-60 photo">
@@ -286,22 +275,14 @@
                                         <div>
                                             <div class="comment-respond"> <span class="comment-reply-title">Add a review </span>
                                                 <form action="#" method="post" class="comment-form" novalidate>
-                                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+                                                    <p class="comment-notes"><span id="email-notes">Địa chỉ email của bạn sẽ không được công bố..</span> Các trường bắt buộc được đánh dấu * <span class="required">*</span></p>
                                                     <div class="comment-form-rating">
                                                         <label id="rating">Your rating</label>
                                                         <p class="stars"> <span> <a class="star-1" href="#">1</a> <a class="star-2" href="#">2</a> <a class="star-3" href="#">3</a> <a class="star-4" href="#">4</a> <a class="star-5" href="#">5</a> </span> </p>
                                                     </div>
                                                     <p class="comment-form-comment">
-                                                        <label>Your review <span class="required">*</span></label>
+                                                        <label>Đánh giá <span class="required">*</span></label>
                                                         <textarea id="comment" name="comment" cols="45" rows="8" required></textarea>
-                                                    </p>
-                                                    <p class="comment-form-author">
-                                                        <label for="author">Name <span class="required">*</span></label>
-                                                        <input id="author" name="author" type="text" value="" size="30" required>
-                                                    </p>
-                                                    <p class="comment-form-email">
-                                                        <label for="email">Email <span class="required">*</span></label>
-                                                        <input id="email" name="email" type="email" value="" size="30" required>
                                                     </p>
                                                     <p class="form-submit">
                                                         <input name="submit" type="submit" id="submit" class="submit" value="Submit">
@@ -314,57 +295,9 @@
                                     <div class="clear"></div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="product_tabs_custom">
-                                <div class="spec-row" id="summarySpecs">
-                                    <table width="100%">
-                                        <tbody>
-                                        <tr>
-                                            <td class="label-spec"> Air Conditioner <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> AntiLock Braking System <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Power Steering <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Power Windows <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> CD Player <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Leather Seats <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Central Locking <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Power Door Locks <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Brake Assist <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Driver Airbag <span class="coln">:</span></td>
-                                            <td class="value-spec"> <i class="fa fa-check-circle"></i> </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                             <div class="tab-pane fade" id="product_tabs_custom1">
                                 <div class="product-tabs-content-inner clearfix">
-                                    <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$valueP->address}}&output=embed" ></iframe>
+                                    <p>{{$valueP->description}}</p>
                                 </div>
                             </div>
                         </div>
@@ -375,7 +308,7 @@
                         <!-- BEGIN RELATED PRODUCTS -->
                         <div class="related-pro container">
                             <div class="slider-items-products">
-                                <div class="new_title center">
+                                <div class="wow backInRight new_title center">
                                     <h2>SẢN PHẨM LIÊN QUAN</h2>
                                 </div>
                                 <div id="related-slider" class="product-flexslider hidden-buttons">
@@ -445,33 +378,4 @@
     </div>
     <!--main-container-->
     </div>
-    <script>
-        function ShowMe()
-        {
-            jQuery('.popup2').show();
-            jQuery('#fade').show();
-
-        }
-        function ShowMe1()
-        {
-            jQuery('.popup3').show();
-            jQuery('#fade').show();
-
-        }
-        function HideMe1()
-        {
-            jQuery('.popup2').hide();
-            jQuery('#fade').hide();
-
-
-        }
-
-        function HideMe2()
-        {
-            jQuery('.popup3').hide();
-            jQuery('#fade').hide();
-
-
-        }
-    </script>
 @endsection

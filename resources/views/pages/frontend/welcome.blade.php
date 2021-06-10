@@ -10,12 +10,16 @@
     <meta name="robots" content="*">
     @include('pages.frontend.css')
 </head>
-<body>
-<div id="page">
+<body class="preloading">
+<div id="loader">
+    <div class="circle">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+    </div>
+</div>
 @include('pages.frontend.header')
 
 @yield('content')
-
 
 @include('pages.frontend.footer')
 <!-- JavaScript -->

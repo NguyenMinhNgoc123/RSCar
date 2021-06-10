@@ -14,6 +14,22 @@
 <script src="{{asset('backend/js/cloud-zoom.js')}}"></script>
 <script type="text/javascript" src="{{asset('/backend/js/jquery.mobile-menu.min.js')}}"></script>
 <script src="{{asset('/backend/js/countdown.js')}}"></script>
+{{--wow js--}}
+<script src='https://cdn.rawgit.com/matthieua/WOW/1.0.1/dist/wow.min.js'></script>
+<script>
+    var loader = function() {
+        setTimeout(function() {
+            $('#loader').css({ 'opacity': 0, 'visibility':'hidden' });
+        }, 1000);
+    };
+    $(function(){
+        loader();
+    });
+</script>
+
+<script>
+    new WOW().init();
+</script>
 
 <script type="text/javascript">
     window.setTimeout(function() {
@@ -21,42 +37,54 @@
             $(this).remove();
         });
     }, 4000)
+    $('.datepicker').datepicker()
 </script>
 <script type="text/javascript">
     $(document).ready(function (){
         $('.btn-cart').on('click',function (){
             var id = $(this).data('id');
-            if (id){
-                $.ajax({
-                    url:"{{url('user/add-cart')}}/"+id,
-                    type:"GET",
-                    dataType:"json",
-                    success:function (data){
-                        const Toast = Swal.mixin({
-                            toast:true,
-                            position:'top-end',
-                            showConfirmButton:false,
-                            timer:3000,
-                        })
-                        if ($.isEmptyObject(data.error)){
-                            $('#total-quantity').text($('#total-quantity-cart').val())
+            var login = $(this).data('login')
+            if (login){
+                if (id){
+                    $.ajax({
+                        url:"{{url('user/add-cart')}}/"+id,
+                        type:"GET",
+                        dataType:"json",
+                        success:function (data){
+                            const Toast = Swal.mixin({
+                                toast:true,
+                                position:'top-end',
+                                showConfirmButton:false,
+                                timer:3000,
+                            })
+                            if ($.isEmptyObject(data.error)){
+                                $('#total-quantity').text($('#total-quantity-cart').val())
 
                                 Toast.fire({
-                                type:'success',
-                                title:data.success,
-                            })
-                        }else{
-                            Toast.fire({
-                                type:'error',
-                                title:data.error
-                            })
+                                    type:'success',
+                                    title:data.success,
+                                })
+                            }else{
+                                Toast.fire({
+                                    type:'error',
+                                    title:data.error
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                    swal({
+                        icon: "success",
+                        title: "Đã thêm vào giỏ hàng",
+                    })
+                }else{
+                    swal("Lỗi")
+                }
             }else{
-                alert('danger');
+                swal({
+                    icon: "error",
+                    title: "Bạn chưa đăng nhập",
+                })
             }
-            swal("Đã thêm vào giỏ hàng")
             e.preventDefault();
         })
     })
@@ -190,3 +218,73 @@
     var iid1 = "countbox_1";
     CountBack_slider(gsecs1, "countbox_1", 1);
 </script>
+{{--tim kiếm sản phẩm--}}
+<script>
+    $(document).ready(function (){
+        var action ="search";
+
+        $("#search_name").keyup(function (){
+            var search_name = $("#search_name").val();
+
+            $.ajax({
+                url:"/search-product",
+                method:"POST",
+                data:{action:action,search_name:search_name,_token: '{{csrf_token()}}'},
+                success:function (data){
+                    //alert(data);
+                    $("#category-products").html(data);
+                    $(document).ready(function (){
+                        $('.btn-cart').on('click',function (){
+                            var id = $(this).data('id');
+                            var login = $(this).data('login')
+                            if (login){
+                                if (id){
+                                    $.ajax({
+                                        url:"{{url('user/add-cart')}}/"+id,
+                                        type:"GET",
+                                        dataType:"json",
+                                        success:function (data){
+                                            const Toast = Swal.mixin({
+                                                toast:true,
+                                                position:'top-end',
+                                                showConfirmButton:false,
+                                                timer:3000,
+                                            })
+                                            if ($.isEmptyObject(data.error)){
+                                                $('#total-quantity').text($('#total-quantity-cart').val())
+
+                                                Toast.fire({
+                                                    type:'success',
+                                                    title:data.success,
+                                                })
+                                            }else{
+                                                Toast.fire({
+                                                    type:'error',
+                                                    title:data.error
+                                                })
+                                            }
+                                        }
+                                    })
+                                    swal({
+                                        icon: "success",
+                                        title: "Đã thêm vào giỏ hàng",
+                                    })
+                                }else{
+                                    swal("Lỗi")
+                                }
+                            }else{
+                                swal({
+                                    icon: "error",
+                                    title: "Bạn chưa đăng nhập",
+                                })
+                            }
+                            e.preventDefault();
+                        })
+                    })
+                }
+            })
+            console.log(action)
+        })
+    })
+</script>
+

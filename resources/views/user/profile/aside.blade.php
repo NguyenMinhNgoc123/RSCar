@@ -8,6 +8,8 @@
                 <li class="current"><a href="{{route('user.profile')}}">Thông tin cá nhân</a></li>
                 <li><a href="{{route('user.change-password')}}"><span>Đổi mật khẩu </span></a></li>
                 <li><a href="{{route('user.order.list')}}"><span>Đơn Hàng</span></a></li>
+                <li><a href="{{route('user.show-cart')}}"><span>Giỏ Hàng</span></a></li>
+                <li><a href="{{route('user.order.history-order')}}"><span>Lịch sử mua hàng</span></a></li>
             </ul>
         </div>
         <!--block-content-->

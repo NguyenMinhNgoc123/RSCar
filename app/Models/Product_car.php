@@ -30,6 +30,7 @@ class Product_car extends Model
         'deposit',
         'discount',
         'thumbnails',
+        'quantity',
         'status',
         'created_at',
         'updated_at'

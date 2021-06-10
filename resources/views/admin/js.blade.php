@@ -1,15 +1,22 @@
+
 <!-- jQuery -->
 <script src="{{('/AdminLTE-master/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{('/AdminLTE-master/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<!-- Bootstrap Switch -->
+<script src="{{asset('/AdminLTE-master/plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+
 <script>
+    $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
     $.widget.bridge('uibutton', $.ui.button)
     window.setTimeout(function() {
         $(".alert").fadeTo(1000, 0).slideUp(500, function(){
             $(this).remove();
         });
-    }, 4000);
+    }, 10000);
     $(function () {
         $("#example1").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -34,8 +41,16 @@
             $(this).parents(".control-group").remove();
         });
     });
+    var loader = function() {
+        setTimeout(function() {
+            $('#loader').css({ 'opacity': 0, 'visibility':'hidden' });
+        }, 1000);
+    };
+    $(function(){
+        loader();
+    });
 </script>
-{{--xử lý giá tiền--}}
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <!-- Bootstrap 4 -->
 <script src="{{asset('/AdminLTE-master/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -45,7 +60,7 @@
 <script src="{{asset('/AdminLTE-master/plugins/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
 <script src="{{asset('/AdminLTE-master/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{asset('/AdminLTE-master/plugins/jqvmap/massetaps/jquery.vmap.usa.js')}}"></script>
+<script src="{{asset('/AdminLTE-master/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- jQuery Knob Chart -->
 <script src="{{asset('/AdminLTE-master/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
 <!-- daterangepicker -->
@@ -81,4 +96,11 @@
 <!-- Ekko Lightbox -->
 <script src="{{asset('/AdminLTE-master/plugins/ekko-lightbox/ekko-lightbox.min.js')}}"></script>
 
+
+<!-- AdminLTE App -->
+<script src="{{asset('/AdminLTE-master/dist/js/adminlte.min.js')}}" ></script>
+
+<script src="{{('/AdminLTE-master/plugins/moment/moment.min.js')}}"></script>
+<script src="{{('/AdminLTE-master/plugins/fullcalendar/main.js')}}"></script>
 @stack('js')
+

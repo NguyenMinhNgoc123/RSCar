@@ -61,24 +61,12 @@
                                     <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th width="20%">id sản phẩm</th>
-                                        <th width="20%"></th>
-                                        <th width="1">Loại xe</th>
-                                        <th>Hình thức</th>
+                                        <th>Mã sản phẩm</th>
+                                        <th></th>
+                                        <th>Hãng xe</th>
+                                        <th>Trạng thái</th>
                                         <th>Giá tiền</th>
-                                        <th>Số lượng</th>
-                                        <th>Giảm giá (%)</th>
                                         <th>Tiền cọc</th>
-                                        <th>Nhà sản xuất xe</th>
-                                        <th>Dòng xe</th>
-                                        <th>Dung tích xe</th>
-                                        <th>Đăng ký tháng /năm</th>
-                                        <th>Tình trạng</th>
-                                        <th>Model</th>
-                                        <th>Số km đã đi</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Tiêu đề</th>
-                                        <th>Mô tả</th>
                                         <th>Ngày tạo</th>
 
                                     </tr>
@@ -89,54 +77,57 @@
                                             <td>{{$key}}</td>
                                             <td>{{ $value->product_id}}</td>
                                             <td>
-                                                <a class="btn btn-primary btn-sm" href="{{route('admin.product.show',$value->product_id)}}">
+                                                <a class="btn btn-primary btn-sm" title="Chi tiết"
+                                                   href="{{route('admin.product.show',$value->product_id)}}">
                                                     <i class="fas fa-folder">
                                                     </i>
-                                                    Ảnh
                                                 </a>
-                                                <a class="btn btn-info btn-sm"
+                                                <a class="btn btn-info btn-sm" title="sửa"
                                                    href="{{route('admin.product.edit',$value->product_id)}}">
                                                     <i class="fas fa-pencil-alt">
                                                     </i>
-                                                    Sửa
                                                 </a>
-                                                <a class="btn btn-danger btn-sm"
-                                                   href="{{route('admin.product.delete',$value->product_id)}}" onclick="return confirm('Bạn có muốn xóa?')">
+                                                <a class="btn btn-danger btn-sm" title="Xóa"
+                                                   href="{{route('admin.product.delete',$value->product_id)}}"
+                                                   onclick="return confirm('Bạn có muốn xóa?')">
                                                     <i class="fas fa-trash">
                                                     </i>
-                                                    Xóa
                                                 </a>
+                                                @if($value->status == 4)
+                                                <a class="btn btn-secondary btn-sm" title="Hiện"
+                                                   href="{{route('admin.product.active',$value->product_id)}}">
+                                                    <i class="fas fa-eye">
+                                                    </i>
+                                                </a>
+                                                @else
+                                                    <a class="btn btn-secondary btn-sm" title="Ẩn"
+                                                       href="{{route('admin.product.un-active',$value->product_id)}}">
+                                                        <i class="fas fa-eye-slash">
+                                                        </i>
+                                                    </a>
+                                                @endif
                                             </td>
-                                            <td>{{$value->tv_name}}</td>
-                                            <td>{{$value->type_name}}</td>
-                                            <td> {{number_format($value->price).'đ'}}</td>
-                                            <td>{{$value->quantity}}</td>
-                                            <td>{{ $value->discount }} %</td>
-                                            <td>{{number_format($value->deposit).'đ'}}</td>
                                             <td>{{$value->brand_name}}</td>
-                                            <td>{{$value->name_car}}</td>
-                                            <td>{{$value->capacity}}</td>
-                                            <td>{{$value->Year_of_registration}}</td>
-                                            <td>{{$value->status_car}}</td>
-                                            <td>{{$value->model}}</td>
-                                            <td>{{$value->number_kilometers}}</td>
-                                            <td>{{$value->address}}</td>
-                                            <td>{{$value->caption}}</td>
-                                            <td>{{$value->description}}</td>
+                                            <td>
+                                                @if($value->status == '0')
+                                                    <button class="btn btn-success" >Đang bán</button>
+                                                @elseif($value->status == '1')
+                                                    <button class="btn btn-danger" >Đã bán</button>
+                                                @elseif($value->status == '2')
+                                                    <button class="btn btn-primary" >Đã cọc</button>
+                                                @elseif($value->status == '3')
+                                                    <button class="btn btn-danger" >Đã thuê</button>
+                                                @else
+                                                    <button class="btn btn-secondary" >Đã ẩn</button>
+                                                @endif
+                                            </td>
+                                            <td> {{number_format($value->price).'đ'}}</td>
+                                            <td>{{number_format($value->deposit).'đ'}}</td>
                                             <td>{{ $value->created_at }}</td>
 
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                    {{--                                    <tfoot>--}}
-                                    {{--                                    <tr>--}}
-                                    {{--                                        <th>Rendering engine</th>--}}
-                                    {{--                                        <th>Browser</th>--}}
-                                    {{--                                        <th>Platform(s)</th>--}}
-                                    {{--                                        <th>Engine version</th>--}}
-                                    {{--                                        <th>CSS grade</th>--}}
-                                    {{--                                    </tr>--}}
-                                    {{--                                    </tfoot>--}}
                                 </table>
                             </div>
                             <!-- /.card-body -->

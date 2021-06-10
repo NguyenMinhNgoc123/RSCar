@@ -10,7 +10,7 @@
             if ($message){ ?>
             <div class="alert bg-primary">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon"></i> Thành Công!</h5>
+                <h5><i class="icon"></i> Thông báo!</h5>
                 <?php echo $message ?>
             </div>
             <?php  Session()->put('message', null);
@@ -23,7 +23,7 @@
             if ($message){ ?>
                 <div class="alert bg-danger" >
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h5><i class="icon"></i> Lỗi!</h5>
+                <h5><i class="icon"></i> Thông báo!</h5>
                 <?php echo $message ?>
                 </div>
             <?php  Session()->put('error', null);

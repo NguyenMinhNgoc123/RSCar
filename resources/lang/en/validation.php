@@ -39,7 +39,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => 'Email không đúng định dạng.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
     'file' => 'The :attribute must be a file.',
@@ -107,7 +107,7 @@ return [
     'prohibited' => 'The :attribute field is prohibited.',
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
-    'same' => 'The :attribute and :other must match.',
+    'same' => 'Mật khẩu xác nhận và mật khẩu phải khớp..',
     'size' => [
         'numeric' => 'The :attribute must be :size.',
         'file' => 'The :attribute must be :size kilobytes.',

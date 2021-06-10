@@ -14,22 +14,23 @@ session_start();
 class CartController extends Controller
 {
     //
-    public function save_cart(Request $request){
-        $data1=[];
+    public function save_cart(Request $request)
+    {
+        $data1 = [];
 
         $product_id = $request->productid_hidden;
         $product_info = DB::table('product_cars')
             ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
-            ->where('product_id','=',$product_id)->get();
-        foreach ($product_info as $value){
-            $data1['id']=$product_id;
-            $data1['qty']='1';
-            $data1['name']=$value->name_car;
-            $data1['price']=$value->deposit;
-            $data1['weight']='123';
-            $data1['options']['type_id']=$value->type_id;
-            $data1['options']['type']=$value->type_name;
-            $data1['options']['image']=$value->thumbnails;
+            ->where('product_id', '=', $product_id)->get();
+        foreach ($product_info as $value) {
+            $data1['id'] = $product_id;
+            $data1['qty'] = '1';
+            $data1['name'] = $value->name_car;
+            $data1['price'] = $value->deposit;
+            $data1['weight'] = '123';
+            $data1['options']['type_id'] = $value->type_id;
+            $data1['options']['type'] = $value->type_name;
+            $data1['options']['image'] = $value->thumbnails;
         }
 
 
@@ -39,7 +40,8 @@ class CartController extends Controller
         return redirect()->back();
 
     }
-    public function addCart(Request $request,$id)
+
+    public function addCart(Request $request, $id)
     {
         $product_id = $id;
         $product = DB::table('product_cars')
@@ -63,9 +65,9 @@ class CartController extends Controller
                     'deposit' => $product->deposit,
                     'thumbnails' => $product->thumbnails,
                     'type_name' => $product->type_name,
-                    'total_rent'=>1,
-                    'date_begin'=>'0000-00-00 00:00:00',
-                    'date_end'=>'0000-00-00 00:00:00',
+                    'total_rent' => 1,
+                    'date_begin' => '0000-00-00',
+                    'date_end' => '0000-00-00',
 
                 ];
                 Session()->put('cart', $cart);
@@ -79,54 +81,61 @@ class CartController extends Controller
                 'deposit' => $product->deposit,
                 'thumbnails' => $product->thumbnails,
                 'type_name' => $product->type_name,
-                'total_rent'=>1,
-                'date_begin'=>'0000-00-00 00:00:00',
-                'date_end'=>'0000-00-00 00:00:00',
+                'total_rent' => 1,
+                'date_begin' => '0000-00-00',
+                'date_end' => '0000-00-00',
             ];
             Session()->put('cart', $cart);
         }
 
         session()->put('cart', $cart);
     }
-    public function show_cart(){
-        $data=[];
+
+    public function show_cart()
+    {
+        $data = [];
         $categoryPostType = DB::table('post_types')->get();
         $categoryBrand = DB::table('brand_products')->get();
         $categoryTypeVehicles = DB::table('type_vehicles')->get();
-        $data['post_types']=$categoryPostType;
-        $data['brand_products']=$categoryBrand;
-        $data['type_vehicles']=$categoryTypeVehicles;
-        return view('pages.cart.show_cart',$data);
+        $data['post_types'] = $categoryPostType;
+        $data['brand_products'] = $categoryBrand;
+        $data['type_vehicles'] = $categoryTypeVehicles;
+        return view('pages.cart.show_cart', $data);
 
     }
-    public function update_cart_quantity(Request $request){
+
+    public function update_cart_quantity(Request $request)
+    {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-//        dd($request->date_begin);die();
-//        dd($date);die();
+        $date = date('Y-m-d');
         $data = $request->all();
         $cart = Session()->get('cart');
-        if ($cart == true){
-            foreach ($cart as $key3 => $value){
-                if ($value['type_id'] == '2'){
-                    if (strtotime($request->date_begin) > strtotime(now()) && strtotime($request->date_end) > strtotime($request->date_begin)){
+        if ($cart == true) {
+            foreach ($cart as $key3 => $value) {
+                if ($value['type_id'] == '2') {
+                    if ((strtotime($request->date_begin) > strtotime($date) || strtotime($request->date_end) > strtotime($request->date_begin))) {
+
                         $first_date = strtotime($request->date_begin);
                         $second_date = strtotime($request->date_end);
                         $datediff = abs($first_date - $second_date);
-                        $estimated_price=str_replace('.', '', floor($datediff / (60*60*24)));
-                         $cart[$key3]['total_rent'] =$estimated_price;
-                         $cart[$key3]['date_begin']=$request->date_begin;
-                        $cart[$key3]['date_end']=$request->date_end;
+                        $estimated_price = str_replace('.', '', floor($datediff / (60 * 60 * 24)));
+
+                        $cart[$key3]['total_rent'] = $estimated_price;
+                        $cart[$key3]['date_begin'] = $request->date_begin;
+                        $cart[$key3]['date_end'] = $request->date_end;
+                    } else {
+                        return redirect()->back()->with('error', 'Chọn cách ngày hiện tại ít nhất tầm 1 ngày');
                     }
                 }
             }
             Session()->put('cart', $cart);
 
-            foreach ($data['cart_qty'] as $key =>$value){
-                $quantity_product = DB::table('product_cars')->where('product_id','=',$key)->first();
-                if ($value != 0 && $value != null && $quantity_product->quantity > $value && $value > 0){
-                    foreach ($cart as $key1 =>$value1){
-                        if ($value1['product_id'] == $key){
-                            $cart[$key1]['quantity'] =$value;
+            foreach ($data['cart_qty'] as $key => $value) {
+                $quantity_product = DB::table('product_cars')->where('product_id', '=', $key)->first();
+                if ($value != 0 && $value != null && $quantity_product->quantity > $value && $value > 0) {
+                    foreach ($cart as $key1 => $value1) {
+                        if ($value1['product_id'] == $key) {
+                            $cart[$key1]['quantity'] = $value;
                         }
                     }
                 }
@@ -139,12 +148,13 @@ class CartController extends Controller
         //return view('pages.cart.show_cart');
     }
 
-    public function delete_cart($id){
+    public function delete_cart($id)
+    {
 
         $cart = Session()->get('cart');
-        if ($cart == true){
-            foreach ($cart as $key =>$value){
-                if ($key= $id){
+        if ($cart == true) {
+            foreach ($cart as $key => $value) {
+                if ($key = $id) {
                     unset($cart[$key]);
                 }
             }
@@ -153,12 +163,14 @@ class CartController extends Controller
         }
 
     }
-    public function delete_cart_all(){
+
+    public function delete_cart_all()
+    {
         $cart = Session()->get('cart');
-        if ($cart == true){
-            Session()->put('cart',null);
+        if ($cart == true) {
+            Session()->put('cart', null);
             return redirect()->back();
-        }else{
+        } else {
             return redirect()->back();
         }
     }

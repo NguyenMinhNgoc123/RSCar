@@ -8,6 +8,7 @@
     <meta name="description" content="Default Description">
     <meta name="keywords" content="fashion, store, E-commerce">
     <meta name="robots" content="*">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('pages.frontend.css')
 </head>
 <body>

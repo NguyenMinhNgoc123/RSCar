@@ -1,8 +1,7 @@
-<form action="{{route('list')}}" method="GET">
-<div id="limiter">
-    <button type="submit" class="">Tìm kiếm</button>
-</div>
-<div class="pages">
-    <input type="text" name="type_id_search" id="type_id_search" class="form-control" placeholder="Search">
+<form >
+{{--    {{csrf_token()}}--}}
+<div class="pages" style="width: 60%">
+    <input type="search" name="search_name" id="search_name" class="form-control" placeholder="Tim kiếm ngay">
 </div>
 </form>
+{{--action="{{route('list')}}" method="GET"--}}

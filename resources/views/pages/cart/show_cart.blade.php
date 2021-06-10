@@ -3,7 +3,34 @@
 @section('content')
     @include('pages.banner')
     <div class="main-container col1-layout wow bounceInUp animated">
-
+        <div style="margin: 20px">
+            <div>
+                <?php
+                $message = Session()->get('message');
+                if ($message){ ?>
+                <div class="alert bg-primary">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon"></i> Thông báo!</h5>
+                    <?php echo $message ?>
+                </div>
+                <?php  Session()->put('message', null);
+                }
+                ?>
+            </div>
+            <div>
+                <?php
+                $message = Session()->get('error');
+                if ($message){ ?>
+                <div class="alert bg-danger" >
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h5><i class="icon"></i> Thông báo!</h5>
+                    <?php echo $message ?>
+                </div>
+                <?php  Session()->put('error', null);
+                }
+                ?>
+            </div>
+        </div>
         <div class="main">
             <div class="cart wow bounceInUp animated" id="change-item-cart">
 
@@ -105,14 +132,17 @@
 
                                             </td>
                                             <td class="a-right movewishlist">
+
                                                 <span class="cart-price">
                                                     @if($value['type_id'] =='2')
-                                                <input name="date_begin" type="datetime-local"
-                                                       value="{{$value['date_begin']}}" size="3"
-                                                       class="input-text">
-                                                    <input name="date_end" type="datetime-local"
-                                                           value="{{$value['date_end']}}" size="3"
-                                                           class="input-text ">
+                                                        ngày mượn
+                                                        <input name="date_begin" type="date" width="200px"
+                                                               value="{{$value['date_begin']}}" size="3"
+                                                               class="input-text datepicker">
+                                                        ngày trả
+                                                        <input name="date_end" type="date"
+                                                               value="{{$value['date_end']}}" size="3"
+                                                               class="input-text ">
                                                     @endif
                                                 </span>
                                             </td>
@@ -150,10 +180,15 @@
 
                     <!-- BEGIN TOTALS COL 2 -->
                     <div class="col-sm-4">
-
-
+                        <div class="discount">
+                        <h3>LƯU Ý</h3>
+                        <ul class="shipping-pro">
+                            <li>Nhận xe vào 8h sáng ngày mượn và trả xe vào 8h sáng của ngày trả</li>
+                            <li>Nếu có yêu cầu hãy nhập bên phần yêu cầu</li>
+                            <li>Nếu vượt quá số ngày trả sẽ tính tiền theo giờ</li>
+                        </ul>
+                        </div>
                     </div>
-
                     <div class="col-sm-4">
 
                         <div class="discount">
@@ -227,17 +262,18 @@
                                         <a type="submit" style="width: 100%;text-decoration: none"
                                            href="{{route('user.checkout')}}"
                                            <?php if (session('cart') == null) echo 'disabled'; else
-                                               foreach (session('cart') as $key =>$value){
-                                                   if ($value['type_id'] == '2'){
-                                                       if ($value['date_begin'] =='0000-00-00 00:00:00' || $value['date_end'] =='0000-00-00 00:00:00' ){
+                                               foreach (session('cart') as $key => $value) {
+                                                   if ($value['type_id'] == '2') {
+                                                       if ($value['date_begin'] == '0000-00-00' || $value['date_end'] == '0000-00-00') {
                                                            echo 'disabled';
                                                        }
                                                    }
                                                }
 
                                            ?>
-                                           class="button btn btn-danger" onClick="">
+                                           class="button btn btn-danger" onClick="" >
                                             <span>THANH TOÁN</span></a>
+
                                     </li>
                                     <br>
                                     <br>
@@ -256,3 +292,4 @@
 
     </div> <!--col1-layout-->
 @endsection
+

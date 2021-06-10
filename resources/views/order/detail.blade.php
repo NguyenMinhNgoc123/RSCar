@@ -50,66 +50,141 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
+                    @foreach($order as $key1 => $value1)
+                    @foreach($admin as $key => $value)
                     <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Danh Sách Đơn</h3>
-                                <a class="btn btn-primary float-right"  href="{{route('admin.order.list')}}">Quay lại</a>
+                        <div class="invoice p-3 mb-3">
+                            <!-- title row -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>
+                                        <i class="fas fa-globe"></i> Chi tiết
+                                        <small class="float-right">Ngày lập : {{$value1->order_create}}</small>
+                                    </h4>
+                                </div>
+                                <!-- /.col -->
                             </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>id sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Tiền cọc </th>
-                                        <th>Tên xe</th>
-                                        <th>Hình thức</th>
-                                        <th>Loại xe</th>
-                                        <th>model</th>
-                                        <th>năm đăng ký</th>
-                                        <th>Tình trạng xe</th>
-                                        <th>Ngày tạo</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($orderDetail as $key =>$value)
+                            <!-- info row -->
+                            <div class="row invoice-info">
+                                <div class="col-sm-4 invoice-col">
+                                    From
+                                    <address>
+                                        <strong>{{$value->name}}</strong><br>
+                                        Số điện thoại: {{$value->phone_no}}<br>
+                                        Email: {{$value->email}}
+                                    </address>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 invoice-col">
+                                    To
+                                    <address>
+                                        <strong>{{$value1->full_name_ship}}</strong><br>
+                                        {{$value1->address_ship}}<br>
+                                        Số điện thoại: {{$value1->phone_no_ship}}<br>
+                                        Email: {{$value1->email_ship}}
+                                    </address>
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-sm-4 invoice-col">
+                                    <b>Invoice #007612</b><br>
+                                    <br>
+                                    <b>Mã đơn :</b> {{$value1->order_id}}<br>
+                                    <b>Tình trạng:</b>
+                                    @if($value1->payment_status == '0')
+                                        <strong>Chưa thanh toán</strong>
+                                    @else
+                                        <strong>Chưa thanh toán</strong>
+                                    @endif
+                                    <br>
+                                    <b>Liên hệ:</b> {{$value->email}}
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <!-- Table row -->
+                            <div class="row">
+                                <div class="col-12 table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
                                         <tr>
-                                            <td>{{ $value->product_id}}</td>
-                                            <td>{{ $value->product_quantity}}</td>
-                                            <td>
-                                                @if($value->type_id =='1')
-                                                    {{number_format($value->product_price).' '.'vnđ'}}
-                                                @else
-                                                    {{number_format($value->product_price).' '.'vnđ/ngày'}}
-                                                @endif
-                                            </td>
-                                            <td> {{$value->name_car}}</td>
-                                            <td>{{$value->type_name}}</td>
-                                            <td>{{$value->tv_name}}</td>
-                                            <td>{{$value->model}}</td>
-                                            <td>{{$value->Year_of_registration}}</td>
-                                            <td>{{$value->status_car}}</td>
-                                            <td>{{$value->order_detail_create}}</td>
+                                            <th>Mã sản phẩm</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>hình thức</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá tiền</th>
+                                            <th>ngày mượn</th>
+                                            <th>ngày trả</th>
+                                            <th>Chi tiết</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                    {{--                                    <tfoot>--}}
-                                    {{--                                    <tr>--}}
-                                    {{--                                        <th>Rendering engine</th>--}}
-                                    {{--                                        <th>Browser</th>--}}
-                                    {{--                                        <th>Platform(s)</th>--}}
-                                    {{--                                        <th>Engine version</th>--}}
-                                    {{--                                        <th>CSS grade</th>--}}
-                                    {{--                                    </tr>--}}
-                                    {{--                                    </tfoot>--}}
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($orderDetails as $key2 =>$value2)
+                                        <tr>
+                                            <td>{{$value2->product_id}}</td>
+                                            <td>{{$value2->name_car}}</td>
+                                            <td>{{$value2->type_name}}</td>
+                                            <td>{{$value2->product_quantity}}</td>
+                                            <td>{{number_format($value2->product_price)}}đ</td>
+                                            <td>{{$value2->order_detail_create}}</td>
+                                            <td>{{$value2->order_detail_end}}</td>
+                                            <td><a href="{{route('admin.product.show',$value2->product_id)}}"><i class="fas fa-eye"></i></a></td>
+                                        </tr>'
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.col -->
                             </div>
-                            <!-- /.card-body -->
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <!-- accepted payments column -->
+                                <div class="col-6">
+
+                                </div>
+                                <!-- /.col -->
+                                <div class="col-6">
+                                    <p class="lead">Ngày lập : {{$value1->order_create}}</p>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th style="width:50%">tiền sản phẩm:</th>
+                                                <td>{{$value1->total}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping:</th>
+                                                <td>0đ</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tổng tiền :</th>
+                                                <td>{{number_format($value1->total)}}đ</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+
+                            <!-- this row will not appear when printing -->
+                            <div class="row no-print">
+                                <div class="col-12">
+                                    <a type="button" href="{{route('admin.order.list')}}" class="btn btn-success float-right"><i class="far fa-credit-card"></i>
+                                        Quay lại
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card -->
+                        <div class="row">
+                            <h2>Địa chỉ khách hàng</h2>
+                            <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$value1->address_ship}}&output=embed" ></iframe>
+                        </div>
                     </div>
+                    @endforeach
+                @endforeach
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->

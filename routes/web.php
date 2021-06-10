@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsCarController;
 use App\Http\Controllers\BrandProductController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeVehicleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index');
 //Route::get('/index', [HomeController::class, 'index'])->name('index');
 //frontend
 Route::get('/list', [HomeController::class, 'list'])->name('list');
-Route::get('/list-pagination', [HomeController::class, 'list_pagination'])->name('list-pagination');
+Route::post('/search-product', [HomeController::class, 'search_product'])->name('search-product');
 Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 
 //Danh mục sản phẩm Ở list
@@ -50,7 +51,31 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
 
     Route::get('/dashboard', [AdminController::class, 'show_dashboard'])->name('dashboard');
     // ->middleware('check_login_admin');
+//manage display products
+    Route::group(['prefix' => 'manage-show', 'as' => 'manage-show.'], function () {
+        Route::get('/list', [ShowController::class, 'list'])->name('list');
+        Route::get('/active-hot/{id}', [ShowController::class, 'active_hot'])->name('active-hot');
+        Route::get('/un-active-hot/{id}', [ShowController::class, 'un_active_hot'])->name('un-active-hot');
 
+        Route::get('/active-sale/{id}', [ShowController::class, 'active_sale'])->name('active-sale');
+        Route::get('/un-active-sale/{id}', [ShowController::class, 'un_active_sale'])->name('un-active-sale');
+
+        Route::get('/active-bestseller/{id}', [ShowController::class, 'active_bestseller'])->name('active-bestseller');
+        Route::get('/un-active-bestseller/{id}', [ShowController::class, 'un_active_bestseller'])->name('un-active-bestseller');
+    });
+//manage admin
+    Route::get('/list-admin', [AdminController::class, 'list_admin'])->name('list-admin');
+    Route::get('/add-admin', [AdminController::class, 'add_admin'])->name('add-admin');
+    Route::post('/save-admin', [AdminController::class, 'save_admin'])->name('save-admin');
+    Route::get('/edit-admin/{id}', [AdminController::class, 'edit_admin'])->name('edit-admin');
+    Route::post('/update-admin/{id}', [AdminController::class, 'update_admin'])->name('update-admin');
+
+//manage user
+    Route::group(['prefix' => 'manage-user', 'as' => 'manage-user.'], function () {
+        Route::get('/list', [AdminController::class, 'list_user'])->name('list');
+        Route::get('/delete/{id}', [AdminController::class, 'delete_user'])->name('delete');
+
+    });
 //manage order
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::get('/list', [OrderController::class, 'index'])->name('list');
@@ -58,6 +83,9 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
         Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [OrderController::class, 'update'])->name('update');
         Route::get('/delete/{id}', [OrderController::class, 'destroy'])->name('delete');
+
+        Route::get('/list-completed', [OrderController::class, 'list_completed'])->name('list-completed');
+        Route::get('/detail-completed/{id}', [OrderController::class, 'show_completed'])->name('detail-completed');
 
     });
 //products car
@@ -70,6 +98,9 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
         Route::get('/show/{id}', [ProductsCarController::class, 'show'])->name('show');
         Route::post('/update/{id}', [ProductsCarController::class, 'update'])->name('update');
         Route::post('/save', [ProductsCarController::class, 'store'])->name('save');
+
+        Route::get('/active/{id}', [ProductsCarController::class, 'active'])->name('active');
+        Route::get('/un-active/{id}', [ProductsCarController::class, 'un_active'])->name('un-active');
     });
 //post Type car (hình thức sản phẩm)
     Route::group(['prefix' => 'postType', 'as' => 'postType.'], function () {
@@ -124,9 +155,13 @@ Route::group(['middleware' => ['check_login_user'], 'as' => 'user.','prefix' => 
         Route::get('/detail/{id}', [MyOrderController::class, 'show'])->name('detail');
         Route::get('/delete/{id}', [MyOrderController::class, 'destroy'])->name('delete');
 
+        Route::get('/history-order', [MyOrderController::class, 'history_order'])->name('history-order');
+
     });
 //check out
     Route::get('/checkout', [CheckOutController::class, 'checkout'])->name('checkout');
+    Route::get('/send-payment', [CheckOutController::class, 'send_payment'])->name('send-payment');
+    Route::get('/print-payment', [CheckOutController::class, 'print_payment'])->name('print-payment');
     Route::post('/save-checkout', [CheckOutController::class, 'save_checkout'])->name('save-checkout');
     Route::get('/payment', [CheckOutController::class, 'payment'])->name('payment');
     Route::post('/save-payment', [CheckOutController::class, 'save_payment'])->name('save-payment');
@@ -160,6 +195,6 @@ Route::group(['middleware' => ['check_not_login'], 'as' => 'guest.','prefix' => 
 
 
 //Search
-Route::post('/search-name', [SearchController::class, 'getSearchAjax'])->name('search-name');
+
 
 

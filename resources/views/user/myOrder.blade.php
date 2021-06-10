@@ -82,19 +82,16 @@
                 <!--recent-orders-->
                 <div class="box-account">
                     <div class="page-title">
-                        <h2>THÔNG TIN THANH TOÁN</h2>
+
                     </div>
                     <div class="col2-set">
                         <div class="col-1">
                             <div class="box">
                                 <div class="box-title">
-                                    <h5>NGUYEN MINH NGOC</h5>
                                     <a href="#"></a></div>
                                 <!--box-title-->
                                 <div class="box-content">
-                                    <p> NGÂN HÀNG : TP BANK<br>
-                                        SỐ TÀI KHOẢN : 0384 7021 801<br>
-                                    </p>
+
                                 </div>
                                 <!--box-content-->
                             </div>
@@ -103,10 +100,8 @@
                         <div class="col-2">
                             <div class="box">
                                 <div class="box-title">
-                                    <h5>NỘI DUNG CHUYỂN KHOẢN</h5>
                                     <!--box-title-->
                                     <div class="box-content">
-                                        <p> Nhập id đơn hàng và nội dung chuyển khoản </p>
                                     </div>
                                     <!--box-content-->
                                 </div>

@@ -8,31 +8,27 @@
                                                   class="product-image"><img
                                 src="{{asset("/product-images/{$valueP->thumbnails}")}}"
                                 alt="Retis lapen casen"></a>
-                        @if($valueP->hot_car != '0' && $valueP->updated_hot_car > now() && $valueP->status == '0')
+                        @if($valueP->hot_car != '0' && $valueP->status == '0')
                             <div class="new-label new-top-left">Hot</div>
                         @elseif($valueP->status == '1')
                             <div class="new-label new-top-left">Đã bán</div>
                         @elseif($valueP->status == '2')
                             <div class="new-label new-top-left">Đã Cọc</div>
+                        @elseif($valueP->status == '3')
+                            <div class="new-label new-top-left">Đã thuê</div>
                         @else
-                            <div class="new-label new-top-left">Chưa cọc</div>
                         @endif
                         @if($valueP->discount != '0')
                             <div class="sale-label sale-top-left">{{$valueP->discount}}%</div>
+                        @else
+                            <div class="sale-label sale-top-left">Giá cực tốt</div>
                         @endif
                         <div class="item-box-hover">
                             <div class="box-inner">
                                 <div class="add_cart">
-{{--                                        <input type="hidden"  value="{{$valueP->product_id}}" class="cart_product_id_{{$valueP->product_id}}">--}}
-{{--                                        <input type="hidden"  value="{{$valueP->thumbnails}}" class="cart_product_thumbnails_{{$valueP->product_id}}">--}}
-{{--                                        <input type="hidden"  value="1" class="cart_product_quantity_{{$valueP->product_id}}">--}}
-{{--                                        <input type="hidden"  value="{{$valueP->name_car}}" class="cart_product_name_{{$valueP->product_id}}">--}}
-{{--                                        <input type="hidden"  value="{{$valueP->type_name}}" class="cart_product_type_{{$valueP->product_id}}">--}}
-{{--                                        <input type="hidden"  value="{{$valueP->deposit}}" class="cart_product_deposit_{{$valueP->product_id}}">--}}
-
-                                        {{--                                    <form action="{{route('user.save-cart')}}" method="post">data-id="{{$valueP->product_id}}"--}}
-{{--                                        <input type="hidden" name="productid_hidden" value="{{$valueP->product_id}}"onclick="return confirm('Bạn có chắc muốn thêm?')" >--}}
-                                        <button class="button btn-cart" type="submit" data-id="{{$valueP->product_id}}" ></button>
+{{--                                    @if($valueP->status != '1' || session()->get('email') == null)--}}
+                                        <button class="button btn-cart" type="submit" data-login="{{Session()->get('user_id')}}" data-id="{{$valueP->product_id}}" ></button>
+{{--                                    @endif--}}
                                 </div>
                                 <div class="product-detail-bnt">
                                     <a
@@ -94,3 +90,4 @@
         </li>
     @endforeach
 </ul>
+

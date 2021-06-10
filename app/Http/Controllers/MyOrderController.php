@@ -131,4 +131,18 @@ class MyOrderController extends Controller
 
         return redirect()->route('user.order.list')->with('message','Xóa đơn hàng thành công');
     }
+    public function history_order(Request $request){
+        $user_id =$request->session()->get('user_id');
+        $data=[];
+        $order = DB::table('orders')
+            ->join('users', 'orders.user_id', '=', 'users.user_id')
+            ->join('ships', 'orders.ship_id', '=', 'ships.ship_id')
+            ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
+            ->where('users.user_id','=',$user_id)
+            ->where('payments.payment_status','=','5')
+            ->orderBy('order_create', 'desc')
+            ->get();
+        $data['order']=$order;
+        return view('user.historyOrder',$data);
+    }
 }

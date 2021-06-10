@@ -52,22 +52,28 @@
                                 <div class="form-group">
                                     <label for="exampleSelectRounded0">Cập nhật tình trạng đơn</label>
                                     <select class="custom-select rounded-0" name="order_status" id="exampleSelectRounded0">
-                                        <option value="" selected disabled>chọn một</option>
+                                        <option value="{{$order->order_status}}" selected >chọn một</option>
                                         <option value="0">Chưa giao xe</option>
+                                        @if($order->payment_status == 1)
                                         <option value="1">Đã giao xe</option>
                                         <option value="2">Đã nhận cọc chưa giao xe</option>
                                         <option value="3">Đang trong quá trình giao xe</option>
-                                        <option value="4">Đã giao xe đang ghi nợ</option>
+                                        <option value="5">Đã Khứ hồi xe và hoàn tất đơn</option>
+                                        @endif
                                     </select>
                                 </div>
+                                @if(session()->get('status_admin') == '1')
                                 <div class="form-group">
                                     <label for="exampleSelectRounded0">Tình trạng thanh toán</label>
                                     <select class="custom-select rounded-0" name="payment_status" id="exampleSelectRounded0">
-                                        <option value="" selected disabled>chọn một</option>
+                                        <option value="{{$order->payment_status}}" selected >chọn một</option>
                                         <option value="0">Chưa thanh toán</option>
                                         <option value="1">Đã Thanh toán</option>
                                     </select>
                                 </div>
+                                @else
+                                    <input type="hidden" name="payment_status" value="{{$order->payment_status}}">
+                                @endif
                                 <div class="form-group">
                                     <a class="btn btn-primary float-left" href="{{route('admin.order.list')}}">Quay lại</a>
                                     <input type="submit" name="update" value="Cập nhật"

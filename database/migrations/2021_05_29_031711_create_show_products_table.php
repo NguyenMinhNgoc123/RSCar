@@ -19,9 +19,6 @@ class CreateShowProductsTable extends Migration
             $table->integer('sale_week');
             $table->integer('best_seller');
             $table->integer('hot_car');
-            $table->dateTime('updated_sale_week');
-            $table->dateTime('updated_best_seller');
-            $table->dateTime('updated_hot_car');
             $table->timestamps();
             $table->foreign('product_id')->references('product_id')->on('product_cars');
         });

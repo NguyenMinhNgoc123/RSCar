@@ -19,7 +19,7 @@ class CheckUserLogin
     {
 //        && !in_array(Route::currentRouteName(), ['user.login-checkout', 'user.user-dashboard'])
         if (!session()->has('email') && !session()->has('user_id') && !in_array(Route::currentRouteName(), ['user.login-user', 'user.user-dashboard']) ){
-            return redirect('user/login-user')->with('message','bạn chưa login');
+            return redirect('user/login-user')->with('error','bạn chưa login');
         }
 
 

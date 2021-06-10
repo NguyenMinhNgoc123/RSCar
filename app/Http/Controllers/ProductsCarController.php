@@ -96,7 +96,8 @@ class ProductsCarController extends Controller
         $data['price'] = $price;
         $data['deposit'] = $deposit;
         $data['discount'] = $request->discount;
-        $data['thumbnails']='0';
+        $data['quantity'] = $request->quantity;
+        $data['thumbnails']='1';
         $data['status']='0';
         $data['created_at'] = $date;
 
@@ -105,39 +106,30 @@ class ProductsCarController extends Controller
 
         if (!empty($request->sale_week)) {
             $sale_week = '1';
-            $time1 = date('Y-m-d H:i:s', strtotime('+ 7 days'));
         }else{
             $sale_week = '0';
-            $time1 = $date;
-
         }
 
         if (!empty($request->best_seller)) {
             $best_seller = '1';
-            $time2 = date('Y-m-d H:i:s', strtotime('+ 30 days'));
         }else{
             $best_seller = '0';
-            $time2 = $date;
         }
 
         if (!empty($request->hot_car)) {
             $hot_car ='1';
-            $time3 = date('Y-m-d H:i:s', strtotime('+ 30 days'));
         }else{
             $hot_car = '0';
-            $time3 = $date;
         }
         $data['sale_week'] =$sale_week;
         $data['best_seller'] = $best_seller;
         $data['hot_car'] = $hot_car;
-        $data['updated_best_seller']=$time2;
-        $data['updated_hot_car']=$time3;
-        $data['updated_sale_week']=$time1;
+
         //$data['created_at'] = $date;
         //dd($request->sale_week);
 
 
-        // dd($data);
+
         //dd($request->File('images'));
         DB::beginTransaction();
 
@@ -208,6 +200,13 @@ class ProductsCarController extends Controller
         $data = [];
         $productPhoto = Product_photo::get()->where('product_id', $id);
         $data['productPhoto'] = $productPhoto;
+        $products = DB::table('product_cars')
+            ->join('brand_products', 'product_cars.brand_id', '=', 'brand_products.brand_id')
+            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
+            ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
+            ->where('product_id','=',$id)
+            ->get();
+        $data['productCar'] = $products;
         $data['id'] = $id;
         //dd($productPhoto);
         return view('productsCar.detail', $data);
@@ -369,5 +368,17 @@ class ProductsCarController extends Controller
             // have error so will show error message
             return redirect()->back()->with('message', 'Xóa không thành công');
         }
+    }
+    public function active($id){
+        $data=[];
+        $data['status']='0';
+        DB::table('product_cars')->where('product_id','=',$id)->update($data);
+        return redirect()->back();
+    }
+    public function un_active($id){
+        $data=[];
+        $data['status']='4';
+        DB::table('product_cars')->where('product_id','=',$id)->update($data);
+        return redirect()->back();
     }
 }
