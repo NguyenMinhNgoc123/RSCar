@@ -5,7 +5,7 @@
                 <div class="item-img">
                     <div class="item-img-info"><a href="{{route('detail',$valueP->product_id)}}"
                                                   title="Retis lapen casen"
-                                                  class="product-image"><img
+                                                  class="product-image"><img style=""
                                 src="{{asset("/product-images/{$valueP->thumbnails}")}}"
                                 alt="Retis lapen casen"></a>
                         @if($valueP->hot_car != '0' && $valueP->status == '0')
@@ -46,7 +46,13 @@
                 </div>
                 <div class="item-info">
                     <div class="info-inner">
-                        <div class="item-title"><a href="{{route('detail',$valueP->product_id)}}"
+                        <div class="item-title"><a style="width:100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;" href="{{route('detail',$valueP->product_id)}}"
                                                    title="Retis lapen casen">{{$valueP->caption}}</a>
                         </div>
                         <div class="item-content">

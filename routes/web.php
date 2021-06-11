@@ -36,9 +36,9 @@ Route::post('/search-product', [HomeController::class, 'search_product'])->name(
 Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 
 //Danh mục sản phẩm Ở list
-Route::get('/category-type/{id}', [HomeController::class, 'show_category_type'])->name('category-type');
-Route::get('/category-brand/{id}', [HomeController::class, 'show_category_brand'])->name('category-brand');
-Route::get('/category-type-vehicles/{id}', [HomeController::class, 'show_category_tv'])->name('category-type-vehicles');
+Route::post('/show-category', [HomeController::class, 'show_category']);
+Route::post('/pagination/fetch', [HomeController::class, 'fetch'])->name('pagination.fetch');
+
 //search list
 
 

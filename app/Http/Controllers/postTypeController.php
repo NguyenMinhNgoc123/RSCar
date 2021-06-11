@@ -150,6 +150,7 @@ class postTypeController extends Controller
         try {
             $PostTypes = PostType::find($id);
             $PostTypes->delete();
+
             DB::commit();
 
             return redirect()->route('admin.postType.list')->with('message', 'Xóa thành công hình thức id : '.$id);

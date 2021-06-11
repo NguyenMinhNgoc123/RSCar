@@ -154,12 +154,12 @@
                                 <div class="form-group" style="">
                                     <label for="exampleInputFile">Hình ảnh (phải có ít nhất 3 ảnh)</label>
                                     <div class="control-group input-group" style="margin-top:10px">
-                                        <input type="file" name="images[]" class="form-control">
+                                        <input type="file" name="images[]" accept="image/*" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group" style="">
                                     <div class="control-group input-group" style="margin-top:10px">
-                                        <input type="file" name="images[]" class="form-control">
+                                        <input type="file" name="images[]" accept="image/*" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group increment" style="" >

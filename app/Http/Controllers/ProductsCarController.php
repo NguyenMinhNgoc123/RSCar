@@ -177,7 +177,7 @@ class ProductsCarController extends Controller
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message
-            return redirect()->back()->with('message', 'thêm sản phẩm không thành công');
+            return redirect()->back()->with('message', $ex->getMessage());
         }
 
 //        Product_car::create($data);

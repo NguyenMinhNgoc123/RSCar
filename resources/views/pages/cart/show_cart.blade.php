@@ -226,7 +226,7 @@
                                             <strong><span
                                                     class="price"></span><?php
                                                 Session()->put('total', $total);
-                                                echo number_format($total, 0, ',', '.') . ' đ' ?>
+                                                echo number_format($total) . ' đ' ?>
                                             </strong>
                                         </td>
                                     </tr>
@@ -245,7 +245,7 @@
                                             Thuế
                                         </td>
                                         <td style="" class="a-right">
-                                            <span class="price">{{'0.00'.' '.'vnđ'}}</span></td>
+                                            <span class="price">{{'0,00'.' '.'vnđ'}}</span></td>
                                     </tr>
                                     <tr>
                                         <td style="" class="a-left" colspan="1">

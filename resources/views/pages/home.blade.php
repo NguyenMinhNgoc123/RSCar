@@ -18,7 +18,7 @@
                                                     <div>
                                                         <div class="info">
                                                             <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span>Top thương hiệu 2019</span> </div>
-                                                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span style="font-weight:normal; display:block">Modern-classic</span> incredible </div>
+                                                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span style="font-weight:normal; display:block">LUÔN CẬP NHẬT</span> incredible </div>
                                                             <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'>GIẢM GIÁ LÊN ĐẾN 30 % CHO CÁC KHÁCH HÀNG NHANH TAY</div>
                                                             <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='{{route('list')}}' class="buy-btn">Xem ngay</a> </div>
                                                         </div>
@@ -34,7 +34,7 @@
                                                     <div>
                                                         <div class="info">
                                                             <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2; white-space:nowrap;'><span>Top Sản phẩm bán chạy</span> </div>
-                                                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span style="font-weight:normal; display:block">Modern-classic</span> Decorative </div>
+                                                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3; white-space:nowrap;'><span style="font-weight:normal; display:block">GIÁ CẢ HỢP LÝ</span> Decorative </div>
                                                             <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'>GIẢM 15% KHI XE MỚI 100%</div>
                                                             <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4; white-space:nowrap;'><a href='{{route('list')}}' class="buy-btn">Xem Ngay</a> </div>
                                                         </div>
@@ -120,7 +120,13 @@
                                     </div>
                                     <div class="item-info">
                                         <div class="info-inner">
-                                            <div class="item-title"><a href="{{route('detail',$valueSW->product_id)}}" title="Retis lapen casen">{{$valueSW->caption}}</a> </div>
+                                            <div class="item-title"><a style="width:100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;" href="{{route('detail',$valueSW->product_id)}}" title="Retis lapen casen">{{$valueSW->caption}}</a> </div>
                                             <div class="item-content">
                                                 <div class="rating">
                                                     <div class="ratings">
@@ -195,7 +201,13 @@
                                     </div>
                                     <div class="item-info">
                                         <div class="info-inner">
-                                            <div class="item-title"><a href="{{route('detail',$valueS->product_id)}}" title="Retis lapen casen">{{$valueS->caption}}</a> </div>
+                                            <div class="item-title"><a style="width:100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;" href="{{route('detail',$valueS->product_id)}}" title="Retis lapen casen">{{$valueS->caption}}</a> </div>
                                             <div class="item-content">
                                                 <div class="rating">
                                                     <div class="ratings">
@@ -266,7 +278,13 @@
                                     </div>
                                     <div class="item-info">
                                         <div class="info-inner">
-                                            <div class="item-title"><a href="{{route('detail',$valueR->product_id)}}" title="Retis lapen casen">{{$valueR->caption}}</a> </div>
+                                            <div class="item-title"><a style="width:100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;" href="{{route('detail',$valueR->product_id)}}" title="Retis lapen casen">{{$valueR->caption}}</a> </div>
                                             <div class="item-content">
                                                 <div class="rating">
                                                     <div class="ratings">
@@ -338,7 +356,13 @@
                                 </div>
                                 <div class="item-info">
                                     <div class="info-inner">
-                                        <div class="item-title"><a href="{{route('detail',$value->product_id)}}" title="Retis lapen casen">{{$value->caption}}</a> </div>
+                                        <div class="item-title"><a style="width:100%;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+     display: -webkit-box;" href="{{route('detail',$value->product_id)}}" title="Retis lapen casen">{{$value->caption}}</a> </div>
                                         <div class="item-content">
                                             <div class="rating">
                                                 <div class="ratings">

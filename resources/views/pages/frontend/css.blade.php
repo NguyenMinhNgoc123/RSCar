@@ -1,6 +1,7 @@
 <link rel="icon" href="#" type="image/x-icon">
 <link rel="shortcut icon" href="#" type="image/x-icon">
 <!-- CSS Style -->
+
 <link rel="stylesheet" type="text/css" href="{{asset('/backend/stylesheet/sweetalert.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/backend/stylesheet/bootstrap.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/backend/stylesheet/font-awesome.css')}}" media="all">

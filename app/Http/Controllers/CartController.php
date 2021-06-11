@@ -110,11 +110,10 @@ class CartController extends Controller
         $date = date('Y-m-d');
         $data = $request->all();
         $cart = Session()->get('cart');
-        if ($cart == true) {
+        if (count($cart) > 0) {
             foreach ($cart as $key3 => $value) {
                 if ($value['type_id'] == '2') {
-                    if ((strtotime($request->date_begin) > strtotime($date) || strtotime($request->date_end) > strtotime($request->date_begin))) {
-
+                    if (strtotime($request->date_begin) > strtotime($date) || strtotime($request->date_end) > strtotime($request->date_begin)) {
                         $first_date = strtotime($request->date_begin);
                         $second_date = strtotime($request->date_end);
                         $datediff = abs($first_date - $second_date);
@@ -126,13 +125,13 @@ class CartController extends Controller
                     } else {
                         return redirect()->back()->with('error', 'Chọn cách ngày hiện tại ít nhất tầm 1 ngày');
                     }
+
                 }
             }
             Session()->put('cart', $cart);
-
             foreach ($data['cart_qty'] as $key => $value) {
                 $quantity_product = DB::table('product_cars')->where('product_id', '=', $key)->first();
-                if ($value != 0 && $value != null && $quantity_product->quantity > $value && $value > 0) {
+                if ($value != 0 && $value != null && $quantity_product->quantity >= $value && $value > 0) {
                     foreach ($cart as $key1 => $value1) {
                         if ($value1['product_id'] == $key) {
                             $cart[$key1]['quantity'] = $value;
@@ -148,7 +147,8 @@ class CartController extends Controller
         //return view('pages.cart.show_cart');
     }
 
-    public function delete_cart($id)
+    public
+    function delete_cart($id)
     {
 
         $cart = Session()->get('cart');
@@ -164,7 +164,8 @@ class CartController extends Controller
 
     }
 
-    public function delete_cart_all()
+    public
+    function delete_cart_all()
     {
         $cart = Session()->get('cart');
         if ($cart == true) {

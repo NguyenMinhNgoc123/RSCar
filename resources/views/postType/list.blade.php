@@ -37,6 +37,20 @@
                             ?>
 
                         </div>
+                        <div>
+                            <?php
+                            $message = Session()->get('error');
+                            if ($message){ ?>
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h5><i class="icon fas fa-check"></i> lỗi!</h5>
+                                <?php echo $message ?>
+                            </div>
+                            <?php  Session()->put('error',null);
+                            }
+                            ?>
+
+                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Danh sách Hình thức</h3>

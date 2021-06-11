@@ -49,7 +49,7 @@
                                                     <div id="gallery_02" class="product-flexslider hidden-buttons product-img-thumb">
                                                         <div class="slider-items slider-width-col4 block-content">
                                                             @foreach($photo as $keyPhoto =>$valuePhoto)
-                                                                <div class="more-views-items" style="padding:10px"> <a href="#" data-image="{{asset("/product-images/{$valuePhoto->p_photo}")}}" data-zoom-image="{{asset("/product-images/{$valuePhoto->p_photo}")}}"> <img id="product-zoom0"  src="{{asset("/product-images/{$valuePhoto->p_photo}")}}" alt="product-image"/> </a></div>
+                                                                <div class="more-views-items" style="padding:10px;height: 500px"> <a href="#" data-image="{{asset("/product-images/{$valuePhoto->p_photo}")}}" data-zoom-image="{{asset("/product-images/{$valuePhoto->p_photo}")}}"> <img id="product-zoom0"  src="{{asset("/product-images/{$valuePhoto->p_photo}")}}" alt="product-image"/> </a></div>
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -234,46 +234,14 @@
                             <div class="tab-pane fade" id="reviews_tabs">
                                 <div class="woocommerce-Reviews">
                                     <div>
-                                        <h2 class="woocommerce-Reviews-title">2 Bài đánh giá cho sản phẩm</h2>
+                                        <h2 class="woocommerce-Reviews-title">Chưa có bài đánh giá cho sản phẩm</h2>
                                         <ol class="commentlist">
-                                            <li class="comment">
-                                                <div> <img alt="" src="images/member1.png" class="avatar avatar-60 photo">
-                                                    <div class="comment-text">
-                                                        <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <div style="width:100%" class="rating"></div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="meta"> <strong>John Doe</strong> <span>–</span> April 19, 2018 </p>
-                                                        <div class="description">
-                                                            <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                            <p>Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- #comment-## -->
-                                            <li class="comment">
-                                                <div> <img alt="" src="images/member2.png" class="avatar avatar-60 photo">
-                                                    <div class="comment-text">
-                                                        <div class="ratings">
-                                                            <div class="rating-box">
-                                                                <div style="width:100%" class="rating"></div>
-                                                            </div>
-                                                        </div>
-                                                        <p class="meta"> <strong>Stephen Smith</strong> <span>–</span> June 02, 2018 </p>
-                                                        <div class="description">
-                                                            <p>Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
                                             <!-- #comment-## -->
                                         </ol>
                                     </div>
                                     <div>
                                         <div>
-                                            <div class="comment-respond"> <span class="comment-reply-title">Add a review </span>
+                                            <div class="comment-respond"> <span class="comment-reply-title">Thêm bài đánh giá </span>
                                                 <form action="#" method="post" class="comment-form" novalidate>
                                                     <p class="comment-notes"><span id="email-notes">Địa chỉ email của bạn sẽ không được công bố..</span> Các trường bắt buộc được đánh dấu * <span class="required">*</span></p>
                                                     <div class="comment-form-rating">
@@ -285,7 +253,7 @@
                                                         <textarea id="comment" name="comment" cols="45" rows="8" required></textarea>
                                                     </p>
                                                     <p class="form-submit">
-                                                        <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                                        <input name="submit" type="submit" id="submit" class="submit" value="ĐĂNG NGAY">
                                                     </p>
                                                 </form>
                                             </div>
@@ -295,6 +263,7 @@
                                     <div class="clear"></div>
                                 </div>
                             </div>
+
                             <div class="tab-pane fade" id="product_tabs_custom1">
                                 <div class="product-tabs-content-inner clearfix">
                                     <p>{{$valueP->description}}</p>

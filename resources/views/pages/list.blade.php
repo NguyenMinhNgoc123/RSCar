@@ -25,8 +25,10 @@
                     @include('pages.formList')
                 </div>
                 {{ csrf_field() }}
-                <div class="toolbar bottom">
-                    {!! $product->links()  !!}
+                <div class="toolbar bottom ">
+                    {{ $product->links() }}
+{{--                    {{ $product->links()  }}--}}
+
                 </div>
             </article>
         </div>

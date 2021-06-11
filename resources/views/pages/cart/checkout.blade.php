@@ -85,13 +85,7 @@
                                                                        class="input-text "></textarea>
                                                         </li>
                                                         <li class="">
-                                                            <input type="checkbox" name="billing[save_in_address_book]"
-                                                                   value="1" title="Save in address book"
-                                                                   id="billing:save_in_address_book"
-                                                                   onChange="if(window.shipping) shipping.setSameAsBilling(false);"
-                                                                   class="checkbox">
-                                                            <label for="billing:save_in_address_book">Save in address
-                                                                book</label>
+
                                                         </li>
                                                     </ul>
                                                 </fieldset>

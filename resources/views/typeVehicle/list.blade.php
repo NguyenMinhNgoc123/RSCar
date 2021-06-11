@@ -28,14 +28,30 @@
                             $message = Session()->get('message');
                             if ($message){ ?>
                             <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+                                </button>
                                 <h5><i class="icon fas fa-check"></i> Thành công!</h5>
                                 <?php echo $message ?>
                             </div>
-                            <?php  Session()->put('message',null);
+                            <?php  Session()->put('message', null);
                             }
                             ?>
+                            <div>
+                                <?php
+                                $message = Session()->get('error');
+                                if ($message){ ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h5><i class="icon fas fa-check"></i> Lỗi!</h5>
+                                    <?php echo $message ?>
+                                </div>
+                                <?php  Session()->put('error', null);
+                                }
+                                ?>
 
+                            </div>
                         </div>
                         <div class="card">
                             <div class="card-header">
@@ -59,12 +75,15 @@
                                         @foreach($typeVehicle as $key => $value)
                                             <tr>
                                                 <td>{{ $value->type_vehicles_id }}</td>
-                                                <td><a class="btn btn-info btn-sm" href="{{ route('admin.typeVehicle.edit',$value->type_vehicles_id) }}">
+                                                <td><a class="btn btn-info btn-sm"
+                                                       href="{{ route('admin.typeVehicle.edit',$value->type_vehicles_id) }}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         Edit
                                                     </a>
-                                                    <a class="btn btn-danger btn-sm" href="{{ route('admin.typeVehicle.delete',$value->type_vehicles_id) }}" onclick="return confirm('Bạn có muốn xóa?')">
+                                                    <a class="btn btn-danger btn-sm"
+                                                       href="{{ route('admin.typeVehicle.delete',$value->type_vehicles_id) }}"
+                                                       onclick="return confirm('Bạn có muốn xóa?')">
                                                         <i class="fas fa-trash">
                                                         </i>
                                                         Delete
