@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class TypeVehicles extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'type_vehicles_id';
+    protected $primaryKey = 'type_shoes_id';
 
-    protected $table = 'type_vehicles';
+    protected $table = 'type_shoes';
 
     protected $fillable= [
-        'type_vehicles_id','tv_name','created','updated'
+        'type_shoes_id','tv_name','created','updated'
     ];
 }

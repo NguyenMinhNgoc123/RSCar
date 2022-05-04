@@ -17,7 +17,7 @@
                         <div class="feature-box">
                             <div class="icon-support"><img src="{{('/backend/images/car-sold-icon.png')}}" alt="Image"></div>
                             <div class="content">
-                                <h6>Car Sold</h6>
+                                <h6>Sold</h6>
                                 <p>30 phút một lần</p>
                             </div>
                         </div>
@@ -72,9 +72,9 @@
                     <div class="co-info">
                         <h4>SHOWROOM</h4>
                         <address>
-                            <div><span>243 Thái Thị Bôi,Đà nẵng</span></div>
-                            <div> <span> 0815115415</span></div>
-                            <div> <span><a href="#"> ngminhngoc123@gmail.com</a></span></div>
+                            <div><span>Đà nẵng</span></div>
+                            <div> <span> 08888888888</span></div>
+                            <div> <span><a href=""> ngonguyenthieuhuy@gmail.com</a></span></div>
                             <div> <span>Mon - Fri : 09am to 06pm</span></div>
                         </address>
                     </div>

@@ -17,21 +17,21 @@ class ProductsCarController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         //
         $data = [];
-        $products = DB::table('product_cars')
-            ->join('brand_products', 'product_cars.brand_id', '=', 'brand_products.brand_id')
-            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
-            ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
-            ->orderByDesc('product_cars.created_at')
+        $products = DB::table('products')
+            ->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_id')
+            ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
+            ->join('type_shoes', 'products.type_shoes_id', '=', 'type_shoes.type_shoes_id')
+            ->where('products.deleted_at',null)
+            ->orderByDesc('products.created_at')
             ->get();
         $data['productCar'] = $products;
-        // dd($data);
-        return view('productsCar.list', $data);
+        return view('products.list', $data);
     }
 
     /**
@@ -45,19 +45,19 @@ class ProductsCarController extends Controller
         $data = [];
         $post_types = PostType::pluck('type_name', 'type_id')->toArray();
         $brands = BrandProduct::pluck('brand_name', 'brand_id')->toArray();
-        $type_vehicles = TypeVehicles::pluck('tv_name', 'type_vehicles_id')->toArray();
+        $type_shoes = TypeVehicles::pluck('tv_name', 'type_shoes_id')->toArray();
         $data['post_types'] = $post_types;
         $data['brands'] = $brands;
-        $data['type_vehicles'] = $type_vehicles;
+        $data['type_shoes'] = $type_shoes;
 //        dd($post_types);
-        return view('productsCar.add', $data);
+        return view('products.add', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -72,31 +72,17 @@ class ProductsCarController extends Controller
 
         $price = str_replace(',', '', $request->price);
 
-        if ($request->deposit != null || $request->deposit !='0'){
-            $deposit = str_replace(',', '', $request->deposit);
-        }else{
-            $deposit='0';
-        }
-
-
-
         $last_id = $data['product_id'] = mt_rand();
         $data['type_id'] = $request->type_id;
         $data['brand_id'] = $request->brand_id;
         $data['caption'] = $request->caption;
-        $data['model'] = $request->model;
-        $data['number_kilometers'] = $request->number_kilometers;
-        $data['type_vehicles_id'] = $request->type_vehicles_id;
-        $data['name_car'] = $request->name_car;
-        $data['capacity'] = $request->capacity;
-        $data['Year_of_registration'] = $request->Year_of_registration;
-        $data['status_car'] = $request->status_car;
+        $data['size'] = $request->size;
+        $data['type_shoes_id'] = $request->type_shoes_id;
         $data['description'] = $request->description;
-        $data['address'] = $request->address;
         $data['price'] = $price;
-        $data['deposit'] = $deposit;
         $data['discount'] = $request->discount;
         $data['quantity'] = $request->quantity;
+        $data['address'] = $request->address;
         $data['thumbnails']='1';
         $data['status']='0';
         $data['created_at'] = $date;
@@ -125,14 +111,7 @@ class ProductsCarController extends Controller
         $data['best_seller'] = $best_seller;
         $data['hot_car'] = $hot_car;
 
-        //$data['created_at'] = $date;
-        //dd($request->sale_week);
-
-
-
-        //dd($request->File('images'));
         DB::beginTransaction();
-
         try {
             $key = count($request->file('images'));
             if ($key > 2) {
@@ -171,8 +150,8 @@ class ProductsCarController extends Controller
 
             DB::commit();
 
-            //return view('productsCar.list');
-            return redirect()->route('admin.product.list')->with('message', 'Thêm danh mục loại xe thành công : ' . $last_id);
+            //return view('products.list');
+            return redirect()->route('admin.product.list')->with('message', 'Thêm danh mục thành công : ' . $last_id);
 
         } catch (\Exception $ex) {
             DB::rollBack();
@@ -180,19 +159,13 @@ class ProductsCarController extends Controller
             return redirect()->back()->with('message', $ex->getMessage());
         }
 
-//        Product_car::create($data);
-//        $data->id;
-//        return redirect()->route('admin.typeVehicle.list')->with('error','Thêm danh mục loại xe không thành công');
-//        //DB::table('post_type')->insert($data);
-//        //Session()->put('message','Thêm danh mục hình thức thành công');
-//        return redirect()->route('admin.typeVehicle.list')->with('message','Thêm danh mục loại xe thành công');
     }
 
     /**
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -200,23 +173,24 @@ class ProductsCarController extends Controller
         $data = [];
         $productPhoto = Product_photo::get()->where('product_id', $id);
         $data['productPhoto'] = $productPhoto;
-        $products = DB::table('product_cars')
-            ->join('brand_products', 'product_cars.brand_id', '=', 'brand_products.brand_id')
-            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
-            ->join('type_vehicles', 'product_cars.type_vehicles_id', '=', 'type_vehicles.type_vehicles_id')
+        $products = DB::table('products')
+            ->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_id')
+            ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
+            ->join('type_shoes', 'products.type_shoes_id', '=', 'type_shoes.type_shoes_id')
             ->where('product_id','=',$id)
+            ->where('products.deleted_at',null)
             ->get();
         $data['productCar'] = $products;
         $data['id'] = $id;
         //dd($productPhoto);
-        return view('productsCar.detail', $data);
+        return view('products.detail', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -224,17 +198,17 @@ class ProductsCarController extends Controller
         $data = [];
         $post_types = PostType::pluck('type_name', 'type_id')->toArray();
         $brands = BrandProduct::pluck('brand_name', 'brand_id')->toArray();
-        $type_vehicles = TypeVehicles::pluck('tv_name', 'type_vehicles_id')->toArray();
+        $type_shoes = TypeVehicles::pluck('tv_name', 'type_shoes_id')->toArray();
         $productCar = Product_car::findOrFail($id);
         $productPhoto = Product_photo::where('product_id', '=', $id)->get();
 
         $data['post_types'] = $post_types;
         $data['brands'] = $brands;
-        $data['type_vehicles'] = $type_vehicles;
+        $data['type_shoes'] = $type_shoes;
         $data['productCar'] = $productCar;
         $data['productPhoto'] = $productPhoto;
         //dd($productPhoto);
-        return view('productsCar.edit', $data);
+        return view('products.edit', $data);
     }
 
     /**
@@ -254,29 +228,18 @@ class ProductsCarController extends Controller
         // set value for field name
 
         $price = str_replace(',', '', $request->price);
-        if ($request->deposit != null){
-            $deposit = str_replace(',', '', $request->deposit);
-        }else{
-            $deposit = '0';
-        }
 
         $productCar->updated_at = $date;
-        $productCar->type_vehicles_id = $request->type_vehicles_id;
+        $productCar->type_shoes_id = $request->type_shoes_id;
         $productCar->type_id = $request->type_id;
         $productCar->brand_id = $request->brand_id;
-        $productCar->name_car = $request->name_car;
-        $productCar->capacity = $request->capacity;
-        $productCar->status_car = $request->status_car;
-        $productCar->model = $request->model;
+        $productCar->size = $request->size;
         $productCar->description = $request->description;
-        $productCar->number_kilometers = $request->number_kilometers;
-        $productCar->address = $request->address;
         $productCar->caption = $request->caption;
         $productCar->quantity = $request->quantity;
         $productCar->price = $price;
-        $productCar->deposit = $deposit;
         $productCar->discount = $request->discount;
-
+        $productCar->address = $request->address;
 
         DB::beginTransaction();
 
@@ -330,55 +293,37 @@ class ProductsCarController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
 
-        //
-        DB::beginTransaction();
-
         try {
 
-            $DeleteShowProduct = Show_product::where('product_id', '=', $id)->first();
-            if ($DeleteShowProduct) {
-                $DeleteShowProduct->delete();
-
-            }
-            $product = Product_car::find($id)->product_photo();
-
-            foreach ($product as $key => $value) {
-                $file_path = public_path('product-images/' . $value->p_photo);
-                unlink($file_path);
-                //File::delete($file_path);
-            }
-
-            if ($product) {
-                $product->delete();
-            }
-
-            $product1 = Product_car::find($id);
-            $product1->delete();
-
-            DB::commit();
+            DB::table('products')->where('product_id', $id)
+                ->where('products.deleted_at',null)
+                ->delete();
 
             return redirect()->route('admin.product.list')->with('message', 'Xóa thành công hình thức id : '.$id);
         }  catch (\Exception $ex) {
             DB::rollBack();
-            // have error so will show error message
             return redirect()->back()->with('message', 'Xóa không thành công');
         }
     }
     public function active($id){
         $data=[];
         $data['status']='0';
-        DB::table('product_cars')->where('product_id','=',$id)->update($data);
+        DB::table('products')->where('product_id','=',$id)
+            ->where('products.deleted_at',null)
+            ->update($data);
         return redirect()->back();
     }
     public function un_active($id){
         $data=[];
         $data['status']='4';
-        DB::table('product_cars')->where('product_id','=',$id)->update($data);
+        DB::table('products')->where('product_id','=',$id)
+            ->where('products.deleted_at',null)
+            ->update($data);
         return redirect()->back();
     }
 }

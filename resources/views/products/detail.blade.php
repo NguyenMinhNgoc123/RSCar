@@ -58,13 +58,6 @@
                                 <div class="form-group">
                                     <label>Thương hiệu : </label><i> {{$value->brand_name}}</i>
                                 </div>
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>Tên xe : </label><i> {{$value->name_car}}</i>
-                                </div>
-                                <div class="form-group">
-                                    <label>Dung tích : </label><i>{{$value->capacity}}</i>
-                                </div>
                             </div>
                             <!-- /.col -->
                             <div class="col-md-6">
@@ -73,12 +66,9 @@
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
-                                    <label>Model : </label><i> {{$value->model}}</i>
+                                    <label>size : </label><i> {{$value->size}}</i>
                                 </div>
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>Năm đăng ký : </label><i> {{$value->Year_of_registration}}</i>
-                                </div>
+
                             </div>
                             <!-- /.col -->
                         </div>
@@ -86,29 +76,13 @@
                         <div class="row">
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>Số km đã đi: </label><i>  {{$value->number_kilometers}} </i>
-                                </div>
-                                <!-- /.form-group -->
-                                <div class="form-group">
-                                    <label>Địa chỉ của xe : </label><i>{{$value->address}}</i>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tình trạng xe : </label><i>  {{$value->status_car}}</i>
-                                </div>
-                                <div class="form-group">
                                     <label>Giá : </label><i>  {{number_format($value->price)}}đ</i>
                                 </div>
                             </div>
                             <!-- /.col -->
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
-                                    <label>Loại xe : </label><i>{{$value->tv_name}}</i>
-                                </div>
-                                <div class="form-group">
                                     <label>Số lượng : </label><i>  {{$value->quantity}}</i>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tiền cọc : </label><i>  {{number_format($value->deposit)}}đ</i>
                                 </div>
                                 <!-- /.form-group -->
                                 <div class="form-group">
@@ -118,11 +92,6 @@
                             <!-- /.col -->
                         </div>
                         <!-- /.row -->
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                        <h2>Địa chỉ xe</h2>
-                        <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$value->address}}&output=embed" ></iframe>
                     </div>
                     @endforeach
                 </div>

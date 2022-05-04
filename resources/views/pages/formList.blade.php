@@ -11,7 +11,7 @@
                         @if($valueP->hot_car != '0' && $valueP->status == '0')
                             <div class="new-label new-top-left">Hot</div>
                         @elseif($valueP->status == '1')
-                            <div class="new-label new-top-left">Đã bán</div>
+                            <div class="new-label new-top-left">Bán chạy</div>
                         @elseif($valueP->status == '2')
                             <div class="new-label new-top-left">Đã Cọc</div>
                         @elseif($valueP->status == '3')
@@ -78,16 +78,9 @@
                                 </div>
                             </div>
                             <div class="other-info">
-                                <div class="col-km"><i class="fa fa-tachometer"></i>
-                                    {{$valueP->number_kilometers}}
-                                </div>
-                                <div class="col-engine"><i class="fa fa-gear"></i>
-                                    {{$valueP->type_name}}
-                                </div>
-                                <div class="col-date"><i class="fa fa-calendar"
-                                                         aria-hidden="true"></i>
-                                    {{$valueP->model}}
-                                </div>
+                                <div class="col-engine"><i class="fa fa-tachometer"></i> size: {{$valueP->size}}</div>
+                                <div class="col-engine"><i class="fa fa-tachometer"></i> số lượng: {{$valueP->quantity}}</div>
+                                <div class="col-engine"><i class="fa fa-tachometer"></i> {{$valueP->brand_name}}</div>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\MessageBag;
-//session_start();
 class AdminController extends Controller
 {
     //
@@ -25,13 +24,15 @@ class AdminController extends Controller
     }
     public function show_dashboard(){
         $data = [];
-        $countOrder = Order::where('order_status','!=',5)->count();
-        $countOrderFinish = Payment::where('payment_status',5)->count();
-        $countTotalproduct = Product_car::count();
-        $countUser = User::count();
+        $countOrder = Order::where('order_status','=',0)->count();
+        $countOrderFinish = Payment::where('payment_status',1)->count();
+        $countTotalProduct = DB::table('products')
+            ->where('products.deleted_at',null)
+            ->count();
+        $countUser = DB::table('users')->count();
         $data['countOrder']=$countOrder;
         $data['countOrderFinish']=$countOrderFinish;
-        $data['countTotalproduct']=$countTotalproduct;
+        $data['countTotalproduct']=$countTotalProduct;
         $data['countUser']=$countUser;
         return view('admin.dashboard',$data);
     }
@@ -83,14 +84,6 @@ class AdminController extends Controller
             'status_admin'=>'required',
 
         ]);
-//        $checkVal = Validator::make($request->all(),[
-//            'name'=>'required',
-//            'phone_no'=>'required',
-//            'status_admin'=>'required',
-//            'email'=>'required',
-//            'admin_status'=>'required',
-//
-//        ]);
 
             $check =DB::table('admins')->where('email','=',$request->email)->get();
             if (count($check) > 0){
@@ -146,34 +139,14 @@ class AdminController extends Controller
         $data['user']=$user;
         return view('account-user.list',$data);
     }
-    public function delete_user(Request  $request,$id){
+    public function delete_user(Request  $request, $id){
 
         try {
-            $order = DB::table('orders')->where('order_id','=',$id)->get();
-            foreach ($order as $value){
-                $request->session()->put('order_id',$value->order_id);
-                $request->session()->put('ship_id',$value->ship_id);
-                $request->session()->put('payment_id',$value->payment_id);
-            }
-
-            DB::table('order_details')
-                ->where('order_id','=',$request->session()->get('order_id'))
-                ->delete();
-            DB::table('orders')
-                ->where('order_id','=',$request->session()->get('order_id'))->delete();
-            DB::table('payments')
-                ->where('payment_id','=',$request->session()->get('payment_id'))->delete();
-            DB::table('ships')
-                ->where('ship_id','=',$request->session()->get('ship_id'))->delete();
             DB::table('users')
-                ->where('user_id','=',$id)->delete();
-
-            session()->put('order_id',null);
-            session()->put('ship_id',null);
-            session()->put('payment_id',null);
+                ->where('user_id','=', $id)->delete();
 
             return redirect()->route('admin.manage-user.list')->with('message','Xóa Tài khoản khách thành công');
-        }catch (\Exception $exception){
+        } catch (\Exception $exception){
             return redirect()->back()->with('error','Không thể xóa khách hàng');
         }
 

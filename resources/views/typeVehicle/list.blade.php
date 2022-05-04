@@ -74,15 +74,15 @@
                                     @if(!empty($typeVehicle))
                                         @foreach($typeVehicle as $key => $value)
                                             <tr>
-                                                <td>{{ $value->type_vehicles_id }}</td>
+                                                <td>{{ $value->type_shoes_id }}</td>
                                                 <td><a class="btn btn-info btn-sm"
-                                                       href="{{ route('admin.typeVehicle.edit',$value->type_vehicles_id) }}">
+                                                       href="{{ route('admin.typeVehicle.edit',$value->type_shoes_id) }}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                         Edit
                                                     </a>
                                                     <a class="btn btn-danger btn-sm"
-                                                       href="{{ route('admin.typeVehicle.delete',$value->type_vehicles_id) }}"
+                                                       href="{{ route('admin.typeVehicle.delete',$value->type_shoes_id) }}"
                                                        onclick="return confirm('Bạn có muốn xóa?')">
                                                         <i class="fas fa-trash">
                                                         </i>

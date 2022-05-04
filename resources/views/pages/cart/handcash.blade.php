@@ -28,38 +28,23 @@
                                                                 <div class="col-1">
                                                                     <div class="box">
                                                                         <div class="box-title">
-                                                                            <h5>NGUYEN MINH NGOC</h5>
+                                                                            <h5>NGÔ NGUYỄN THIẾU HUY</h5>
                                                                             <a href="#"></a></div>
                                                                         <!--box-title-->
                                                                         <div class="box-content">
                                                                             <p> NGÂN HÀNG : TP BANK<br>
-                                                                                SỐ TÀI KHOẢN : 0384 7021 801<br>
+                                                                                SỐ TÀI KHOẢN : 123456789<br>
                                                                             </p>
                                                                         </div>
                                                                         <!--box-content-->
                                                                         <div class="buttons-set" id="billing-buttons-container">
-                                                                            <button type="button" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></button>
-                                                                        </div>
-                                                                        <br>
-                                                                        <div class="buttons-set" id="billing-buttons-container">
-                                                                            <a type="submit" href="{{route('user.send-payment')}}" class="button continue"><span>GỬI HÓA ĐƠN QUA EMAIL</span></a>
-{{--                                                                            target="_blank"--}}
+                                                                            <a type="button" href="{{route('user.order.list')}}" class="button continue"><span>XEM ĐƠN HÀNG</span></a>
                                                                         </div>
                                                                     </div>
                                                                     <!--box-->
                                                                 </div>
                                                                 <div class="col-2">
-                                                                    <div class="box">
-                                                                        <div class="box-title">
-                                                                            <h5>NỘI DUNG CHUYỂN KHOẢN</h5>
-                                                                            <!--box-title-->
-                                                                            <div class="box-content">
-                                                                                <p> Nhập id đơn hàng và nội dung chuyển khoản </p>
-                                                                            </div>
-                                                                            <!--box-content-->
-                                                                        </div>
-                                                                        <!--box-->
-                                                                    </div>
+
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -92,7 +77,7 @@
                                                     <strong>Thành Tiền</strong>
                                                 </td>
                                                 <td style="" class="a-right">
-                                                    <strong><span class="price">{{Cart::subtotal().' '.'vnđ'}}</span></strong>
+                                                    <strong><span class="price">{{$total.' '.'vnđ'}}</span></strong>
                                                 </td>
                                             </tr>
                                             </tfoot>
@@ -102,7 +87,7 @@
                                                     Thuế
                                                 </td>
                                                 <td style="" class="a-right">
-                                                    <span class="price">{{'0.00'.' '.'vnđ'}}</span></td>
+                                                    <span class="price">{{'2.00'.' '.'%'}}</span></td>
                                             </tr>
                                             <tr>
                                                 <td style="" class="a-left" colspan="1">

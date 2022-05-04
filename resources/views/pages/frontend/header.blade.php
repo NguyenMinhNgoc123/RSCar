@@ -28,13 +28,13 @@
                                 <div class="no-js"><a title="" class="clicker"></a>
                                     <div class="fl-nav-links">
                                         <div class="language-currency">
-                                            <div class="fl-language">
-                                                <h3>Ngôn ngữ</h3>
-                                                <ul class="lang">
-                                                    <li><a href="#"> <img src="{{('/backend/images/english.png')}}"
-                                                                          alt="English"> <span>English</span> </a></li>
-                                                </ul>
-                                            </div>
+{{--                                            <div class="fl-language">--}}
+{{--                                                <h3>Ngôn ngữ</h3>--}}
+{{--                                                <ul class="lang">--}}
+{{--                                                    <li><a href="#"> <img src="{{('/backend/images/english.png')}}"--}}
+{{--                                                                          alt="English"> <span>English</span> </a></li>--}}
+{{--                                                </ul>--}}
+{{--                                            </div>--}}
                                             <!--fl-language-->
                                             <!-- END For version 1,2,3,4,6 -->
                                             <!-- For version 1,2,3,4,6 -->
@@ -97,20 +97,9 @@
                                         </li>
                                         <li class="level0 parent drop-menu"><a class="level-top"
                                                                                href="{{route('list')}}"><span>Sản phẩm</span></a>
-                                            <ul class="level1">
-
-                                                <li class="level1 first"><a href=""><span>cần bán</span></a>
-                                                </li>
-                                                <li class="level1 first"><a href=""><span>Cho thuê</span></a>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li class="level0 parent drop-menu"><a class="level-top"
                                                                                href="#"><span>Blog</span></a>
-                                            <ul class="level1">
-                                                <li class="level1 first"><a href=""><span>Blog Xe</span></a>
-                                                </li>
-                                            </ul>
                                         </li>
                                         <li class="level0 parent drop-menu"><a href="#"><span>Giới thiệu</span> </a>
                                             <!--sub sub category-->
@@ -140,36 +129,6 @@
                                                 <li class="level1"><a
                                                         href="404error.html"><span>404 Error Page</span></a></li>
                                             </ul>
-                                        </li>
-                                        <li class="fl-custom-tabmenulink mega-menu"><a href="#" class="level-top">
-                                                <span>Chương trình GIẢM GIÁ</span> </a>
-                                            <div class="level0-wrapper fl-custom-tabmenu"
-                                                 style="left: 0px; display: none;">
-                                                <div class="container">
-                                                    <div class="header-nav-dropdown-wrapper clearer">
-                                                        <div class="grid12-3">
-                                                            <div><img src="{{('/backend/images/custom-img1.jpg')}}"
-                                                                      alt="custom-image"></div>
-                                                            <h4 class="heading">GIẢM GIÁ TRÊN 30%</h4>
-                                                        </div>
-                                                        <div class="grid12-3">
-                                                            <div><img src="{{('/backend/images/custom-img2.jpg')}}"
-                                                                      alt="custom-image"></div>
-                                                            <h4 class="heading">GIẢM GIÁ DƯỚI 10%</h4>
-                                                        </div>
-                                                        <div class="grid12-3">
-                                                            <div><img src="{{('/backend/images/custom-img3.jpg')}}"
-                                                                      alt="custom-image"></div>
-                                                            <h4 class="heading">XE SIÊU LƯỚT GIÁ TỐT</h4>
-                                                        </div>
-                                                        <div class="grid12-3">
-                                                            <div><img src="{{('/backend/images/custom-img4.jpg')}}"
-                                                                      alt="custom-image"></div>
-                                                            <h4 class="heading">XE MỚI 100%</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </li>
                                         @if($name == null)
                                         <li class="mega-menu"><a class="level-top"

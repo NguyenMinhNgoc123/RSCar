@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="{{asset('/AdminLTE-master/plugins/ekko-lightbox/ekko-lightbox.css')}}">
 
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 
 
 @stack('css')

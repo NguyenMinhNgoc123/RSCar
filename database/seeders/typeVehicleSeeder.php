@@ -17,12 +17,12 @@ class typeVehicleSeeder extends Seeder
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $date = date('Y-m-d H:i:s');
         //
-        DB::table('type_vehicles')->insert([
-            [ 'tv_name'=>'Ô tô', 'created'=>$date,'updated'=>$date],
-            [ 'tv_name'=>'Xe máy','created'=>$date,'updated'=>$date],
-            [ 'tv_name'=>'Xe Tải,xe công','created'=>$date,'updated'=>$date],
-            [ 'tv_name'=>'Xe điện','created'=>$date,'updated'=>$date],
-            [ 'tv_name'=>'Phương tiện khác','created'=>$date,'updated'=>$date]
+        DB::table('type_shoes')->insert([
+            [ 'tv_name'=>'Slip Ons', 'created'=>$date,'updated'=>$date],
+            [ 'tv_name'=>'Boots','created'=>$date,'updated'=>$date],
+            [ 'tv_name'=>'Sandals','created'=>$date,'updated'=>$date],
+            [ 'tv_name'=>'Lace Ups','created'=>$date,'updated'=>$date],
+            [ 'tv_name'=>'Oxfords','created'=>$date,'updated'=>$date]
         ]);
     }
 }

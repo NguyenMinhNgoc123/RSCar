@@ -12,7 +12,7 @@ class BrandProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -40,7 +40,7 @@ class BrandProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreBrandProductRequest $request)
     {
@@ -56,9 +56,7 @@ class BrandProductController extends Controller
         if ($request->brand_name == null){
             return redirect()->route('admin.brandProduct.list')->with('error','Thêm danh mục hình thức không thành công');
         }
-        $result = BrandProduct::create($data);
-        //DB::table('post_type')->insert($data);
-        //Session()->put('message','Thêm danh mục hình thức thành công');
+        BrandProduct::create($data);
         return redirect()->route('admin.brandProduct.list')->with('message','Thêm danh mục hình thức thành công');
     }
 
@@ -77,7 +75,7 @@ class BrandProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -94,7 +92,7 @@ class BrandProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -102,11 +100,6 @@ class BrandProductController extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $date = date('Y-m-d H:i:s');
 
-//        $data=[];
-//        $data['name'] = $request->name;
-//        $data['updated_at']=$date;
-//        DB::table('post_types')->where('type_id',$id)->update($data);
-//        return redirect('list-post-type')->with('message','cập nhật danh mục hình thức thành công');
         DB::beginTransaction();
 
         try {
@@ -132,21 +125,24 @@ class BrandProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
-        DB::beginTransaction();
-
         try {
-            $PostTypes = BrandProduct::find($id);
-            $PostTypes->delete();
-
-            DB::commit();
+            $exist_products = DB::table('products')
+                ->where('brand_id', $id)
+                ->where('deleted_at', null)
+                ->first();
+            if (!$exist_products) {
+                $PostTypes = BrandProduct::find($id);
+                $PostTypes->delete();
+                return redirect()->route('admin.brandProduct.list')
+                    ->with('message', 'Xóa thành công hình thức id : '.$id);
+            }
 
             return redirect()->route('admin.brandProduct.list')
-                ->with('message', 'Xóa thành công hình thức id : '.$id);
+                ->with('message', 'Brand đã được sử dụng : ');
         }  catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message

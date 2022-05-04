@@ -13,6 +13,6 @@ class BrandProduct extends Model
     protected $table = 'brand_products';
 
     protected $fillable= [
-        'brand_id','brand_name','brand_caption','brand_content1','brand_content2','brand_content3','brand_description','brand_thumbnails','created','updated'
+        'brand_id','created','updated'
     ];
 }

@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use mysql_xdevapi\Exception;
 use Session;
 
 class OrderController extends Controller
@@ -13,7 +14,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -23,7 +24,8 @@ class OrderController extends Controller
             ->join('users', 'orders.user_id', '=', 'users.user_id')
             ->join('ships', 'orders.ship_id', '=', 'ships.ship_id')
             ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
-            ->where('order_status','!=', '5')
+            ->where('order_status','=', '0')
+            ->where('payments.payment_status','!=', '1')
             ->orderBy('order_create', 'desc')
             ->get();
         $data['order'] = $order;
@@ -55,7 +57,7 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -72,9 +74,10 @@ class OrderController extends Controller
         $data['order'] = $order;
 
         $orderDetails = DB::table('order_details')
-            ->join('product_cars', 'product_cars.product_id', '=', 'order_details.product_id')
-            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
+            ->join('products', 'products.product_id', '=', 'order_details.product_id')
+            ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
             ->where('order_id','=',$id)
+            ->where('products.deleted_at',null)
             ->get();
         $data['orderDetails']=$orderDetails;
 
@@ -85,7 +88,7 @@ class OrderController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -104,7 +107,7 @@ class OrderController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -113,73 +116,24 @@ class OrderController extends Controller
         $date = date('Y-m-d H:i:s');
         try {
             $data1 = [];
-            $dataCar = [];
             $data = [];
-            if (isset($request->payment_status)) {
-                if ($request->payment_status == '1') {
-                    $dataCar['updated_at'] = $date;
-                    $data1['payment_status'] = $request->payment_status;
-                    $order_details = DB::table('order_details')
-                        ->where('order_id', '=', $id)->get();
-                    foreach ($order_details as $key => $value) {
-                        $id_product = $value->product_id;
-                        $type = DB::table('product_cars')
-                            ->where('product_id', '=', $id_product)->first();
-                        if ($type->type_id == '2'){
-                            $dataCar['status'] = '3';
-                        }else{
-                            $dataCar['status'] = '1';
-                        }
-                        DB::table('product_cars')
-                            ->where('product_id', '=', $id_product)
-                            ->update($dataCar);
-                    }
-                } else {
-                    $dataCar['status'] = 0;
-                    $dataCar['updated_at'] = $date;
-                    $data1['payment_status'] = $request->payment_status;
-                    $order_details = DB::table('order_details')
-                        ->where('order_id', '=', $id)->get();
-                    foreach ($order_details as $key => $value) {
-                        $id_product = $value->product_id;
-                        DB::table('product_cars')
-                            ->where('product_id', '=', $id_product)
-                            ->update($dataCar);
-                    }
-                }
+
+            $data1['payment_status'] = $request->payment_status;
+            if ($data1['payment_status']) {
                 DB::table('payments')
                     ->join('orders', 'orders.payment_id', '=', 'payments.payment_id')
                     ->where('orders.order_id', $id)
                     ->update($data1);
-
             }
 
             if (isset($request->order_status)) {
-                $dataStatus=[];
                 $data['order_status'] = $request->order_status;
                 DB::table('orders')
                     ->where('order_id', $id)
                     ->update($data);
-                if ($request->order_status == 5 ){
-                    $order_details = DB::table('order_details')
-                        ->where('order_id', '=', $id)->get();
-                    foreach ($order_details as $key => $value) {
-                        $id_product = $value->product_id;
-                        $type = DB::table('product_cars')
-                            ->where('product_id', '=', $id_product)->first();
-                        if ($type->type_id == '2'){
-                            $dataStatus['status']='0';
-                        }else{
-                            $dataStatus['status']='1';
-                        }
-                        DB::table('product_cars')
-                            ->where('product_id', '=', $id_product)
-                            ->update($dataStatus);
-                    }
-                    return redirect()->route('admin.order.list')->with('message','Đơn đã hoàn tất');
-                }
+
+                return redirect()->route('admin.order.list')->with('message','Đơn đã hoàn tất');
             }
-            return redirect()->route('admin.order.list');
 
         } catch (\Exception $exception) {
             return redirect()->back()->with('error','không được để trống');
@@ -192,32 +146,44 @@ class OrderController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request, $id)
     {
-        //
-        $order = DB::table('orders')->where('order_id', '=', $id)->get();
-        foreach ($order as $value) {
-            $request->session()->put('order_id', $value->order_id);
-            $request->session()->put('ship_id', $value->ship_id);
-            $request->session()->put('payment_id', $value->payment_id);
+
+        try {
+            $data = DB::table('order_details')
+                ->where('order_id', '=', $id)
+                ->get();
+            $data_orders = DB::table('orders')
+                ->where('order_id', '=', $id)
+                ->first();
+            foreach ($data as $value) {
+                $data_product = DB::table('products')
+                    ->where('product_id', $value->product_id)
+                    ->where('products.deleted_at',null)
+                    ->first();
+                if ($data_product) {
+                    DB::table('products')
+                        ->where('product_id', $value->product_id)
+                        ->where('products.deleted_at',null)
+                        ->update(['quantity' => $data_product->quantity + $value->product_quantity]);
+                }
+            }
+            DB::table('order_details')
+                ->where('order_id', '=', $id)
+                ->delete();
+            DB::table('orders')
+                ->where('order_id', '=', $id)->delete();
+            DB::table('payments')
+                ->where('payment_id', '=', $data_orders->payment_id)->delete();
+            DB::table('ships')
+                ->where('ship_id', '=', $data_orders->ship_id)->delete();
+
+            return redirect()->route('admin.order.list')->with('message', 'Xóa đơn hàng thành công');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Xóa đơn hàng không thành công');
         }
-
-        DB::table('order_details')
-            ->where('order_id', '=', $request->session()->get('order_id'))
-            ->delete();
-        DB::table('orders')
-            ->where('order_id', '=', $request->session()->get('order_id'))->delete();
-        DB::table('payments')
-            ->where('payment_id', '=', $request->session()->get('payment_id'))->delete();
-        DB::table('ships')
-            ->where('ship_id', '=', $request->session()->get('ship_id'))->delete();
-        session()->put('order_id', null);
-        session()->put('ship_id', null);
-        session()->put('payment_id', null);
-
-        return redirect()->route('admin.order.list')->with('message', 'Xóa đơn hàng thành công');
     }
     public function list_completed(){
         $data = [];
@@ -225,7 +191,8 @@ class OrderController extends Controller
             ->join('users', 'orders.user_id', '=', 'users.user_id')
             ->join('ships', 'orders.ship_id', '=', 'ships.ship_id')
             ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
-            ->where('order_status','=', '5')
+            ->where('order_status','=', '1')
+            ->where('payments.payment_status','=', '1')
             ->orderBy('order_create', 'desc')
             ->get();
         $data['order'] = $order;
@@ -244,9 +211,10 @@ class OrderController extends Controller
         $data['order'] = $order;
 
         $orderDetails = DB::table('order_details')
-            ->join('product_cars', 'product_cars.product_id', '=', 'order_details.product_id')
-            ->join('post_types', 'product_cars.type_id', '=', 'post_types.type_id')
+            ->join('products', 'products.product_id', '=', 'order_details.product_id')
+            ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
             ->where('order_id','=',$id)
+            ->where('products.deleted_at',null)
             ->get();
         $data['orderDetails']=$orderDetails;
 
