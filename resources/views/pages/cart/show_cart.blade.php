@@ -37,7 +37,6 @@
                 <div class="table-responsive shopping-cart-tbl  container">
                     <form action="{{route('user.update-cart-quantity')}}" method="post">
                         @csrf
-                        <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
 
                         <fieldset>
                             </span></th>
@@ -55,10 +54,8 @@
                                 <tr class="first last">
                                     <th rowspan=""></th>
                                     <th rowspan="1"><span class="nobr">
-                                    <th rowspan="1"><span class="nobr">HÌNH THỨC</span></th>
-                                    <th class="a-center" colspan="1"><span class="nobr">TIỀN CỌC</span></th>
                                     <th rowspan="1" class="a-center"><span class="nobr">SỐ LƯỢNG</span></th>
-                                    <th rowspan="1" class="a-center"><span class="nobr">NGÀY THUÊ</span></th>
+                                    <th rowspan="1" class="a-center"><span class="nobr">size</span></th>
                                     <th class="a-center" style="padding-right: 20px" colspan="1"><span class="nobr">TỔNG TIỀN SẢN PHẨM</span>
                                     </th>
                                     <th rowspan="1" class="a-center">&nbsp;</th>
@@ -67,6 +64,7 @@
                                 <tfoot>
                                 <tr class="first last">
                                     <td colspan="50" class="a-right last">
+                                        <input type="hidden" name="type" value="update_cart">
                                         <a type="button" title="Continue Shopping" class="button btn-continue"
                                            href="{{route('list')}}"
                                            onClick=""><span><span>TIẾP TỤC MUA SẮM</span></span></a>
@@ -85,72 +83,41 @@
                                     $total = 0;
                                     $number_quantity = 0;
                                 @endphp
-                                @if(session('cart') != null)
+                                @if($carts)
 
-                                    @foreach(session('cart') as $key =>$value)
+                                    @foreach($carts as $key => $value)
                                         <?php $subtotal = 0;
-
-                                        $subtotal += $value['deposit'] * $value['quantity'] * $value['total_rent'];
-
-                                        $total += $subtotal;
-                                        $number_quantity += $value['quantity']
                                         ?>
                                         <tr class="first last odd" id="sid">
                                             <td class="image hidden-table">
-                                                <a href="product-detail.html"
+                                                <a href=""
                                                    title="Women&#39;s Georgette Animal Print"
                                                    class="product-image"><img
-                                                        src="{{asset("/product-images/{$value['thumbnails']}")}}"
+                                                        src="{{asset("/product-images/{$value->thumbnails}")}}"
                                                         width="75"
                                                         alt="Women&#39;s Georgette Animal Print"></a></td>
                                             <td>
                                                 <h2 class="product-name">
-                                                    <a href="{{route('detail',$value['product_id'])}}">{{$value['name_car']}}</a>
+                                                    <a href="{{route('detail',$value->product_id)}}">{{$value->caption}}</a>
                                                 </h2>
                                             </td>
-                                            <td class="a-center hidden-table">
-                                             <span class="cart-price">
-                                                <span class="">{{$value['type_name']}}</span>
-                                            </span>
-                                            </td>
-
-
-                                            <td class="a-right hidden-table">
-                                    <span class="cart-price">
-                                        @if($value['type_id'] =='2')
-                                            <span class="price">{{number_format($value['deposit'])}} đ/ngày</span>
-                                        @else
-                                            <span class="price">{{number_format($value['deposit'])}} đ</span>
-                                        @endif
-                                    </span>
-
-                                            </td>
                                             <td class="a-center movewishlist">
-                                                <input name="cart_qty[{{$value['product_id']}}]"
-                                                       value="{{$value['quantity']}}" size="2" title="Qty"
-                                                       class="input-text cart_quantity">
+                                                <input id="testInput" name="cart_qty[{{$value->product_id}}]"
+                                                       value="{{$value->cart_quantity}}" size="2" title="Qty"
+                                                       class="input-text">
 
                                             </td>
                                             <td class="a-right movewishlist">
 
                                                 <span class="cart-price">
-                                                    @if($value['type_id'] =='2')
-                                                        ngày mượn
-                                                        <input name="date_begin" type="date" width="200px"
-                                                               value="{{$value['date_begin']}}" size="3"
-                                                               class="input-text datepicker">
-                                                        ngày trả
-                                                        <input name="date_end" type="date"
-                                                               value="{{$value['date_end']}}" size="3"
-                                                               class="input-text ">
-                                                    @endif
+                                                    {{$value->size}}
                                                 </span>
                                             </td>
                                             <td class="a-right movewishlist">
                                                 <span class="cart-price">
 
                                                 <span class="price">
-                                                    <?php echo number_format($subtotal)?>
+                                                   {{number_format($value->sum_product)}}
                                                 </span>
                                                 </span>
                                             </td>
@@ -159,7 +126,7 @@
                                                 {{--                                            {{route('user.delete-cart',$valueCT->rowId)}}--}}
                                                 <a title="Remove item"
                                                    class="button remove-item"
-                                                   href="{{route('user.delete-cart',$value['product_id'])}}"></a>
+                                                   href="{{route('user.delete-cart', $value->id_cart)}}"></a>
                                             </td>
 
 
@@ -183,9 +150,8 @@
                         <div class="discount">
                         <h3>LƯU Ý</h3>
                         <ul class="shipping-pro">
-                            <li>Nhận xe vào 8h sáng ngày mượn và trả xe vào 8h sáng của ngày trả</li>
-                            <li>Nếu có yêu cầu hãy nhập bên phần yêu cầu</li>
-                            <li>Nếu vượt quá số ngày trả sẽ tính tiền theo giờ</li>
+                            <h3><p>Nhấn cập nhật giỏ trước khi thanh toán</p></h3>
+                            <h3><p>Nếu không cập nhật sẽ lấy số lượng cũ thanh toán</p></h3>
                         </ul>
                         </div>
                     </div>
@@ -224,9 +190,7 @@
                                         </td>
                                         <td style="" class="a-right">
                                             <strong><span
-                                                    class="price"></span><?php
-                                                Session()->put('total', $total);
-                                                echo number_format($total) . ' đ' ?>
+                                                    class="price"></span>{{number_format($sum_cart)}}
                                             </strong>
                                         </td>
                                     </tr>
@@ -237,7 +201,7 @@
                                             Tổng số lượng
                                         </td>
                                         <td style="" class="a-right">
-                                            <span class="price" id="total-quantity-cart">{{$number_quantity}}</span>
+                                            <span class="price" id="total-quantity-cart">{{$count_product}}</span>
                                         </td>
                                     </tr>
                                     <tr>
@@ -259,18 +223,8 @@
 
                                 <ul class="checkout">
                                     <li>
-                                        <a type="submit" style="width: 100%;text-decoration: none"
-                                           href="{{route('user.checkout')}}"
-                                           <?php if (session('cart') == null) echo 'disabled'; else
-                                               foreach (session('cart') as $key => $value) {
-                                                   if ($value['type_id'] == '2') {
-                                                       if ($value['date_begin'] == '0000-00-00' || $value['date_end'] == '0000-00-00') {
-                                                           echo 'disabled';
-                                                       }
-                                                   }
-                                               }
-
-                                           ?>
+                                        <a type="submit" style="width: 100%;text-decoration: none" id="reg_btn"
+                                           href="{{route('user.checkout')}}" @if($sold == 1) disabled @endif
                                            class="button btn btn-danger" onClick="" >
                                             <span>THANH TOÁN</span></a>
 

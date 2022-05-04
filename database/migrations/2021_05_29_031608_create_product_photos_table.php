@@ -18,7 +18,6 @@ class CreateProductPhotosTable extends Migration
             $table->string('p_photo',255);
             $table->integer('product_id');
             $table->timestamps();
-            $table->foreign('product_id')->references('product_id')->on('product_cars');
         });
     }
 

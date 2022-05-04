@@ -20,7 +20,6 @@ class CreateShowProductsTable extends Migration
             $table->integer('best_seller');
             $table->integer('hot_car');
             $table->timestamps();
-            $table->foreign('product_id')->references('product_id')->on('product_cars');
         });
     }
 

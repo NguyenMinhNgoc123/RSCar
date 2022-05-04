@@ -36,7 +36,7 @@
                         ?>
 
                     </div>
-                    <form action="{{ route('admin.typeVehicle.update', $typeVehicle->type_vehicles_id) }}" method="POST">
+                    <form action="{{ route('admin.typeVehicle.update', $typeVehicle->type_shoes_id) }}" method="POST">
                         {{ csrf_field() }}
                         <div class="card card-primary">
                             <div class="card-header">

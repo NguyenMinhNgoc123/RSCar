@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Cập nhật xe </h1>
+                        <h1>Cập nhật giày </h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Cập nhật xe</li>
+                            <li class="breadcrumb-item active">Cập nhật sản phẩm</li>
                         </ol>
                     </div>
                 </div>
@@ -51,11 +51,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputStatus">Loại xe</label>
-                                    <select id="inputStatus" name="type_vehicles_id" class="form-control custom-select">
-                                        @if(!empty($type_vehicles))
-                                            @foreach($type_vehicles as $key3 => $value3)
-                                                <option value="{{$key3}}" {{ old('type_vehicles_id', $key3) == $productCar->type_vehicles_id ? 'selected' : ''  }} >{{$value3}}</option>
+                                    <label for="inputStatus">Loại giày</label>
+                                    <select id="inputStatus" name="type_shoes_id" class="form-control custom-select">
+                                        @if(!empty($type_shoes))
+                                            @foreach($type_shoes as $key3 => $value3)
+                                                <option value="{{$key3}}" {{ old('type_shoes_id', $key3) == $productCar->type_shoes_id ? 'selected' : ''  }} >{{$value3}}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputName">Nhà sản xuất xe (Honda,Yamaha,..)</label>
+                                    <label for="inputName">Thương hiệu</label>
                                     <select id="inputStatus" name="brand_id" class="form-control custom-select">
 
                                         @if(!empty($brands))
@@ -82,32 +82,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputName">Dòng xe (SH,wave,..)</label>
-                                    <input type="text" id="inputName" name="name_car" class="form-control" value="{{$productCar->name_car}}">
+                                    <label for="inputName">size</label>
+                                    <input type="number" id="inputName" name="size" class="form-control" value="{{$productCar->size}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputName">Dung tích xe</label>
-                                    <input type="text" id="inputName" name="capacity" class="form-control" value="{{$productCar->capacity}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputName">Đăng ký tháng/năm</label>
-                                    <input type="text" id="inputName" name="Year_of_registration" class="form-control" value="{{$productCar->Year_of_registration}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">Tình trạng xe</label>
-                                    <input type="text" id="inputName" name="status_car" class="form-control" value="{{$productCar->status_car}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">Model</label>
-                                    <input type="text" id="inputName" name="model" class="form-control" value="{{$productCar->model}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStatus">Số km đã đi</label>
-                                    <input type="text" id="inputName" name="number_kilometers" class="nbk form-control" value="{{$productCar->number_kilometers}}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputClientCompany">Địa chỉ</label>
-                                    <input type="text" id="inputClientCompany" name="address" class="form-control" value="{{$productCar->address}}">
+                                    <label for="inputClientCompany">Giá</label>
+                                    <input type="text" id="inputClientCompany money" name="price" class="form-control money" value="{{$productCar->price}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputName">Tiêu đề (caption)</label>
@@ -122,16 +102,12 @@
                                     <input type="text" id="inputName" name="quantity" class="form-control" value="{{$productCar->quantity}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputName">Giá tiền </label>
-                                    <input type="text" id="inputName" name="price" class="money form-control" value="{{$productCar->price}}" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputName">Tiền cọc </label>
-                                    <input type="text" id="inputName" name="deposit" class="deposit form-control" value="{{$productCar->deposit}}" >
-                                </div>
-                                <div class="form-group">
                                     <label for="inputName">Giảm giá (%)</label>
                                     <input type="text" id="inputName" name="discount" class="form-control" value="{{$productCar->discount}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Địa chỉ (nếu có)</label>
+                                    <input type="text" id="inputName" name="address" class="form-control" value="{{$productCar->address}}">
                                 </div>
                                 <div class="form-group" style="">
                                     <label for="exampleInputFile">Hình ảnh</label>
@@ -181,9 +157,6 @@
 
         <script type="text/javascript">
             $('.money').simpleMoneyFormat();
-        </script>
-        <script type="text/javascript">
-            $('.deposit').simpleMoneyFormat();
         </script>
         <script type="text/javascript">
             $('.nbk').simpleMoneyFormat();

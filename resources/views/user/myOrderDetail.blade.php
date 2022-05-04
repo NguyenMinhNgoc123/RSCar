@@ -21,13 +21,9 @@
                             <div class="box-content">
                                 <p><strong>Tình trạng đơn : </strong>
                                     @if($valueO->order_status =='0')
-                                        Chưa giao xe
+                                        Chưa giao hàng
                                     @elseif ($valueO->order_status =='1')
-                                        Đã giao xe
-                                    @elseif ($valueO->order_status =='2')
-                                        Đã nhận cọc chưa giao xe
-                                    @else
-                                        Đã giao xe đang ghi nợ
+                                        Đã giao hàng
                                     @endif
                                     <br><br>
                                     <strong>Tên người đặt :</strong> {{$valueO->full_name_ship}}<br>
@@ -100,7 +96,6 @@
                             <th>id sản phẩm</th>
                             <th>Số lượng</th>
                             <th>Tiền cọc</th>
-                            <th>Tên xe</th>
                             <th>Hình thức</th>
                             <th>chi tiết sản phẩm</th>
                             <th>Ngày tạo</th>
@@ -118,7 +113,6 @@
                                         {{number_format($value->product_price).' '.'vnđ/ngày'}}
                                     @endif
                                 </td>
-                                <td> {{$value->name_car}}</td>
                                 <td>{{$value->type_name}}</td>
                                 <td><a href="{{route('detail',$value->product_id)}}"><strong>chi tiết</strong></a></td>
                                 <td>{{$value->order_detail_create}}</td>

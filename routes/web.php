@@ -88,7 +88,7 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
         Route::get('/detail-completed/{id}', [OrderController::class, 'show_completed'])->name('detail-completed');
 
     });
-//products car
+//products
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::get('/list', [ProductsCarController::class, 'index'])->name('list');
         Route::get('/add', [ProductsCarController::class, 'create'])->name('add');
@@ -156,7 +156,6 @@ Route::group(['middleware' => ['check_login_user'], 'as' => 'user.','prefix' => 
         Route::get('/delete/{id}', [MyOrderController::class, 'destroy'])->name('delete');
 
         Route::get('/history-order', [MyOrderController::class, 'history_order'])->name('history-order');
-
     });
 //check out
     Route::get('/checkout', [CheckOutController::class, 'checkout'])->name('checkout');

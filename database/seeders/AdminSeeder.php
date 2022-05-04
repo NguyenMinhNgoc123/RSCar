@@ -18,10 +18,10 @@ class AdminSeeder extends Seeder
 
         DB::table('admins')->insert([
             'admin_id'=>'1',
-            'name' => 'Ngoc',
-            'email' => 'NguyenMinhNgoc@gmail.com',
+            'name' => 'Huy',
+            'email' => 'huy@gmail.com',
             'password' => md5('852654'),
-            'phone_no'=>'0815115415',
+            'phone_no'=>'0888888888',
             'status_admin'=>'1',
             'created_at'=>$date
         ]);

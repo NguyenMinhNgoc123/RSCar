@@ -51,12 +51,12 @@ class TypeVehicleController extends Controller
 
         $data['created']=$date;
         if ($request->tv_name == null){
-            return redirect()->route('admin.typeVehicle.list')->with('error','Thêm danh mục loại xe không thành công');
+            return redirect()->route('admin.typeVehicle.list')->with('error','Thêm danh mục loại không thành công');
         }
         $result = TypeVehicles::create($data);
         //DB::table('post_type')->insert($data);
         //Session()->put('message','Thêm danh mục hình thức thành công');
-        return redirect()->route('admin.typeVehicle.list')->with('message','Thêm danh mục loại xe thành công');
+        return redirect()->route('admin.typeVehicle.list')->with('message','Thêm danh mục loại thành công');
     }
 
     /**
@@ -117,11 +117,11 @@ class TypeVehicleController extends Controller
             DB::commit();
 
             return redirect()->route('admin.typeVehicle.list')
-                ->with('message', 'cập nhật danh mục loại xe thành công');
+                ->with('message', 'cập nhật danh mục loại thành công');
         } catch (\Exception $ex) {
             DB::rollBack();
             // have error so will show error message
-            return redirect()->back()->with('error', 'cập nhật danh mục loại xe không thành công');
+            return redirect()->back()->with('error', 'cập nhật danh mục loại không thành công');
         }
     }
 
@@ -133,19 +133,18 @@ class TypeVehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
-        DB::beginTransaction();
-
         try {
-            $typeVehicles = TypeVehicles::find($id);
-            $typeVehicles->delete();
+            $check_exist = DB::table('products')
+                ->where('type_shoes_id', $id)
+                ->first();
+            if (!$check_exist) {
+                DB::table('type_shoes')->where('type_shoes_id', $id);
+                return redirect()->route('admin.typeVehicle.list')
+                    ->with('message', 'Xóa thành công loại id : '.$id);
+            }
+            return redirect()->back()->with('error', 'Xóa không thành công, sản phẩm đã được sử dụng');
 
-            DB::commit();
-
-            return redirect()->route('admin.typeVehicle.list')
-                ->with('message', 'Xóa thành công loại xe id : '.$id);
         }  catch (\Exception $ex) {
-            DB::rollBack();
             // have error so will show error message
             return redirect()->back()->with('error', 'Xóa không thành công');
         }
