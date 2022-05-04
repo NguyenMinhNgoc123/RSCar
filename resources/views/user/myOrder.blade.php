@@ -10,7 +10,6 @@
             <div class="dashboard">
                 <div class="welcome-msg">
                     <p class="hello"><strong>Hello, {{Session()->get('full_name')}}!</strong></p>
-                    <p>Hãy Thanh toán đơn hàng trước khi chúng biến mất</p>
                 </div>
                 <div class="recent-orders">
                     <div class="title-buttons"><strong></strong> ĐƠN HÀNG CỦA BẠN
@@ -42,15 +41,15 @@
                                     <td>{{ $value->order_id}}</td>
                                     <td>
                                         @if($value->order_status =='0')
-                                            Chưa giao xe
+                                            Chưa giao
                                         @elseif ($value->order_status =='1')
-                                            Đã giao xe
+                                            Đã giao
                                         @elseif ($value->order_status =='2')
-                                            Đã nhận cọc chưa giao xe
+                                            Đã nhận cọc chưa giao
                                         @elseif($value->order_status =='3')
-                                            Đang trong quá trình giao xe
+                                            Đang trong quá trình giao
                                         @else
-                                            Đang giao xe đang ghi nợ
+                                            Đang giao đang ghi nợ
                                         @endif
                                     </td>
                                     <td> {{number_format($value->total)}}</td>
@@ -70,7 +69,12 @@
                                             Đã thanh toán
                                         @endif
                                     </td>
-                                    <td class="a-center last"><span class="nobr"> <a href="{{route('user.order.detail',$value->order_id)}}"><strong>Xem chi tiết</strong></a> / <a href="{{route('user.order.delete',$value->order_id)}}"><strong>Xóa</strong></a></span>
+                                    <td class="a-center last">
+                                        <span class="nobr">
+                                            <a href="{{route('user.order.detail',$value->order_id)}}">
+                                                <strong>Xem chi tiết</strong>
+                                            </a>@if($value->payment_status=='0') / <a href="{{route('user.order.delete',$value->order_id)}}"><strong>Huỷ đơn hàng</strong></a>@endif
+                                        </span>
                                     </td>
                                 </tr>
                             @endforeach

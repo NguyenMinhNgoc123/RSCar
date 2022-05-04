@@ -63,7 +63,7 @@
                                             @if($valueP->hot_car != '0' && $valueP->updated_hot_car > now() && $valueP->status == '0')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @elseif($valueP->status == '1')
-                                                <div class="new-label new-top-left">Đã bán</div>
+                                                <div class="new-label new-top-left">Bán Chạy</div>
                                             @else
                                             @endif
                                             @if($valueP->discount != '0')

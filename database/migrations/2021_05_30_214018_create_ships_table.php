@@ -19,7 +19,7 @@ class CreateShipsTable extends Migration
             $table->string('email_ship',255);
             $table->string('address_ship',255);
             $table->string('phone_no_ship',255);
-            $table->longText('description_ship');
+            $table->longText('description_ship')->nullable();
             $table->dateTime('created_ship');
         });
     }

@@ -20,7 +20,7 @@
                                     <fieldset class="group-select">
                                         <ul class="">
                                             <li class="wide">
-                                                <label for="billing-address-select">Nhập địa chỉ giao xe tận nơi nếu bạn muốn thuê xe </label>
+                                                <label for="billing-address-select">Nhập địa chỉ giao tận nơi nếu bạn muốn thuê xe </label>
                                                 <br>
                                             </li>
                                             <li id="billing-new-address-form" >
@@ -33,7 +33,7 @@
                                                                             class="required">*</span></label>
                                                                     <div class="input-box1">
                                                                         <input type="email" id="billing:firstname"
-                                                                               name="email_ship" value="{{session()->get('email')}}"
+                                                                               name="email_ship" value="{{$info->email}}"
                                                                                class="input-text required-entry">
                                                                     </div>
                                                                 </div>
@@ -42,7 +42,7 @@
                                                                             class="required">*</span></label>
                                                                     <div class="input-box1">
                                                                         <input type="text" id="billing:lastname"
-                                                                               name="full_name_ship" value="{{session()->get('full_name')}}"
+                                                                               name="full_name_ship" value="{{$info->full_name}}"
                                                                                title="Last Name" maxlength="255"
                                                                                class="input-text required-entry">
                                                                     </div>

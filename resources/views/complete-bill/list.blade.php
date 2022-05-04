@@ -93,15 +93,15 @@
                                             </td>
                                             <td>
                                                 @if($value->order_status =='0')
-                                                    <strong>Chưa giao xe</strong>
+                                                    <strong>Chưa giao </strong>
                                                 @elseif ($value->order_status =='1')
-                                                    <strong>Đã giao xe</strong>
+                                                    <strong>Đã giao </strong>
                                                 @elseif ($value->order_status =='2')
-                                                    <strong>Đã nhận cọc chưa giao xe</strong>
+                                                    <strong>Đã nhận cọc chưa giao </strong>
                                                 @elseif($value->order_status =='3')
                                                     <strong>Đang giao xe</strong>
                                                 @elseif($value->order_status =='4')
-                                                    <strong>Đã giao xe đang ghi nợ</strong>
+                                                    <strong>Đã giao đang ghi nợ</strong>
                                                 @else
                                                     <strong>Hoàn Thành</strong>
                                                 @endif
@@ -119,7 +119,7 @@
                                                 @if($value->payment_status == '0')
                                                     <strong>Chưa thanh toán</strong>
                                                 @else
-                                                    <strong>Chưa thanh toán</strong>
+                                                    <strong>Đã thanh toán</strong>
                                                 @endif
                                             </td>
                                             <td> {{number_format($value->total)}}đ</td>

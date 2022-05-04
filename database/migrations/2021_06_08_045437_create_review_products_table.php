@@ -20,7 +20,6 @@ class CreateReviewProductsTable extends Migration
             $table->string('star_post',255);
             $table->dateTime('created_review');
             $table->timestamps();
-            $table->foreign('product_id')->references('product_id')->on('product_cars');
         });
     }
 

@@ -11058,7 +11058,7 @@ footer .newsletter-row {
 	overflow: hidden;
 	width: 100%;
 	padding: 55px 0px;
-	background:url(../images/newsletter-bg.jpg) no-repeat bottom right;
+	background:url(../images/bg-footer.jpg) no-repeat bottom right;
 
 
 }
@@ -13382,7 +13382,7 @@ select#shipping-address-select {
     border-bottom: none;
     text-align: center;
     background-repeat: no-repeat;
-    background-image: url(../images/category-bg.jpg);
+    background-image: url(../images/nike-air-max.jpg);
 	background-position:bottom
 }
 

@@ -17,7 +17,7 @@ class productCarSeeder extends Seeder
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $date = date('Y-m-d H:i:s');
         //
-        DB::table('product_cars')->insert([
+        DB::table('products')->insert([
 
         ]);
     }
