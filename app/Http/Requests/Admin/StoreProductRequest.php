@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'caption'=>'required|min:30|max:155',
             'model'=>'required|numeric',
             'number_kilometers'=>'required',
-            'type_vehicles_id'=>'required',
+            'type_shoes_id'=>'required',
             'name_car'=>'required',
             'capacity'=>'required',
             'Year_of_registration'=>'required',

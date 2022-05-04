@@ -18,7 +18,6 @@ class CreateWishlistsTable extends Migration
             $table->integer('product_id');
             $table->integer('user_id');
             $table->dateTime('created_wishlist');
-            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

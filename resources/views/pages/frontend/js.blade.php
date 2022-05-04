@@ -51,25 +51,7 @@
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000,
-                            })
-                            if ($.isEmptyObject(data.error)) {
-                                $('#total-quantity').text($('#total-quantity-cart').val())
-
-                                Toast.fire({
-                                    type: 'success',
-                                    title: data.success,
-                                })
-                            } else {
-                                Toast.fire({
-                                    type: 'error',
-                                    title: data.error
-                                })
-                            }
+                            alert(data)
                         }
                     })
                     swal({

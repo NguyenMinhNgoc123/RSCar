@@ -18,6 +18,11 @@
                             <div id="checkout-step-billing" class="step a-item">
                                 <form id="co-billing-form" action="{{route('user.save-payment')}}" method="post">
                                     @csrf
+                                    <input type="hidden" name="full_name_ship" value="{{ $_GET['full_name_ship']}}">
+                                    <input type="hidden" name="email_ship" value="{{ $_GET['email_ship']}}">
+                                    <input type="hidden" name="address_ship" value="{{$_GET['address_ship']}}">
+                                    <input type="hidden" name="phone_no_ship" value="{{ $_GET['phone_no_ship']}}">
+                                    <input type="hidden" name="phone_no_ship" value="{{ $_GET['description_ship'] || ''}}">
                                     <fieldset class="group-select">
                                         <ul class="">
                                             <li id="billing-new-address-form" >
@@ -27,13 +32,13 @@
                                                             <div class="customer-name">
                                                                 <div class="input-box name-firstname payment-option">
                                                                     <span>
-                                                                        <label for=""><input type="radio" id="payment1" checked name="payment_method" value="2"> TRẢ BẰNG THẺ ATM</label>
+                                                                        <label for=""><input type="radio" id="payment1" checked name="payment_method" disabled value="2"> TRẢ BẰNG THẺ ATM</label>
                                                                     </span><br>
                                                                     <span>
-                                                                        <label for=""><input type="radio" id="payment2" name="payment_method" value="1"> NHẬN TIỀN MẶT</label>
+                                                                        <label for=""><input type="radio" id="payment2" name="payment_method" checked value="1"> NHẬN TIỀN MẶT</label>
                                                                     </span><br>
                                                                     <span>
-                                                                        <label for=""><input type="radio" id="payment3" name="payment_method" value="0"> GHI NỢ</label>
+                                                                        <label for=""><input type="radio" id="payment3" name="payment_method" disabled value="0"> GHI NỢ</label>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -73,7 +78,7 @@
                                                         <strong>Thành Tiền</strong>
                                                     </td>
                                                     <td style="" class="a-right">
-                                                        <strong><span class="price">{{number_format(Session()->get('total')).'đ'}}</span></strong>
+                                                        <strong><span class="price">{{number_format($sum_cart).'đ'}}</span></strong>
                                                     </td>
                                                 </tr>
                                                 </tfoot>
@@ -83,7 +88,7 @@
                                                         Thuế
                                                     </td>
                                                     <td style="" class="a-right">
-                                                        <span class="price">{{'0.00'.' '.'vnđ'}}</span></td>
+                                                        <span class="price">{{'2.00'.' '.'vnđ'}}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="" class="a-left" colspan="1">
@@ -94,20 +99,6 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-
-{{--                                            <ul class="checkout">--}}
-{{--                                                <li>--}}
-{{--                                                    <a type="submit" style="width: 100%;text-decoration: none"--}}
-{{--                                                       href="{{route('user.checkout')}}"--}}
-{{--                                                       class="button btn btn-danger" onClick="">--}}
-{{--                                                        <span>THANH TOÁN</span></a>--}}
-{{--                                                </li>--}}
-{{--                                                <br>--}}
-{{--                                                <li><a href="multiple-addresses.html" title="Checkout with Multiple Addresses">Checkout--}}
-{{--                                                        with Multiple Addresses</a>--}}
-{{--                                                </li>--}}
-{{--                                                <br>--}}
-{{--                                            </ul>--}}
                                         </div><!--inner-->
                                     </dl>
                                 </div>

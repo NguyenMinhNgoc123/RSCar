@@ -10,7 +10,7 @@ class MyOrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -21,6 +21,7 @@ class MyOrderController extends Controller
             ->join('users', 'orders.user_id', '=', 'users.user_id')
             ->join('ships', 'orders.ship_id', '=', 'ships.ship_id')
             ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
+            ->where('orders.order_status','=',0)
             ->where('users.user_id','=',$user_id)
             ->orderBy('order_create', 'desc')
             ->get();
@@ -54,7 +55,7 @@ class MyOrderController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -68,11 +69,12 @@ class MyOrderController extends Controller
             ->get();
         $data['order']=$order;
         $orderDetail = DB::table('order_details')->where('order_id','=',$id)
-            ->join('product_cars', 'order_details.product_id', '=', 'product_cars.product_id')
-            ->join('post_types', 'post_types.type_id', '=', 'product_cars.type_id')
-            ->join('type_vehicles', 'type_vehicles.type_vehicles_id', '=', 'product_cars.type_vehicles_id')
+            ->join('products', 'order_details.product_id', '=', 'products.product_id')
+            ->join('post_types', 'post_types.type_id', '=', 'products.type_id')
+            ->join('type_shoes', 'type_shoes.type_shoes_id', '=', 'products.type_shoes_id')
+            ->where('products.deleted_at',null)
             ->get();
-        $data['orderDetail']=$orderDetail;
+        $data['orderDetail'] = $orderDetail;
         return view('user.myOrderDetail',$data);
     }
 
@@ -104,32 +106,13 @@ class MyOrderController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request,$id)
+    public function destroy(Request $request, $id)
     {
         //
-        $order = DB::table('orders')->where('order_id','=',$id)->get();
-        foreach ($order as $value){
-            $request->session()->put('order_id',$value->order_id);
-            $request->session()->put('ship_id',$value->ship_id);
-            $request->session()->put('payment_id',$value->payment_id);
-        }
-
-        DB::table('order_details')
-            ->where('order_id','=',$request->session()->get('order_id'))
-            ->delete();
-        DB::table('orders')
-            ->where('order_id','=',$request->session()->get('order_id'))->delete();
-        DB::table('payments')
-            ->where('payment_id','=',$request->session()->get('payment_id'))->delete();
-        DB::table('ships')
-            ->where('ship_id','=',$request->session()->get('ship_id'))->delete();
-        session()->put('order_id',null);
-        session()->put('ship_id',null);
-        session()->put('payment_id',null);
-
-        return redirect()->route('user.order.list')->with('message','Xóa đơn hàng thành công');
+        DB::table('orders')->where('order_id', $id)->update(['order_status', 2]);
+        return redirect()->route('user.order.list')->with('message','Vui lòng chờ ');
     }
     public function history_order(Request $request){
         $user_id =$request->session()->get('user_id');
@@ -139,7 +122,8 @@ class MyOrderController extends Controller
             ->join('ships', 'orders.ship_id', '=', 'ships.ship_id')
             ->join('payments', 'orders.payment_id', '=', 'payments.payment_id')
             ->where('users.user_id','=',$user_id)
-            ->where('payments.payment_status','=','5')
+            ->where('orders.order_status','=',1)
+            ->where('payments.payment_status','=',1)
             ->orderBy('order_create', 'desc')
             ->get();
         $data['order']=$order;

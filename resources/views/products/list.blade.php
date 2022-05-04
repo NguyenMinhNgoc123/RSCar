@@ -63,12 +63,12 @@
                                         <th>id</th>
                                         <th>Mã sản phẩm</th>
                                         <th></th>
-                                        <th>Hãng xe</th>
+                                        <th>Thương hiệu</th>
                                         <th>Trạng thái</th>
                                         <th>Giá tiền</th>
-                                        <th>Tiền cọc</th>
+                                        <th>số lượng</th>
+                                        <th>size</th>
                                         <th>Ngày tạo</th>
-
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -112,19 +112,13 @@
                                                 @if($value->status == '0')
                                                     <button class="btn btn-success" >Đang bán</button>
                                                 @elseif($value->status == '1')
-                                                    <button class="btn btn-danger" >Đã bán</button>
-                                                @elseif($value->status == '2')
-                                                    <button class="btn btn-primary" >Đã cọc</button>
-                                                @elseif($value->status == '3')
-                                                    <button class="btn btn-danger" >Đã thuê</button>
-                                                @else
-                                                    <button class="btn btn-secondary" >Đã ẩn</button>
+                                                    <button class="btn btn-danger" >Hàng bán chạy</button>
                                                 @endif
                                             </td>
                                             <td> {{number_format($value->price).'đ'}}</td>
-                                            <td>{{number_format($value->deposit).'đ'}}</td>
+                                            <td>{{ $value->quantity }}</td>
+                                            <td>{{ $value->size }}</td>
                                             <td>{{ $value->created_at }}</td>
-
                                         </tr>
                                     @endforeach
                                     </tbody>

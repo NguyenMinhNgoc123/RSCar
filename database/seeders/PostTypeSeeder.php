@@ -19,7 +19,6 @@ class PostTypeSeeder extends Seeder
         //
         DB::table('post_types')->insert([
             [ 'type_name'=>'cần bán', 'created'=>$date , 'updated'=>$date],
-            [ 'type_name'=>'cho thuê','created'=>$date,'updated'=>$date]
         ]);
     }
 }

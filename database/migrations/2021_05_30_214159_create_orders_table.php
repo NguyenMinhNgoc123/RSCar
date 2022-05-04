@@ -21,9 +21,6 @@ class CreateOrdersTable extends Migration
             $table->double('total');
             $table->integer('order_status');
             $table->dateTime('order_create');
-            $table->foreign('user_id')->references('user_id')->on('users');
-            $table->foreign('ship_id')->references('ship_id')->on('ships');
-            $table->foreign('payment_id')->references('payment_id')->on('payments');
         });
     }
 

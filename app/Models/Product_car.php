@@ -10,37 +10,25 @@ class Product_car extends Model
     use HasFactory;
     protected $primaryKey = 'product_id';
 
-    protected $table = 'product_cars';
+    protected $table = 'products';
 
     protected $fillable= [
         'product_id',
         'type_id',
         'brand_id',
         'caption',
-        'model',
-        'number_kilometers',
-        'type_vehicles_id',
-        'name_car',
-        'capacity',
-        'Year_of_registration',
-        'status_car',
+        'size',
+        'type_shoes_id',
         'description',
-        'address',
+        'description',
         'price',
-        'deposit',
         'discount',
         'thumbnails',
         'quantity',
         'status',
+        'deleted_at',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'address',
     ];
-    public function show_product()
-    {
-        return $this->hasOne(Show_product::class,'product_id');
-    }
-    public function product_photo()
-    {
-        return $this->hasMany(Product_photo::class,'product_id');
-    }
 }

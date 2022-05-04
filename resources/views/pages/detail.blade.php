@@ -76,9 +76,8 @@
 
                                                 <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price">
                                                     @if($valueP->type_id == '1')
-                                                            {{number_format($valueP->price)}} vnđ - {{number_format($valueP->deposit)}}vnđ
+                                                            {{number_format($valueP->price)}} vnđ
                                                         @else
-                                                            {{number_format($valueP->deposit)}}vnđ
                                                         @endif
                                                 </span> </p>
                                             </div>
@@ -92,46 +91,18 @@
                                                     <td class="label-spec"> Hình thức <span class="coln">:</span></td>
                                                     <td class="value-spec"> {{$valueP->type_name}} </td>
                                                 </tr>
-                                                <tr>
+                                                <tr>Ï
                                                     <td class="label-spec"> Thương hiệu <span class="coln">:</span></td>
                                                     <td class="value-spec"> {{$valueP->brand_name}} </td>
                                                 </tr>
                                                 <tr class="odd">
-                                                    <td class="label-spec"> loại xe <span class="coln">:</span></td>
+                                                    <td class="label-spec"> loại <span class="coln">:</span></td>
                                                     <td class="value-spec"> {{$valueP->tv_name}} </td>
                                                 </tr>
-                                                <tr class="odd">
-                                                    <td class="label-spec"> Số km đã đi <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->number_kilometers}} km </td>
-                                                </tr>
                                                 <tr>
-                                                    <td class="label-spec"> Model <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->model}} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-spec"> Tên xe <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->name_car}} </td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="label-spec"> Dung tích <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->capacity}} </td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="label-spec"> Năm đăng ký <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->Year_of_registration}} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-spec"> Tình trạng xe <span class="coln">:</span></td>
-                                                    <td class="value-spec"> {{$valueP->status_car}} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-spec"> Tình trạng bài <span class="coln">:</span></td>
+                                                    <td class="label-spec"> Size <span class="coln">:</span></td>
                                                     <td class="value-spec">
-                                                        @if($valueP->status == '0')
-                                                            Đang bán
-                                                        @else
-                                                            Đã bán
-                                                        @endif
+                                                        {{$valueP->size}}
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -149,8 +120,8 @@
                                         </div>
                                         <ul class="shipping-pro">
                                             <li>Tư vấn miễn phí</li>
-                                            <li>ship xe toàn quốc</li>
-                                            <li>Bảo hành xe dài hạn</li>
+                                            <li>ship toàn quốc</li>
+                                            <li>Bảo hành dài hạn</li>
                                         </ul>
                                     </div>
                                     <!--product-shop-->
@@ -162,14 +133,14 @@
                     <div class="product-collateral container">
                         <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                             <li class="active"> <a href="#product_tabs_description" data-toggle="tab">Google map</a> </li>
-                            <li><a href="#product_tabs_tags" data-toggle="tab">Thông số kĩ thuật</a></li>
+                            <li><a href="#product_tabs_tags" data-toggle="tab">Thông số giày</a></li>
                             <li> <a href="#reviews_tabs" data-toggle="tab">Đánh giá</a> </li>
                             <li> <a href="#product_tabs_custom1" data-toggle="tab">Mô tả</a> </li>
                         </ul>
                         <div id="productTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="product_tabs_description">
                                 <div class="std">
-                                    <iframe width="100%" height="500" src="http://maps.google.com/maps?q={{$valueP->address}}&output=embed" ></iframe>
+                                    <iframe width="100%" height="500" src="http://maps.google.com/maps?q=@if ($valueP->address) {{$valueP->address}} @else 'da nang' @endif&output=embed" ></iframe>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="product_tabs_tags">
@@ -185,46 +156,13 @@
                                             <td class="value-spec"> {{$valueP->brand_name}} </td>
                                         </tr>
                                         <tr class="odd">
-                                            <td class="label-spec"> loại xe <span class="coln">:</span></td>
+                                            <td class="label-spec"> loại  <span class="coln">:</span></td>
                                             <td class="value-spec"> {{$valueP->tv_name}} </td>
                                         </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Số km đã đi <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->number_kilometers}} km </td>
-                                        </tr>
                                         <tr>
-                                            <td class="label-spec"> Model <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->model}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Tên xe <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->name_car}} </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Dung tích <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->capacity}} </td>
-                                        </tr>
-                                        <tr class="odd">
-                                            <td class="label-spec"> Năm đăng ký <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->Year_of_registration}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Tình trạng xe <span class="coln">:</span></td>
-                                            <td class="value-spec"> {{$valueP->status_car}} </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="label-spec"> Tình trạng bài <span class="coln">:</span></td>
+                                            <td class="label-spec"> size <span class="coln">:</span></td>
                                             <td class="value-spec">
-                                                @if($valueP->hot_car != '0' && $valueP->status == '0')
-                                                    <div class="new-label new-top-left">Hot</div>
-                                                @elseif($valueP->status == '1')
-                                                    <div class="new-label new-top-left">Đã bán</div>
-                                                @elseif($valueP->status == '2')
-                                                    <div class="new-label new-top-left">Đã Cọc</div>
-                                                @elseif($valueP->status == '3')
-                                                    <div class="new-label new-top-left">Đã thuê</div>
-                                                @else
-                                                @endif
+                                                {{$valueP->size}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -313,16 +251,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="item-price">
-                                                                    @if($valueRP->type_id == '1')
-                                                                        <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueRP->price)}} vnđ</span> </span> </div>
-                                                                    @else
-                                                                        <div class="price-box"><span class="regular-price"><span class="price">{{number_format($valueRP->deposit)}} vnđ/ngày</span> </span> </div>
-                                                                    @endif
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span class="price">{{number_format($valueRP->price)}} vnđ</span> </span>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="other-info">
-                                                                    <div class="col-km"><i class="fa fa-tachometer"></i> {{$valueRP->number_kilometers}} km</div>
-                                                                    <div class="col-engine"><i class="fa fa-gear"></i> {{$valueRP->type_name}}</div>
-                                                                    <div class="col-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{$valueRP->model}}</div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i> số lượng:  {{$valueRP->quantity}}</div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i> size:  {{$valueRP->size}}</div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i> {{$valueRP->brand_name}}</div>
                                                                 </div>
                                                             </div>
                                                         </div>

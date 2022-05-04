@@ -18,7 +18,7 @@
                                         <div class="list-group-item">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input product_check type" id="type" name="type" value="{{$valuePT->type_id}}"><span> &nbsp;&nbsp;{{$valuePT->type_name}}</span>
+                                                    <input type="checkbox" class="form-check-input product_check type" id="type" name="type" value="{{$valuePT->type_id}}"><span> &nbsp;&nbsp;ALL</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -58,12 +58,12 @@
                         <ul class="level0_482" style="display:block">
                                 <li>
                                     <div class="list-group">
-                                        @foreach($type_vehicles as $valueTV)
+                                        @foreach($type_shoes as $valueTV)
                                         <div class="list-group-item">
                                             <div class="form-check">
                                                 <label class="form-check-label">
                                                     <input type="checkbox" class="form-check-input product_check" id="tv_name"
-                                                           value="{{$valueTV->type_vehicles_id}}"><span> &nbsp;&nbsp;{{$valueTV->tv_name}}</span>
+                                                           value="{{$valueTV->type_shoes_id}}"><span> &nbsp;&nbsp;{{$valueTV->tv_name}}</span>
                                                 </label>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item active"><img style="width: 315px;height: 375px;"
-                                                  src="{{asset('backend/images/WLC-jun-vu-mercedes-benz-c300-amg-2019-6.jpg')}}"
+                                                  src="{{asset('backend/images/nike-joyride.jpeg')}}"
                                                   alt="slide3">
                         <div class="carousel-caption">
                             <h3><a title=" Sample Product" href="">10% OFF</a>
@@ -102,15 +102,15 @@
                             <a class="link" href="#">Xem ngay</a></div>
                     </div>
                     <div class="item"><img style="width: 315px;height: 375px;"
-                                           src="{{asset('backend/images/gan-200-chiec-hyundai-grand-i10-bi-trieu-hoi-tai-viet-nam1527815593.jpg')}}"
+                                           src="{{asset('backend/images/nike-running-shoes-315x375.jpeg')}}"
                                            alt="slide1">
                         <div class="carousel-caption">
-                            <h3><a title=" Sample Product" href="">Luôn cập nhật xe mới</a></h3>
+                            <h3><a title=" Sample Product" href="">Luôn cập nhật mới</a></h3>
                             <p></p>
                         </div>
                     </div>
                     <div class="item"><img style="width: 315px;height: 375px;"
-                                           src="{{asset('backend/images/1sz_OHNz_400x400.jpg')}}" alt="slide2">
+                                           src="{{asset('backend/images/nike-joyride.jpeg')}}" alt="slide2">
                         <div class="carousel-caption">
                             <h3><a title=" Sample Product" href=""></a></h3>
                             <p>.</p>

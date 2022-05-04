@@ -13,8 +13,8 @@ class CreateTypeVehiclesTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_vehicles', function (Blueprint $table) {
-            $table->integer('type_vehicles_id')->autoIncrement();
+        Schema::create('type_shoes', function (Blueprint $table) {
+            $table->integer('type_shoes_id')->autoIncrement();
             $table->string('tv_name',255);
             $table->dateTime('created');
             $table->dateTime('updated');
@@ -28,6 +28,6 @@ class CreateTypeVehiclesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_vehicles');
+        Schema::dropIfExists('type_shoes');
     }
 }
