@@ -101,21 +101,6 @@
                                                     <a href="{{route('detail',$value->product_id)}}">{{$value->caption}}</a>
                                                 </h2>
                                             </td>
-<<<<<<< HEAD
-                                            <td class="a-center hidden-table">
-                                             <span class="cart-price">
-                                            </span>
-                                            </td>
-
-
-                                            <td class="a-right hidden-table">
-                                    <span class="cart-price">
-
-                                    </span>
-
-                                            </td>
-=======
->>>>>>> ddfa3db02da0252ace53679bbc6e7b6041afdfa1
                                             <td class="a-center movewishlist">
                                                 <input id="testInput" name="cart_qty[{{$value->product_id}}]"
                                                        value="{{$value->cart_quantity}}" size="2" title="Qty"
@@ -125,11 +110,7 @@
                                             <td class="a-right movewishlist">
 
                                                 <span class="cart-price">
-<<<<<<< HEAD
-
-=======
                                                     {{$value->size}}
->>>>>>> ddfa3db02da0252ace53679bbc6e7b6041afdfa1
                                                 </span>
                                             </td>
                                             <td class="a-right movewishlist">
@@ -176,20 +157,6 @@
                     </div>
                     <div class="col-sm-4">
 
-                        <div class="discount">
-                            <h3>NHẬP MÃ GIẢM GIÁ</h3>
-                            <form id="discount-coupon-form" action="#" method="post">
-                                <label for="coupon_code">Nhập mẫ giảm giá nếu bạn có</label>
-                                <input type="hidden" name="remove" id="remove-coupone" value="0">
-                                <input class="input-text fullwidth" type="text" id="coupon_code" name="coupon_code"
-                                       value="">
-                                <button type="button" title="Apply Coupon" class="button coupon "
-                                        onClick="discountForm.submit(false)" value="Apply Coupon">
-                                    <span>XÁC NHẬN</span></button>
-
-                            </form>
-
-                        </div> <!--discount-->
                     </div> <!--col-sm-4-->
 
                     <div class="col-sm-4">

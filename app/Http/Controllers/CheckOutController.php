@@ -49,7 +49,7 @@ class CheckOutController extends Controller
                 'email_ship' => $request->email_ship,
                 'address_ship' => $request->address,
                 'phone_no_ship' => $request->phone_no_ship,
-                'description_ship' => $request->description_ship,
+                'description_ship' => isset($request->description_ship) ? $request->description_ship : '',
                 'created_ship' => $date1
             ];
             return redirect()->route('user.payment', $data);
@@ -96,9 +96,12 @@ class CheckOutController extends Controller
                 $dataShip['email_ship'] = $request->email_ship;
                 $dataShip['address_ship'] = $request->address_ship;
                 $dataShip['phone_no_ship'] = $request->phone_no_ship;
-                $dataShip['description_ship'] = $request->description_ship;
+                if ($request->description_ship) {
+                    $dataShip['description_ship'] = $request->description_ship;
+                } else {
+                    $dataShip['description_ship'] = null;
+                }
                 $dataShip['created_ship'] = $date;
-
                 DB::table('ships')->insert($dataShip);
 
                 $data = [];

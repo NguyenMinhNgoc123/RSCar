@@ -65,7 +65,7 @@
                                     <tr>
                                         <th>id</th>
                                         <th></th>
-                                        <th>Tên loại xe</th>
+                                        <th>Tên loại</th>
                                         <th>Ngày tạo</th>
                                         <th>ngày cập nhật</th>
                                     </tr>

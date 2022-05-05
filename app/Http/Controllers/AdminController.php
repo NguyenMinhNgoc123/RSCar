@@ -152,7 +152,7 @@ class AdminController extends Controller
 
                 return redirect()->route('admin.manage-user.list')->with('message','Xóa Tài khoản khách thành công');
             }
-            return redirect()->back()->with('error','Không thể xóa khách hàng');
+            return redirect()->back()->with('error','Không thể xóa khách hàng đã có đơn');
         } catch (\Exception $exception){
             return redirect()->back()->with('error','Không thể xóa khách hàng');
         }

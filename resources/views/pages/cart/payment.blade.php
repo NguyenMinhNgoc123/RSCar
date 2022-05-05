@@ -22,7 +22,7 @@
                                     <input type="hidden" name="email_ship" value="{{ $_GET['email_ship']}}">
                                     <input type="hidden" name="address_ship" value="{{$_GET['address_ship']}}">
                                     <input type="hidden" name="phone_no_ship" value="{{ $_GET['phone_no_ship']}}">
-                                    <input type="hidden" name="phone_no_ship" value="{{ $_GET['description_ship'] || ''}}">
+                                    <input type="hidden" name="description_ship" value="{{ $_GET['description_ship']}}">
                                     <fieldset class="group-select">
                                         <ul class="">
                                             <li id="billing-new-address-form" >

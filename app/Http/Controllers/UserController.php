@@ -46,7 +46,7 @@ class UserController extends Controller
                 $request->session()->put('user_id',$id);
                 $request->session()->put('email',$request->email_regis);
                 $request->session()->put('full_name',$request->full_name);
-                return redirect()->route('user.show-cart')->with('message', 'Đăng ký tài khoản thành công ');
+                return redirect('/')->with('message', 'Đăng ký tài khoản thành công ');
             }else{
                 return redirect()->back()->with('error','email đã tồn tại');
             }
