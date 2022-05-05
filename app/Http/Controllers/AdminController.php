@@ -142,10 +142,17 @@ class AdminController extends Controller
     public function delete_user(Request  $request, $id){
 
         try {
-            DB::table('users')
-                ->where('user_id','=', $id)->delete();
 
-            return redirect()->route('admin.manage-user.list')->with('message','Xóa Tài khoản khách thành công');
+            $check_exist_order = DB::table('orders')
+                ->where('user_id', $id)
+                ->first();
+            if (!$check_exist_order) {
+                DB::table('users')
+                    ->where('user_id','=', $id)->delete();
+
+                return redirect()->route('admin.manage-user.list')->with('message','Xóa Tài khoản khách thành công');
+            }
+            return redirect()->back()->with('error','Không thể xóa khách hàng');
         } catch (\Exception $exception){
             return redirect()->back()->with('error','Không thể xóa khách hàng');
         }

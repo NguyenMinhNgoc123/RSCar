@@ -133,19 +133,18 @@ class TypeVehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
-        DB::beginTransaction();
-
         try {
-            $typeVehicles = TypeVehicles::find($id);
-            $typeVehicles->delete();
+            $check_exist = DB::table('products')
+                ->where('type_shoes_id', $id)
+                ->first();
+            if (!$check_exist) {
+                DB::table('type_shoes')->where('type_shoes_id', $id);
+                return redirect()->route('admin.typeVehicle.list')
+                    ->with('message', 'Xóa thành công loại id : '.$id);
+            }
+            return redirect()->back()->with('error', 'Xóa không thành công, sản phẩm đã được sử dụng');
 
-            DB::commit();
-
-            return redirect()->route('admin.typeVehicle.list')
-                ->with('message', 'Xóa thành công loại id : '.$id);
         }  catch (\Exception $ex) {
-            DB::rollBack();
             // have error so will show error message
             return redirect()->back()->with('error', 'Xóa không thành công');
         }

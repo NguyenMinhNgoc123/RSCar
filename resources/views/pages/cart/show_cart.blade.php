@@ -54,10 +54,8 @@
                                 <tr class="first last">
                                     <th rowspan=""></th>
                                     <th rowspan="1"><span class="nobr">
-                                    <th rowspan="1"><span class="nobr">HÌNH THỨC</span></th>
-                                    <th class="a-center" colspan="1"><span class="nobr">TIỀN CỌC</span></th>
                                     <th rowspan="1" class="a-center"><span class="nobr">SỐ LƯỢNG</span></th>
-                                    <th rowspan="1" class="a-center"><span class="nobr">NGÀY THUÊ</span></th>
+                                    <th rowspan="1" class="a-center"><span class="nobr">size</span></th>
                                     <th class="a-center" style="padding-right: 20px" colspan="1"><span class="nobr">TỔNG TIỀN SẢN PHẨM</span>
                                     </th>
                                     <th rowspan="1" class="a-center">&nbsp;</th>
@@ -103,6 +101,7 @@
                                                     <a href="{{route('detail',$value->product_id)}}">{{$value->caption}}</a>
                                                 </h2>
                                             </td>
+<<<<<<< HEAD
                                             <td class="a-center hidden-table">
                                              <span class="cart-price">
                                             </span>
@@ -115,6 +114,8 @@
                                     </span>
 
                                             </td>
+=======
+>>>>>>> ddfa3db02da0252ace53679bbc6e7b6041afdfa1
                                             <td class="a-center movewishlist">
                                                 <input id="testInput" name="cart_qty[{{$value->product_id}}]"
                                                        value="{{$value->cart_quantity}}" size="2" title="Qty"
@@ -124,7 +125,11 @@
                                             <td class="a-right movewishlist">
 
                                                 <span class="cart-price">
+<<<<<<< HEAD
 
+=======
+                                                    {{$value->size}}
+>>>>>>> ddfa3db02da0252ace53679bbc6e7b6041afdfa1
                                                 </span>
                                             </td>
                                             <td class="a-right movewishlist">

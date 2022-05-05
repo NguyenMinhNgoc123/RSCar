@@ -144,7 +144,6 @@ class BrandProductController extends Controller
             return redirect()->route('admin.brandProduct.list')
                 ->with('message', 'Brand đã được sử dụng : ');
         }  catch (\Exception $ex) {
-            DB::rollBack();
             // have error so will show error message
             return redirect()->back()->with('error', 'Xóa không thành công');
         }

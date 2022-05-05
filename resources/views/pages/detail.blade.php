@@ -110,7 +110,7 @@
                                         </div>
                                         <div class="email-addto-box">
                                             <ul class="add-to-links">
-                                                <li> <button class="button btn-app link-wishlist" style="width: 200px;height: 41px;border-bottom: 25px;" href=""><span>Thêm vào yêu thích</span></button></li>
+{{--                                                <li> <button class="button btn-app link-wishlist" style="width: 200px;height: 41px;border-bottom: 25px;" href=""><span>Thêm vào yêu thích</span></button></li>--}}
                                                 <li>
                                                     <button class="button btn-cart link-cart" style="width: 200px;height: 41px;border-bottom: 25px;" type="submit" data-login="{{Session()->get('user_id')}}" data-id="{{$valueP->product_id}}" ><span>Thêm vào giỏ</span></button>
                                                 </li>
