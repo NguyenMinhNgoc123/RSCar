@@ -54,7 +54,7 @@
                         <!--level0-->
                     </li>
                     <!--level 0-->
-                    <li><a href="#.html">LOẠI XE</a> <span class="subDropdown plus"></span>
+                    <li><a href="#.html">LOẠI GIÀY</a> <span class="subDropdown plus"></span>
                         <ul class="level0_482" style="display:block">
                                 <li>
                                     <div class="list-group">

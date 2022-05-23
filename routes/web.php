@@ -69,12 +69,12 @@ Route::group(['middleware' => ['check_login_admin'], 'as' => 'admin.','prefix' =
     Route::post('/save-admin', [AdminController::class, 'save_admin'])->name('save-admin');
     Route::get('/edit-admin/{id}', [AdminController::class, 'edit_admin'])->name('edit-admin');
     Route::post('/update-admin/{id}', [AdminController::class, 'update_admin'])->name('update-admin');
+    Route::get('/delete-admin/{id}', [AdminController::class, 'delete_admin'])->name('delete-admin');
 
 //manage user
     Route::group(['prefix' => 'manage-user', 'as' => 'manage-user.'], function () {
         Route::get('/list', [AdminController::class, 'list_user'])->name('list');
         Route::get('/delete/{id}', [AdminController::class, 'delete_user'])->name('delete');
-
     });
 //manage order
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {

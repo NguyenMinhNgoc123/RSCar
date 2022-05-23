@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Bảng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -62,12 +62,12 @@
                                         @foreach($admin as $key => $value)
                                             <tr>
                                                 <td>{{ $value->admin_id }}</td>
-                                                <td><a class="btn btn-info btn-sm" title="Sửa" href="{{ route('admin.edit-admin',$value->admin_id) }}">
+                                                <td><a class="btn btn-info btn-sm" title="Sửa" href="{{ route('admin.edit-admin', $value->admin_id) }}">
                                                         <i class="fas fa-pencil-alt">
                                                         </i>
                                                     </a>
                                                     @if(session()->get('status_admin') == '1')
-                                                    <a class="btn btn-danger btn-sm" title="Xóa" href="{{ route('admin.brandProduct.delete',$value->admin_id) }}" onclick="return confirm('Bạn có muốn xóa?')">
+                                                    <a class="btn btn-danger btn-sm" title="Xóa" href="{{ route('admin.delete-admin', $value->admin_id) }}" onclick="return confirm('Bạn có muốn xóa?')">
                                                         <i class="fas fa-trash">
                                                         </i>
                                                     </a>

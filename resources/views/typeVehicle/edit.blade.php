@@ -6,12 +6,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Cập nhật loại xe</h1>
+                        <h1>Cập nhật</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Cập nhật loại xe</li>
+                            <li class="breadcrumb-item active">Cập nhật loại</li>
                         </ol>
                     </div>
                 </div>
@@ -50,12 +50,12 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Loại xe</label>
+                                    <label for="inputName">Loại</label>
                                     <input type="text" id="inputName" name="tv_name" class="form-control"
                                            value="{{$typeVehicle->tv_name}}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" name="update" value="Cập nhật loại xe"
+                                    <input type="submit" name="update" value="Cập nhật"
                                            class="btn btn-success float-right">
                                 </div>
                             </div>

@@ -142,7 +142,7 @@ class BrandProductController extends Controller
             }
 
             return redirect()->route('admin.brandProduct.list')
-                ->with('message', 'Brand đã được sử dụng : ');
+                ->with('error', 'Brand đã được sử dụng không thể xoá');
         }  catch (\Exception $ex) {
             // have error so will show error message
             return redirect()->back()->with('error', 'Xóa không thành công');

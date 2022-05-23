@@ -111,7 +111,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-header">XỬ LÝ HIỂN THỊ</li>
+                    <li class="nav-header">XỬ LÝ HIỂN THỊ TRANG CHỦ</li>
                     <li class="nav-item">
                         <a href="{{route('admin.manage-show.list')}}" class="nav-link">
                             <i class="nav-icon fas fa-table"></i>

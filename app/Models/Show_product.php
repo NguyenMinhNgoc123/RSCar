@@ -16,14 +16,7 @@ class Show_product extends Model
         'sale_week',
         'best_seller',
         'hot_car',
-        'updated_sale_week',
-        'updated_best_seller',
-        'updated_hot_car',
         'created_at',
         'updated_at',
     ];
-    public function product_car()
-    {
-        return $this->belongsTo(Product_car::class);
-    }
 }

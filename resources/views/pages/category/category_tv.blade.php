@@ -60,7 +60,7 @@
                                                                       class="product-image"><img
                                                     src="{{asset("/product-images/{$valueP->thumbnails}")}}"
                                                     alt="Retis lapen casen"></a>
-                                            @if($valueP->hot_car != '0' && $valueP->updated_hot_car > now() && $valueP->status == '0')
+                                            @if($valueP->hot_car != 0 && $valueP->updated_hot_car > now() && $valueP->status == '0')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @elseif($valueP->status == '1')
                                                 <div class="new-label new-top-left">Bán chạy</div>
@@ -76,7 +76,7 @@
                                                                 type="button"></button>
                                                     </div>
                                                     <div class="product-detail-bnt"><a
-                                                            href="{{route('detail',$valueP->product_id)}}"
+                                                            href="{{route('detail', $valueP->product_id)}}"
                                                             class="button detail-bnt"><span>Quick View</span></a>
                                                     </div>
                                                     <div class="actions"><span class="add-to-links"><a

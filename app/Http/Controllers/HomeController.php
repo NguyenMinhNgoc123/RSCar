@@ -19,7 +19,7 @@ class HomeController extends Controller
             ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
             ->join('type_shoes', 'products.type_shoes_id', '=', 'type_shoes.type_shoes_id')
             ->join('show_products', 'products.product_id', '=', 'show_products.product_id')
-            ->where('sale_week', '!=', '0')
+            ->where('sale_week', '!=', 0)
             ->where('products.deleted_at',null)
             ->where('status', '!=', '4')
             ->orderBy('products.created_at', 'desc')
@@ -35,7 +35,6 @@ class HomeController extends Controller
             ->where('products.deleted_at',null)
             ->orderBy('products.created_at', 'desc')
             ->get();
-        // cho thuê
         $Rent = DB::table('products')
             ->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_id')
             ->join('post_types', 'products.type_id', '=', 'post_types.type_id')
@@ -157,17 +156,22 @@ class HomeController extends Controller
         $output .= '<ul class="products-grid" id="dynamic-row">';
         foreach ($product as $valueP) {
             $status = '';
-            if ($valueP->hot_car != '0' && $valueP->status == '0') {
-                $status = '<div class="new-label new-top-left">Hot</div>';
-            } else if ($valueP->status == '1') {
-                $status = '<div class="new-label new-top-left">Bán Chạy</div>';
-            } else if ($valueP->status == '2') {
-                $status = '<div class="new-label new-top-left">Đã Cọc</div>';
-            } else if ($valueP->status == '3') {
-                $status = '<div class="new-label new-top-left">Đã thuê</div>';
-            } else {
-                $status = '';
+            if($valueP->quantity == 0)
+                $status = '<div class="new-label new-top-left">Hết Hàng</div>';
+            else {
+                if ($valueP->hot_car != 0 && $valueP->status == '0') {
+                    $status = '<div class="new-label new-top-left">Hot</div>';
+                } else if ($valueP->status == '1') {
+                    $status = '<div class="new-label new-top-left">Bán Chạy</div>';
+                } else if ($valueP->status == '2') {
+                    $status = '<div class="new-label new-top-left">Đã Cọc</div>';
+                } else if ($valueP->status == '3') {
+                    $status = '<div class="new-label new-top-left">Đã thuê</div>';
+                } else {
+                    $status = '';
+                }
             }
+
 
             $payment = '';
             if ($valueP->quantity == 0) {
@@ -288,16 +292,20 @@ class HomeController extends Controller
         $output .= '<ul class="products-grid" id="dynamic-row">';
         foreach ($product as $valueP) {
             $status = '';
-            if ($valueP->hot_car != '0' && $valueP->status == '0') {
-                $status = '<div class="new-label new-top-left">Hot</div>';
-            } else if ($valueP->status == '1') {
-                $status = '<div class="new-label new-top-left">Bán chạy</div>';
-            } else if ($valueP->status == '2') {
-                $status = '<div class="new-label new-top-left">Đã Cọc</div>';
-            } else if ($valueP->status == '3') {
-                $status = '<div class="new-label new-top-left">Đã thuê</div>';
-            } else {
-                $status = '';
+            if($valueP->quantity == 0) {
+                $status = '<div class="new-label new-top-left">Hết hàng</div>';
+            }else {
+                if ($valueP->hot_car != 0 && $valueP->status == '0') {
+                    $status = '<div class="new-label new-top-left">Hot</div>';
+                } else if ($valueP->status == '1') {
+                    $status = '<div class="new-label new-top-left">Bán chạy</div>';
+                } else if ($valueP->status == '2') {
+                    $status = '<div class="new-label new-top-left">Đã Cọc</div>';
+                } else if ($valueP->status == '3') {
+                    $status = '<div class="new-label new-top-left">Đã thuê</div>';
+                } else {
+                    $status = '';
+                }
             }
 
             $payment = '';

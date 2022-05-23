@@ -90,19 +90,22 @@
                                 <div class="item-inner">
                                     <div class="item-img">
                                         <div class="item-img-info"><a href="{{route('detail',$valueSW->product_id)}}" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$valueSW->thumbnails}")}}" alt="Retis lapen casen"></a>
-                                            @if($valueSW->hot_car != '0' && $valueSW->status == '0')
-                                                <div class="new-label new-top-left">Hot</div>
-                                            @elseif($valueSW->status == '1')
-                                                <div class="new-label new-top-left">Bán chạy</div>
-                                            @elseif($valueSW->status == '2')
-                                                <div class="new-label new-top-left">Đã Cọc</div>
-                                            @elseif($valueSW->status == '3')
-                                                <div class="new-label new-top-left">Đã thuê</div>
+                                            @if($valueSW->quantity == 0)
+                                                <div class="new-label new-top-left">Hết hàng</div>
                                             @else
+                                                @if($valueSW->hot_car == 1 && $valueSW->status == '0')
+                                                    <div class="new-label new-top-left">Hot</div>
+                                                @elseif($valueSW->status == '1')
+                                                    <div class="new-label new-top-left">Bán chạy</div>
+                                                @elseif($valueSW->status == '2')
+                                                    <div class="new-label new-top-left">Đã Cọc</div>
+                                                @else
+                                                @endif
                                             @endif
+
                                             @if($valueSW->discount != '0')
                                                 <div class="sale-label sale-top-left">{{$valueSW->discount}}%</div>
-                                            @elseif($valueSW->best_seller =='1')
+                                            @elseif($valueSW->best_seller == 1)
                                                 <div class="sale-label sale-top-left">Giá cực tốt</div>
                                             @else
                                             @endif
@@ -172,7 +175,7 @@
                                 <div class="item-inner">
                                     <div class="item-img">
                                         <div class="item-img-info" ><a href="{{route('detail',$valueS->product_id)}}" title="Retis lapen casen" class="product-image"><img  src="{{asset("/product-images/{$valueS->thumbnails}")}}"  alt="Retis lapen casen"></a>
-                                            @if($valueS->hot_car != '0' && $valueS->status == '0')
+                                            @if($valueS->hot_car != 0 && $valueS->status == '0')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @elseif($valueS->status == '1')
                                                 <div class="new-label new-top-left">Bán chạy</div>
@@ -184,7 +187,7 @@
                                             @endif
                                             @if($valueS->discount != '0')
                                                 <div class="sale-label sale-top-left">{{$valueS->discount}}%</div>
-                                            @elseif($valueS->best_seller =='1')
+                                            @elseif($valueS->best_seller == 1)
                                                 <div class="sale-label sale-top-left">Giá cực tốt</div>
                                             @else
                                             @endif
@@ -252,7 +255,7 @@
                             <div class="item-inner">
                                 <div class="item-img">
                                     <div class="item-img-info"><a href="{{route('detail',$value->product_id)}}" title="Retis lapen casen" class="product-image"><img src="{{asset("/product-images/{$value->thumbnails}")}}" alt="Retis lapen casen"></a>
-                                        @if($value->hot_car != '0' && $value->status == '0')
+                                        @if($value->hot_car != 0 && $value->status == '0')
                                             <div class="new-label new-top-left">Hot</div>
                                         @elseif($value->status == '1')
                                             <div class="new-label new-top-left">Bán Chạy</div>
@@ -264,7 +267,7 @@
                                         @endif
                                         @if($value->discount != '0')
                                             <div class="sale-label sale-top-left">{{$value->discount}}%</div>
-                                        @elseif($value->best_seller =='1')
+                                        @elseif($value->best_seller == 1)
                                             <div class="sale-label sale-top-left">Giá cực tốt</div>
                                         @else
                                         @endif

@@ -30,7 +30,7 @@
                                         <ul>
                                             <li class="fields">
                                                 <div class="input-box">
-                                                    <label for="billing:city">Mật khẩu mới<em
+                                                    <label for="billing:city">Mật khẩu cũ<em
                                                             class="required">*</em></label>
                                                     <input type="password" title="City" name="password_old"
                                                            value="" class="input-text  required-entry"

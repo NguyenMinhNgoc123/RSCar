@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Bảng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -34,13 +34,15 @@
                                 <?php echo $message ?>
                             </div>
                             <?php  Session()->put('message', null);
+                            } else {
+
                             }
                             ?>
 
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Danh sách Sản phẩm sắp hết hạn</h3>
+                                <h3 class="card-title">Danh sách</h3>
                             </div>
 
                             <!-- /.card-header -->
@@ -64,26 +66,26 @@
 
                                             ?>
                                             <tr>
-                                                <td>{{ $value->product_id }}</td>
-                                                <td>
-                                                    @if($value->hot_car ==1)
-                                                        <a href="{{route('admin.manage-show.un-active-hot',$value->product_id)}}" class="btn btn-block btn-outline-danger">Tắt</a>
+                                                <td style="width: 100px">{{ $value->product_id }}</td>
+                                                <td style="width: 100px">
+                                                    @if($value->hot_car == 1)
+                                                        <a href="{{route('admin.manage-show.un-active-hot',$value->product_id)}}" class="btn btn-block btn-secondary btn-lg">Tắt</a>
                                                     @else
-                                                        <a href="{{route('admin.manage-show.active-hot',$value->product_id)}}" class="btn btn-block btn-outline-primary">Bật</a>
+                                                        <a href="{{route('admin.manage-show.active-hot',$value->product_id)}}" class="btn btn-block btn-primary btn-lg">Bật</a>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if($value->best_seller ==1)
-                                                        <a href="{{route('admin.manage-show.un-active-sale',$value->product_id)}}" class="btn btn-block btn-outline-danger">Tắt</a>
+                                                <td style="width: 150px">
+                                                @if($value->best_seller == 1)
+                                                        <a href="{{route('admin.manage-show.un-active-bestseller',$value->product_id)}}" class="btn btn-block btn-secondary btn-lg">Tắt</a>
                                                     @else
-                                                        <a href="{{route('admin.manage-show.active-sale',$value->product_id)}}" class="btn btn-block btn-outline-primary">Bật</a>
+                                                        <a href="{{route('admin.manage-show.active-bestseller',$value->product_id)}}" class="btn btn-block btn-primary btn-lg">Bật</a>
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if($value->sale_week ==1)
-                                                        <a href="{{route('admin.manage-show.un-active-bestseller',$value->product_id)}}" class="btn btn-block btn-outline-danger">Tắt</a>
+                                                <td style="width: 150px">
+                                                @if($value->sale_week == 1)
+                                                        <a href="{{route('admin.manage-show.un-active-sale',$value->product_id)}}" class="btn btn-block btn-secondary btn-lg">Tắt</a>
                                                     @else
-                                                        <a href="{{route('admin.manage-show.active-bestseller',$value->product_id)}}" class="btn btn-block btn-outline-primary">Bật</a>
+                                                        <a href="{{route('admin.manage-show.active-sale',$value->product_id)}}" class="btn btn-block btn-primary btn-lg">Bật</a>
                                                     @endif
                                                 </td>
                                                 <td>{{ $value->updated_at }}</td>

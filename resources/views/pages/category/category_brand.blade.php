@@ -60,11 +60,15 @@
                                                                       class="product-image"><img
                                                     src="{{asset("/product-images/{$valueP->thumbnails}")}}"
                                                     alt="Retis lapen casen"></a>
-                                            @if($valueP->hot_car != '0' && $valueP->updated_hot_car > now() && $valueP->status == '0')
+                                            @if($valueP->quantity == 0)
+                                                <div class="new-label new-top-left">Hết Hàng</div>
+                                            @else
+                                            @if($valueP->hot_car != 0 && $valueP->updated_hot_car > now() && $valueP->status == '0')
                                                 <div class="new-label new-top-left">Hot</div>
                                             @elseif($valueP->status == '1')
                                                 <div class="new-label new-top-left">Bán chạy</div>
                                             @else
+                                            @endif
                                             @endif
                                             @if($valueP->discount != '0')
                                                 <div class="sale-label sale-top-left">{{$valueP->discount}}%</div>

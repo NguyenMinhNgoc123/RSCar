@@ -158,4 +158,17 @@ class AdminController extends Controller
         }
 
     }
+
+    public function delete_admin(Request $request, $id): \Illuminate\Http\RedirectResponse
+    {
+        try {
+            DB::table('admins')
+                ->where('admin_id', $id)->delete();
+
+            return redirect()->back()->with('message', 'Xóa Tài khoản khách thành công');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Không thể xóa khách hàng');
+        }
+
+    }
 }

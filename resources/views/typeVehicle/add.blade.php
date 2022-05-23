@@ -50,11 +50,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Loại xe</label>
+                                    <label for="inputName">Loại</label>
                                     <input type="text" id="inputName" name="tv_name" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" name="submit" value="Thêm Loại xe" class="btn btn-success float-right">
+                                    <input type="submit" name="submit" value="Thêm" class="btn btn-success float-right">
                                 </div>
                             </div>
                             <!-- /.card-body -->
